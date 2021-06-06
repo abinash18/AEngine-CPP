@@ -1,0 +1,16 @@
+#version 460
+layout (location = 0) in vec3 position;
+struct MM {
+	vec3 s;
+	vec3 _s;
+};
+uniform M {
+	MM ss;
+};
+uniform mat4 T_MVP;
+layout(location = 4) uniform mat4 T_model;
+layout(location = 5) uniform MM sss;
+void main() {
+	//vec3 sasda = sss.s * sss._s;
+	//gl_Position = T_MVP * vec4(position, 1.0);
+}

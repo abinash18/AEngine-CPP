@@ -1,0 +1,10 @@
+#version 330 core
+#include "lighting-frag.glh"
+
+uniform SpotLight R_spotLight;
+
+vec4 calcLighting(vec3 normal, vec3 worldPos) {
+  return calcSpotLight(R_spotLight, normal, worldPos);
+}
+
+#include "lighting-main.glh"

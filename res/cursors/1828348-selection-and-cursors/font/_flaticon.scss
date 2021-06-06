@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+.fimanager:before {
+    display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.flaticon-001-add-selection:before { content: "\f100"; }
+.flaticon-002-box:before { content: "\f101"; }
+.flaticon-003-circle:before { content: "\f102"; }
+.flaticon-004-cursor:before { content: "\f103"; }
+.flaticon-005-delete:before { content: "\f104"; }
+.flaticon-006-double-click:before { content: "\f105"; }
+.flaticon-007-expand:before { content: "\f106"; }
+.flaticon-008-finger:before { content: "\f107"; }
+.flaticon-009-focus:before { content: "\f108"; }
+.flaticon-010-hand:before { content: "\f109"; }
+.flaticon-011-hand:before { content: "\f10a"; }
+.flaticon-012-hand:before { content: "\f10b"; }
+.flaticon-013-hold:before { content: "\f10c"; }
+.flaticon-014-hourglass:before { content: "\f10d"; }
+.flaticon-015-load:before { content: "\f10e"; }
+.flaticon-016-move:before { content: "\f10f"; }
+.flaticon-017-move:before { content: "\f110"; }
+.flaticon-018-move:before { content: "\f111"; }
+.flaticon-019-move:before { content: "\f112"; }
+.flaticon-020-release:before { content: "\f113"; }
+.flaticon-021-remove-selection:before { content: "\f114"; }
+.flaticon-022-right:before { content: "\f115"; }
+.flaticon-023-rounded:before { content: "\f116"; }
+.flaticon-024-selection:before { content: "\f117"; }
+.flaticon-025-selection:before { content: "\f118"; }
+.flaticon-026-single:before { content: "\f119"; }
+.flaticon-027-hand:before { content: "\f11a"; }
+.flaticon-028-hand:before { content: "\f11b"; }
+.flaticon-029-square:before { content: "\f11c"; }
+.flaticon-030-square:before { content: "\f11d"; }
+.flaticon-031-target:before { content: "\f11e"; }
+.flaticon-032-text:before { content: "\f11f"; }
+.flaticon-033-text:before { content: "\f120"; }
+.flaticon-034-text:before { content: "\f121"; }
+.flaticon-035-top:before { content: "\f122"; }
+.flaticon-036-waiting:before { content: "\f123"; }
+.flaticon-037-selection:before { content: "\f124"; }
+
+$font-Flaticon-001-add-selection: "\f100";
+$font-Flaticon-002-box: "\f101";
+$font-Flaticon-003-circle: "\f102";
+$font-Flaticon-004-cursor: "\f103";
+$font-Flaticon-005-delete: "\f104";
+$font-Flaticon-006-double-click: "\f105";
+$font-Flaticon-007-expand: "\f106";
+$font-Flaticon-008-finger: "\f107";
+$font-Flaticon-009-focus: "\f108";
+$font-Flaticon-010-hand: "\f109";
+$font-Flaticon-011-hand: "\f10a";
+$font-Flaticon-012-hand: "\f10b";
+$font-Flaticon-013-hold: "\f10c";
+$font-Flaticon-014-hourglass: "\f10d";
+$font-Flaticon-015-load: "\f10e";
+$font-Flaticon-016-move: "\f10f";
+$font-Flaticon-017-move: "\f110";
+$font-Flaticon-018-move: "\f111";
+$font-Flaticon-019-move: "\f112";
+$font-Flaticon-020-release: "\f113";
+$font-Flaticon-021-remove-selection: "\f114";
+$font-Flaticon-022-right: "\f115";
+$font-Flaticon-023-rounded: "\f116";
+$font-Flaticon-024-selection: "\f117";
+$font-Flaticon-025-selection: "\f118";
+$font-Flaticon-026-single: "\f119";
+$font-Flaticon-027-hand: "\f11a";
+$font-Flaticon-028-hand: "\f11b";
+$font-Flaticon-029-square: "\f11c";
+$font-Flaticon-030-square: "\f11d";
+$font-Flaticon-031-target: "\f11e";
+$font-Flaticon-032-text: "\f11f";
+$font-Flaticon-033-text: "\f120";
+$font-Flaticon-034-text: "\f121";
+$font-Flaticon-035-top: "\f122";
+$font-Flaticon-036-waiting: "\f123";
+$font-Flaticon-037-selection: "\f124";

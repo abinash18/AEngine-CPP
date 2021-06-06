@@ -1,0 +1,10 @@
+#version 330 core
+#include "lighting-frag.glh"
+
+uniform DirectionalLight R_directionalLight;
+
+vec4 calcLighting(vec3 normal, vec3 worldPos) {
+	return calcDirectionalLight(R_directionalLight, normal, worldPos);
+}
+
+#include "lighting-main.glh"

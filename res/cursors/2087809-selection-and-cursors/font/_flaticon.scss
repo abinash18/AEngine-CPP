@@ -1,0 +1,121 @@
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+.fimanager:before {
+    display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.flaticon-001-cursor:before { content: "\f100"; }
+.flaticon-002-cursor:before { content: "\f101"; }
+.flaticon-003-click:before { content: "\f102"; }
+.flaticon-004-app:before { content: "\f103"; }
+.flaticon-005-cursor:before { content: "\f104"; }
+.flaticon-006-cursor:before { content: "\f105"; }
+.flaticon-007-delete:before { content: "\f106"; }
+.flaticon-008-brightness:before { content: "\f107"; }
+.flaticon-009-brightness:before { content: "\f108"; }
+.flaticon-010-upload:before { content: "\f109"; }
+.flaticon-011-command:before { content: "\f10a"; }
+.flaticon-012-cursor:before { content: "\f10b"; }
+.flaticon-013-cursor:before { content: "\f10c"; }
+.flaticon-014-enter:before { content: "\f10d"; }
+.flaticon-015-scroll:before { content: "\f10e"; }
+.flaticon-016-scroll:before { content: "\f10f"; }
+.flaticon-017-cursor:before { content: "\f110"; }
+.flaticon-018-cursor:before { content: "\f111"; }
+.flaticon-019-cursor:before { content: "\f112"; }
+.flaticon-020-menu:before { content: "\f113"; }
+.flaticon-021-keys:before { content: "\f114"; }
+.flaticon-022-move:before { content: "\f115"; }
+.flaticon-023-move:before { content: "\f116"; }
+.flaticon-024-menu:before { content: "\f117"; }
+.flaticon-025-option:before { content: "\f118"; }
+.flaticon-026-cursor:before { content: "\f119"; }
+.flaticon-027-cursor:before { content: "\f11a"; }
+.flaticon-028-cursor:before { content: "\f11b"; }
+.flaticon-029-cursor:before { content: "\f11c"; }
+.flaticon-030-shift:before { content: "\f11d"; }
+.flaticon-031-desk:before { content: "\f11e"; }
+.flaticon-032-sleep:before { content: "\f11f"; }
+.flaticon-033-wait:before { content: "\f120"; }
+.flaticon-034-tab:before { content: "\f121"; }
+.flaticon-035-cursor:before { content: "\f122"; }
+.flaticon-036-text-box:before { content: "\f123"; }
+.flaticon-037-text-field:before { content: "\f124"; }
+.flaticon-038-add:before { content: "\f125"; }
+.flaticon-039-type:before { content: "\f126"; }
+.flaticon-040-scroll:before { content: "\f127"; }
+.flaticon-041-scroll:before { content: "\f128"; }
+.flaticon-042-cursor:before { content: "\f129"; }
+.flaticon-043-hourglass:before { content: "\f12a"; }
+
+$font-Flaticon-001-cursor: "\f100";
+$font-Flaticon-002-cursor: "\f101";
+$font-Flaticon-003-click: "\f102";
+$font-Flaticon-004-app: "\f103";
+$font-Flaticon-005-cursor: "\f104";
+$font-Flaticon-006-cursor: "\f105";
+$font-Flaticon-007-delete: "\f106";
+$font-Flaticon-008-brightness: "\f107";
+$font-Flaticon-009-brightness: "\f108";
+$font-Flaticon-010-upload: "\f109";
+$font-Flaticon-011-command: "\f10a";
+$font-Flaticon-012-cursor: "\f10b";
+$font-Flaticon-013-cursor: "\f10c";
+$font-Flaticon-014-enter: "\f10d";
+$font-Flaticon-015-scroll: "\f10e";
+$font-Flaticon-016-scroll: "\f10f";
+$font-Flaticon-017-cursor: "\f110";
+$font-Flaticon-018-cursor: "\f111";
+$font-Flaticon-019-cursor: "\f112";
+$font-Flaticon-020-menu: "\f113";
+$font-Flaticon-021-keys: "\f114";
+$font-Flaticon-022-move: "\f115";
+$font-Flaticon-023-move: "\f116";
+$font-Flaticon-024-menu: "\f117";
+$font-Flaticon-025-option: "\f118";
+$font-Flaticon-026-cursor: "\f119";
+$font-Flaticon-027-cursor: "\f11a";
+$font-Flaticon-028-cursor: "\f11b";
+$font-Flaticon-029-cursor: "\f11c";
+$font-Flaticon-030-shift: "\f11d";
+$font-Flaticon-031-desk: "\f11e";
+$font-Flaticon-032-sleep: "\f11f";
+$font-Flaticon-033-wait: "\f120";
+$font-Flaticon-034-tab: "\f121";
+$font-Flaticon-035-cursor: "\f122";
+$font-Flaticon-036-text-box: "\f123";
+$font-Flaticon-037-text-field: "\f124";
+$font-Flaticon-038-add: "\f125";
+$font-Flaticon-039-type: "\f126";
+$font-Flaticon-040-scroll: "\f127";
+$font-Flaticon-041-scroll: "\f128";
+$font-Flaticon-042-cursor: "\f129";
+$font-Flaticon-043-hourglass: "\f12a";
