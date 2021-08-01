@@ -1,3 +1,5 @@
+# Visual Studio Code
+.vs/
 # Prerequisites
 *.d
 
@@ -27,6 +29,6 @@
 *.lib
 
 # Executables
-*.exe
+**.exe
 *.out
 *.app
