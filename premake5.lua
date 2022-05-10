@@ -7,8 +7,10 @@ workspace "AEngine"
         "Release",
         "Dist"
     }
+	
+	startproject "TestBox"
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 project "AEngine"
     location "AEngine"
