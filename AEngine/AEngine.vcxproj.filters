@@ -28,6 +28,7 @@
     <ClInclude Include="src\AEngine\Log.h">
       <Filter>AEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Application.cpp">

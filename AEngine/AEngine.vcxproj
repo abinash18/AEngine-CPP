@@ -147,6 +147,7 @@
     <ClInclude Include="src\AEngine\Application.h" />
     <ClInclude Include="src\AEngine\Core.h" />
     <ClInclude Include="src\AEngine\EntryPoint.h" />
+    <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h" />
     <ClInclude Include="src\AEngine\EventHandling\Event.h" />
     <ClInclude Include="src\AEngine\EventHandling\KeyEvent.h" />
     <ClInclude Include="src\AEngine\Log.h" />
