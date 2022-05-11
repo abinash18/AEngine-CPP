@@ -1,6 +1,6 @@
 #pragma once
 #include <sstream>
-#include "src/AEngine/EventHandling/Event.h"
+#include "Event.h"
 
 namespace AEngine {
 
@@ -19,7 +19,7 @@ namespace AEngine {
 			int m_KeyCode;
 	};
 
-	class HAZEL_API KeyPressedEvent : public KeyEvent {
+	class AE_API KeyPressedEvent : public KeyEvent {
 		public:
 			KeyPressedEvent(int keycode, int repeatCount)
 				: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
@@ -37,7 +37,7 @@ namespace AEngine {
 			int m_RepeatCount;
 	};
 
-	class HAZEL_API KeyReleasedEvent : public KeyEvent {
+	class AE_API KeyReleasedEvent : public KeyEvent {
 		public:
 			KeyReleasedEvent(int keycode)
 				: KeyEvent(keycode) {}
