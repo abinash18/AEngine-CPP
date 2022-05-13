@@ -29,6 +29,7 @@
       <Filter>AEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h" />
+    <ClInclude Include="src\AEngine\Math\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Application.cpp">
@@ -37,5 +38,6 @@
     <ClCompile Include="src\AEngine\Log.cpp">
       <Filter>AEngine</Filter>
     </ClCompile>
+    <ClCompile Include="src\AEngine\Math\Math.cpp" />
   </ItemGroup>
 </Project>
