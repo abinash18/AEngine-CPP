@@ -30,6 +30,7 @@
     </ClInclude>
     <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h" />
     <ClInclude Include="src\AEngine\Math\Math.h" />
+    <ClInclude Include="src\AEngine\EventHandling\MouseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Application.cpp">

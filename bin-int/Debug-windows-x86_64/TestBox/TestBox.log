@@ -1,8 +1,8 @@
 ﻿  TestBox.cpp
-C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\src\AEngine\Log.h(38,43): warning C4251: 'AEngine::Log::s_CoreLogger': class 'std::shared_ptr<spdlog::logger>' needs to have dll-interface to be used by clients of class 'AEngine::Log'
+C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\src\AEngine\Log.h(48,42): warning C4251: 'AEngine::Log::s_CoreLogger': class 'std::shared_ptr<spdlog::logger>' needs to have dll-interface to be used by clients of class 'AEngine::Log'
 C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\vendor\spdlog\include\spdlog\details\registry.h(34): message : see declaration of 'std::shared_ptr<spdlog::logger>'
-C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\src\AEngine\Log.h(39,43): warning C4251: 'AEngine::Log::s_ClientLogger': class 'std::shared_ptr<spdlog::logger>' needs to have dll-interface to be used by clients of class 'AEngine::Log'
+C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\src\AEngine\Log.h(49,42): warning C4251: 'AEngine::Log::s_ClientLogger': class 'std::shared_ptr<spdlog::logger>' needs to have dll-interface to be used by clients of class 'AEngine::Log'
 C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\vendor\spdlog\include\spdlog\details\registry.h(34): message : see declaration of 'std::shared_ptr<spdlog::logger>'
-C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\src\AEngine\Log.h(59,1): warning C4005: 'AE_DEBUG': macro redefinition
-C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\TestBox\src\TestBox.cpp : message : see previous definition of 'AE_DEBUG'
+C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\src\AEngine\Log.h(70,1): warning C4005: 'AE_DEBUG': macro redefinition
+C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\AEngine\src\AEngine\Log.h(70,1): message : 'AE_DEBUG' previously declared on the command line
   TestBox.vcxproj -> C:\Users\abina\Desktop\Programing\AEngine\Git Repository\AEngine-CPP\bin\Debug-windows-x86_64\TestBox\TestBox.exe
