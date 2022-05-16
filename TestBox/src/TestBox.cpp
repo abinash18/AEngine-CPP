@@ -4,7 +4,7 @@ class TestBox : public AEngine::Application {
 	public:
 		TestBox() {};
 
-		~TestBox() {};
+		~TestBox() override {};
 };
 
 AEngine::Application* AEngine::createApplication() { return new TestBox(); }
