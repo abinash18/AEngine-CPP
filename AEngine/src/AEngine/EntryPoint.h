@@ -16,7 +16,7 @@ extern AEngine::Application* AEngine::createApplication();
 int main(int argc, char** argv) {
 	AEngine::Log::Init();
 	AE_CORE_CRITICAL("Initialized Logger");
-	AE_CRITICAL("Initialized Logger");
+	AE_INFO("Initialized Logger");
 	auto app = AEngine::createApplication();
 	app->run();
 	delete app;

@@ -7,6 +7,9 @@
     <Filter Include="AEngine\EventHandling">
       <UniqueIdentifier>{F2EACA45-5E57-8640-274B-1E9E9376A8A8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AEngine\Math">
+      <UniqueIdentifier>{D5FFA33C-C162-33E1-6AE8-6B97562AFF63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AEngine.h" />
@@ -19,18 +22,25 @@
     <ClInclude Include="src\AEngine\EntryPoint.h">
       <Filter>AEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h">
+      <Filter>AEngine\EventHandling</Filter>
+    </ClInclude>
     <ClInclude Include="src\AEngine\EventHandling\Event.h">
       <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\EventHandling\KeyEvent.h">
       <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\EventHandling\MouseEvent.h">
+      <Filter>AEngine\EventHandling</Filter>
+    </ClInclude>
     <ClInclude Include="src\AEngine\Log.h">
       <Filter>AEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h" />
-    <ClInclude Include="src\AEngine\Math\Math.h" />
-    <ClInclude Include="src\AEngine\EventHandling\MouseEvent.h" />
+    <ClInclude Include="src\AEngine\Math\Math.h">
+      <Filter>AEngine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\aepch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Application.cpp">
@@ -39,6 +49,9 @@
     <ClCompile Include="src\AEngine\Log.cpp">
       <Filter>AEngine</Filter>
     </ClCompile>
-    <ClCompile Include="src\AEngine\Math\Math.cpp" />
+    <ClCompile Include="src\AEngine\Math\Math.cpp">
+      <Filter>AEngine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\aepch.cpp" />
   </ItemGroup>
 </Project>
