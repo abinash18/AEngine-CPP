@@ -24,6 +24,7 @@ namespace AEngine {
 
 			inline int getRepeatCount() const { return m_RepeatCount; }
 
+
 			std::string toString() const override {
 				std::stringstream ss;
 				ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
