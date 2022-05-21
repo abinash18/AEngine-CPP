@@ -57,7 +57,7 @@
 	
 	<s:String x:Key="/Default/Housekeeping/Layout/DialogWindows/OptionsDialogView/Position/@EntryValue">[195,-16](1024,894)</s:String>
 	
-	<s:String x:Key="/Default/Housekeeping/OptionsDialog/SelectedPageId/@EntryValue">CppFormatterOtherPage</s:String>
+	
 	
 	
 	

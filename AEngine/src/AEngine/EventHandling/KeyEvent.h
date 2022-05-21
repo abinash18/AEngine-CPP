@@ -1,6 +1,4 @@
 #pragma once
-#include <sstream>
-#include <ostream>
 #include "Event.h"
 
 namespace AEngine {

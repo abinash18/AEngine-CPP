@@ -5,7 +5,7 @@ workspace "AEngine"
     {
         "Debug",
         "Release",
-        "Dist"
+        "Distrobution"
     }
 	
 	startproject "TestBox"
@@ -19,6 +19,9 @@ project "AEngine"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "aepch.h"
+    pchsource "AEngine/src/aepch.cpp"
 
     files
     {

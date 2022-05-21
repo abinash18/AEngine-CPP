@@ -9,8 +9,8 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Dist|x64">
-      <Configuration>Dist</Configuration>
+    <ProjectConfiguration Include="Distrobution|x64">
+      <Configuration>Distrobution</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -34,7 +34,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distrobution|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
@@ -49,7 +49,7 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Distrobution|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -67,16 +67,17 @@
     <TargetName>AEngine</TargetName>
     <TargetExt>.dll</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\bin\Dist-windows-x86_64\AEngine\</OutDir>
-    <IntDir>..\bin-int\Dist-windows-x86_64\AEngine\</IntDir>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distrobution|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\bin\Distrobution-windows-x86_64\AEngine\</OutDir>
+    <IntDir>..\bin-int\Distrobution-windows-x86_64\AEngine\</IntDir>
     <TargetName>AEngine</TargetName>
     <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;AE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -96,7 +97,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;AE_Release;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -118,28 +120,23 @@
       <Command>IF EXIST ..\bin\Release-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll ..\bin\Release-windows-x86_64\TestBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll ..\bin\Release-windows-x86_64\TestBox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distrobution|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;AE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Optimization>Full</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <StringPooling>true</StringPooling>
+      <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <ImportLibrary>..\bin\Dist-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
+      <ImportLibrary>..\bin\Distrobution-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll ..\bin\Dist-windows-x86_64\TestBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll ..\bin\Dist-windows-x86_64\TestBox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Distrobution-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Distrobution-windows-x86_64\AEngine\AEngine.dll ..\bin\Distrobution-windows-x86_64\TestBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Distrobution-windows-x86_64\AEngine\AEngine.dll ..\bin\Distrobution-windows-x86_64\TestBox &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -159,7 +156,9 @@
     <ClCompile Include="src\AEngine\Application.cpp" />
     <ClCompile Include="src\AEngine\Log.cpp" />
     <ClCompile Include="src\AEngine\Math\Math.cpp" />
-    <ClCompile Include="src\aepch.cpp" />
+    <ClCompile Include="src\aepch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

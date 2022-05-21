@@ -6,12 +6,8 @@
  * \date   July 2021
  *********************************************************************/
 #pragma once
-
+#include "aepch.h"
 #include "AEngine/Core.h"
-
-#include <functional>
-#include <ostream>
-#include <string>
 
 /**
  * Currently Blocking IO
@@ -35,7 +31,10 @@ namespace AEngine {
 		KEY_RELEASED,
 		MOUSE_BUTTON_PRESSED,
 		MOUSE_BUTTON_RELEASED,
-		MOUSE_MOVED,
+		/**
+		 * @brief This is so gay, apparently there is a macro in the WinContTypes header that has the same declaration as MouseMoved in all caps, like there should be a way to distiguish between enums and macros.
+		*/
+		MouseMoved,
 		MOUSE_SCROLLED
 	};
 
@@ -53,12 +52,12 @@ namespace AEngine {
 	};
 
 	#define EVENT_CLASS_TYPE(type) \
-	static EventType getStaticType() { return EventType::##type; } \
-  virtual EventType getEventType() const override { return getStaticType(); } \
-  virtual const char *getName() const override { return #type; }
+		static EventType getStaticType() { return EventType::##type; } \
+			virtual EventType getEventType() const override { return getStaticType(); } \
+				virtual const char *getName() const override { return #type; }
 
 	#define EVENT_CLASS_CATEGORY(category) \
-  virtual int getCategoryFlags() const override { return category; }
+		virtual int getCategoryFlags() const override { return category; }
 
 	/**
 	 *

@@ -1,3 +1,4 @@
+#include "aepch.h"
 #include "Application.h"
 
 #include "Log.h"
@@ -5,9 +6,9 @@
 #include "EventHandling/ApplicationEvent.h"
 
 namespace AEngine {
-	Application::Application() { }
+	Application::Application() { };
 
-	Application::~Application() { }
+	Application::~Application() { };
 
 	void Application::run() {
 
