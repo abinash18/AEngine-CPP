@@ -2,13 +2,13 @@
 #include "Math.h"
 
 namespace AEngine {
-	float fastInvSqrt(float _value) {
+	float fast_inv_sqrt(const float _value) {
 		long        i;
 		float       x2, y;
 		const float threehalfs = 1.5F;
 
-		x2 = number * 0.5F;
-		y  = number;
+		x2 = _value * 0.5F;
+		y  = _value;
 		i  = *(long*)&y;            // evil floating point bit level hacking
 		i  = 0x5f3759df - (i >> 1); // what the fuck? 
 		y  = *(float*)&i;
