@@ -1,6 +1,4 @@
 #pragma once
-#include <sstream>
-#include <ostream>
 #include "Event.h"
 
 namespace AEngine {
@@ -22,7 +20,7 @@ namespace AEngine {
 			KeyPressedEvent(int keycode, int repeatCount)
 				: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
-			inline int GetRepeatCount() const { return m_RepeatCount; }
+			inline int getRepeatCount() const { return m_RepeatCount; }
 
 
 			std::string toString() const override {

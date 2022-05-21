@@ -40,6 +40,7 @@
     <ClInclude Include="src\AEngine\Math\Math.h">
       <Filter>AEngine\Math</Filter>
     </ClInclude>
+    <ClInclude Include="src\aepch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Application.cpp">
@@ -51,5 +52,6 @@
     <ClCompile Include="src\AEngine\Math\Math.cpp">
       <Filter>AEngine\Math</Filter>
     </ClCompile>
+    <ClCompile Include="src\aepch.cpp" />
   </ItemGroup>
 </Project>

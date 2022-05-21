@@ -7,6 +7,7 @@
  *********************************************************************/
 #pragma once
 #include "Core.h"
+#include "EventHandling/Event.h"
 
 namespace AEngine {
 	class AE_API Application {

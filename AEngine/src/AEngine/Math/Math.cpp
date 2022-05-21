@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "Math.h"
 
 namespace AEngine {
@@ -18,3 +19,6 @@ namespace AEngine {
 	}
 
 }
+=======
+#include "aepch.h"
+>>>>>>> 51f315d9ddba11847e744b6e04aa3ace84039f22

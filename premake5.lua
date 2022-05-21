@@ -5,7 +5,7 @@ workspace "AEngine"
     {
         "Debug",
         "Release",
-        "Dist"
+        "Distrobution"
     }
 	
 	startproject "TestBox"
@@ -20,6 +20,9 @@ project "AEngine"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "aepch.h"
+    pchsource "AEngine/src/aepch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",
@@ -28,6 +31,7 @@ project "AEngine"
 
     includedirs
     {
+        "%{prj.name}/src",
         "%{prj.name}/vendor/spdlog/include"
     }
 

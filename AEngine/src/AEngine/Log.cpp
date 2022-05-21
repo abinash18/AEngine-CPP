@@ -6,6 +6,7 @@
  * \author abina
  * \date   July 2021
  *********************************************************************/
+#include "aepch.h"
 #include "Log.h"
 #include <memory>
 #include "spdlog/sinks/stdout_color_sinks.h"
