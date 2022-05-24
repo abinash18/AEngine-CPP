@@ -1,6 +1,6 @@
 #pragma once
 namespace AEngine {
 
-	float fastInvSqrt(float _value);
+	float fast_inv_sqrt(float _value);
 
 }

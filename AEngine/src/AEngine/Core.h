@@ -9,13 +9,13 @@
 
 #ifdef AE_PLATFORM_WINDOWS
 
-#ifdef AE_BUILD_DLL
-#define AE_API __declspec(dllexport)
+    #ifdef AE_BUILD_DLL
+        #define AE_API __declspec(dllexport)
+    #else
+        #define AE_API __declspec(dllimport)
+    #endif // AE_BUILD_DLL
 #else
-#define AE_API __declspec(dllimport)
-#endif // AE_BUILD_DLL
-#else
-#error AE Only supports windows.
+    #error AE Only supports windows.
 #endif // AE_PLATFORM_WINDOWS
 
 #define BIT(x) (1 << x)

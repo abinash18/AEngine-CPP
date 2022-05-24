@@ -7,4 +7,7 @@ class TestBox : public AEngine::Application {
 		~TestBox() override {};
 };
 
-AEngine::Application* AEngine::createApplication() { return new TestBox(); }
+AEngine::Application* AEngine::createApplication() {
+	AE_INFO("Starting");
+	return new TestBox();
+}
