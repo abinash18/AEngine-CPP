@@ -11,6 +11,11 @@ workspace "AEngine"
 	startproject "TestBox"
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+    
+    IncludeDir = {}
+    IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include"
+    
+    include "AEngine/vendor/GLFW"
 
 project "AEngine"
     location "AEngine"
@@ -32,7 +37,14 @@ project "AEngine"
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}"
+    }
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
     }
 
     filter "system:windows"

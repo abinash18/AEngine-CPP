@@ -1,3 +1,6 @@
 [submodule "AEngine/vendor/spdlog"]
 	path = AEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "AEngine/vendor/GLFW"]
+	path = AEngine/vendor/GLFW
+	url = https://github.com/abinash18/glfw

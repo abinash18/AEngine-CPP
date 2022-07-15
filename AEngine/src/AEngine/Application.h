@@ -7,6 +7,9 @@
  *********************************************************************/
 #pragma once
 #include "Core.h"
+#include "Window.h"
+
+#include "EventHandling/ApplicationEvent.h"
 #include "EventHandling/Event.h"
 
 namespace AEngine {
@@ -17,6 +20,11 @@ namespace AEngine {
 
 			void run();
 
+			void OnEvent(Event& e);
+		private:
+			bool                    OnWindowClose(WindowCloseEvent);
+			std::unique_ptr<Window> m_Window;
+			bool                    m_running = true;
 	};
 
 	/**
