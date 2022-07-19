@@ -84,6 +84,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -109,6 +110,7 @@
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,6 +153,8 @@
     <ClInclude Include="src\AEngine\EventHandling\Event.h" />
     <ClInclude Include="src\AEngine\EventHandling\KeyEvent.h" />
     <ClInclude Include="src\AEngine\EventHandling\MouseEvent.h" />
+    <ClInclude Include="src\AEngine\Layer.h" />
+    <ClInclude Include="src\AEngine\LayerStack.h" />
     <ClInclude Include="src\AEngine\Log.h" />
     <ClInclude Include="src\AEngine\Math\Math.h" />
     <ClInclude Include="src\AEngine\Platform\Windows\WindowsWindow.h" />
@@ -159,6 +163,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Application.cpp" />
+    <ClCompile Include="src\AEngine\Layer.cpp" />
+    <ClCompile Include="src\AEngine\LayerStack.cpp" />
     <ClCompile Include="src\AEngine\Log.cpp" />
     <ClCompile Include="src\AEngine\Math\Math.cpp" />
     <ClCompile Include="src\AEngine\Platform\Windows\WindowsWindow.cpp" />

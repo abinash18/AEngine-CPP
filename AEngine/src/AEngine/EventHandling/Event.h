@@ -67,18 +67,21 @@ namespace AEngine {
 		friend class EventDispatcher;
 
 		public:
+			/** If the event has been handled already or not. This is required in layered
+				 * systems.*/
+			bool handled = false;
 			/**  Pure virtual methods; All event sub classes have to implement them.*/
 			virtual EventType   getEventType() const = 0;
 			virtual const char* getName() const = 0;
 			virtual int         getCategoryFlags() const = 0;
-			virtual std::string toString() const { return getName(); }
 
-			bool isInCategory(EventCategory category) { return getCategoryFlags() & category; }
+			virtual std::string toString() const {
+				return getName();
+			}
 
-		protected:
-			/** If the event has been handled already or not. This is required in layered
-			 * systems.*/
-			bool m_Handled = false;
+			bool isInCategory(EventCategory category) {
+				return getCategoryFlags() & category;
+			}
 	};
 
 	class EventDispatcher {
@@ -89,7 +92,7 @@ namespace AEngine {
 
 			template <typename T> bool dispatch(EventFn<T> func) {
 				if (m_Event.getEventType() == T::getStaticType()) {
-					m_Event.m_Handled = func(*static_cast<T*>(&m_Event));
+					m_Event.handled = func(*static_cast<T*>(&m_Event));
 					return true;
 				}
 				return false;
@@ -99,5 +102,7 @@ namespace AEngine {
 			Event& m_Event;
 	};
 
-	inline std::ostream& operator<<(std::ostream& os, const Event& e) { return os << e.toString(); }
+	inline std::ostream& operator<<(std::ostream& os, const Event& e) {
+		return os << e.toString();
+	}
 } // namespace AEngine

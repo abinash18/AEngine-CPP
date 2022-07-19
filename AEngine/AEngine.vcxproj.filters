@@ -40,6 +40,12 @@
     <ClInclude Include="src\AEngine\EventHandling\MouseEvent.h">
       <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\Layer.h">
+      <Filter>AEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\LayerStack.h">
+      <Filter>AEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\AEngine\Log.h">
       <Filter>AEngine</Filter>
     </ClInclude>
@@ -56,6 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Application.cpp">
+      <Filter>AEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\Layer.cpp">
+      <Filter>AEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\LayerStack.cpp">
       <Filter>AEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\AEngine\Log.cpp">

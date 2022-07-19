@@ -12,6 +12,8 @@
  */
 #include "AEngine/Log.h"
 
+#include "AEngine/Layer.h"
+
 /**
  *
  *	Entry Point

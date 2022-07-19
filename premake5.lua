@@ -65,14 +65,17 @@ project "AEngine"
 
         filter "configurations:Debug"
             defines "AE_DEBUG"
+            buildoptions "/MDd"
             symbols "On"
 
         filter "configurations:Release"
             defines "AE_Release"
+            buildoptions "/MD"
             optimize "On"
 
         filter "configurations:Dist"
             defines "AE_DIST"
+            buildoptions "/MD"
             optimize "On"
 
 project "TestBox"
@@ -112,12 +115,15 @@ project "TestBox"
 
         filter "configurations:Debug"
             defines "AE_DEBUG"
+            buildoptions "/MDd"
             symbols "On"
 
         filter "configurations:Release"
             defines "AE_Release"
+            buildoptions "/MD"
             optimize "On"
 
         filter "configurations:Dist"
             defines "AE_DIST"
+            buildoptions "/MD"
             optimize "On"

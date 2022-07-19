@@ -10,7 +10,8 @@
 #include "Window.h"
 
 #include "EventHandling/ApplicationEvent.h"
-#include "EventHandling/Event.h"
+#include "AEngine/EventHandling/Event.h"
+#include "AEngine/LayerStack.h"
 
 namespace AEngine {
 	class AE_API Application {
@@ -21,10 +22,14 @@ namespace AEngine {
 			void run();
 
 			void OnEvent(Event& e);
+
+			void pushLayer(Layer* layer);
+			void pushOverlay(Layer* overlay);
 		private:
 			bool                    OnWindowClose(WindowCloseEvent);
 			std::unique_ptr<Window> m_Window;
 			bool                    m_running = true;
+			LayerStack              layerStack;
 	};
 
 	/**
