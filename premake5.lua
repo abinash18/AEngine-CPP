@@ -5,7 +5,7 @@ workspace "AEngine"
     {
         "Debug",
         "Release",
-        "Distrobution"
+        "Dist"
     }
 	
 	startproject "TestBox"
@@ -14,8 +14,10 @@ workspace "AEngine"
     
     IncludeDir = {}
     IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include"
+    IncludeDir["GLAD"] = "AEngine/vendor/GLAD/include"
     
     include "AEngine/vendor/GLFW"
+    include "AEngine/vendor/GLAD"
 
 project "AEngine"
     location "AEngine"
@@ -38,12 +40,14 @@ project "AEngine"
     {
         "%{prj.name}/src",
         "%{prj.name}/vendor/spdlog/include",
-        "%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.GLAD}"
     }
 
     links
     {
         "GLFW",
+        "GLAD",
         "opengl32.lib"
     }
 
@@ -55,7 +59,8 @@ project "AEngine"
         defines
         {
             "AE_PLATFORM_WINDOWS",
-            "AE_BUILD_DLL"
+            "AE_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands
@@ -69,7 +74,7 @@ project "AEngine"
             symbols "On"
 
         filter "configurations:Release"
-            defines "AE_Release"
+            defines "AE_RELEASE"
             buildoptions "/MD"
             optimize "On"
 

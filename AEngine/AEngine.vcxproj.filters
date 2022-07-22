@@ -52,7 +52,7 @@
     <ClInclude Include="src\AEngine\Math\Math.h">
       <Filter>AEngine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\Platform\Windows\WindowsWindow.h">
+    <ClInclude Include="src\AEngine\window\Platform\Windows\WindowsWindow.h">
       <Filter>AEngine\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\Window.h">
@@ -76,7 +76,7 @@
     <ClCompile Include="src\AEngine\Math\Math.cpp">
       <Filter>AEngine\Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\AEngine\Platform\Windows\WindowsWindow.cpp">
+    <ClCompile Include="src\AEngine\window\Platform\Windows\WindowsWindow.cpp">
       <Filter>AEngine\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\aepch.cpp" />

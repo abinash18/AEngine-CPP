@@ -6,6 +6,8 @@
 #include "AEngine/EventHandling/MouseEvent.h"
 #include "AEngine/EventHandling/KeyEvent.h"
 
+#include <glad/glad.h>
+
 namespace AEngine {
 	static bool GLFWInitialized = false;
 
@@ -13,10 +15,21 @@ namespace AEngine {
 		AE_CORE_ERROR("GLFW Error ({0}): {1}", error_code, description);
 	}
 
-	Window* Window::Create(const WindowProperties& props) { return new WindowsWindow(props); }
-	WindowsWindow::WindowsWindow(const WindowProperties& properties) { init(properties); }
+	Window* Window::create(const WindowProperties& props) {
+		return new WindowsWindow(props);
+	}
 
-	WindowsWindow::~WindowsWindow() { close(); }
+	WindowsWindow::WindowsWindow(const WindowProperties& properties) {
+		init(properties);
+	}
+
+	WindowsWindow::~WindowsWindow() {
+		close();
+	}
+
+	void WindowsWindow::post_init() { }
+	void WindowsWindow::pre_init() { }
+	void WindowsWindow::swapbuffers() { }
 
 	void WindowsWindow::init(const WindowProperties& properties) {
 		m_data.title  = properties.title;
@@ -36,6 +49,10 @@ namespace AEngine {
 		m_Window = glfwCreateWindow((int)properties.width, (int)properties.height, m_data.title.c_str(), nullptr,
 									nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		AE_CORE_ASSERT(status, "Failed GLAD Initialization");
+
 		glfwSetWindowUserPointer(m_Window, &m_data);
 		setVSync(true);
 
@@ -110,7 +127,9 @@ namespace AEngine {
 	};
 
 
-	void WindowsWindow::close() { glfwDestroyWindow(m_Window); }
+	void WindowsWindow::close() {
+		glfwDestroyWindow(m_Window);
+	}
 
 	void WindowsWindow::update() {
 		glfwPollEvents();
@@ -118,12 +137,18 @@ namespace AEngine {
 	}
 
 	void WindowsWindow::setVSync(bool enabled) {
-		if (enabled) { glfwSwapInterval(1); } else { glfwSwapInterval(0); }
+		if (enabled) {
+			glfwSwapInterval(1);
+		} else {
+			glfwSwapInterval(0);
+		}
 		m_data.vSync = enabled;
 	}
 
 
-	bool WindowsWindow::isVSync() const { return m_data.vSync; }
+	bool WindowsWindow::isVSync() const {
+		return m_data.vSync;
+	}
 
 
 }
