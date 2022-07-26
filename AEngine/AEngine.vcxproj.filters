@@ -10,11 +10,17 @@
     <Filter Include="AEngine\Math">
       <UniqueIdentifier>{D5FFA33C-C162-33E1-6AE8-6B97562AFF63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AEngine\Platform">
-      <UniqueIdentifier>{50F5E0D3-3CEE-FF25-6520-E5AA5178DF31}</UniqueIdentifier>
+    <Filter Include="AEngine\core">
+      <UniqueIdentifier>{744BB03C-60AE-3FE1-0934-7897F5750B64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AEngine\Platform\Windows">
-      <UniqueIdentifier>{8AEFF6B8-7614-4639-9F5F-2BC98BE34457}</UniqueIdentifier>
+    <Filter Include="AEngine\window">
+      <UniqueIdentifier>{036B2958-EF38-1D5E-D8CC-8D84C439F9C2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\window\Platform">
+      <UniqueIdentifier>{B7BABFA8-23F2-0740-2CFC-6B6398B22E39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\window\Platform\Windows">
+      <UniqueIdentifier>{F12BDC2C-5D0F-EB6C-6612-19A9D274B1BD}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,11 +58,20 @@
     <ClInclude Include="src\AEngine\Math\Math.h">
       <Filter>AEngine\Math</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\window\Platform\Windows\WindowsWindow.h">
-      <Filter>AEngine\Platform\Windows</Filter>
+    <ClInclude Include="src\AEngine\core\CoreEngine.h">
+      <Filter>AEngine\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\Window.h">
-      <Filter>AEngine</Filter>
+    <ClInclude Include="src\AEngine\core\Time.h">
+      <Filter>AEngine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\window\GLFWWindowManager.h">
+      <Filter>AEngine\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\window\Platform\Windows\WindowsWindow.h">
+      <Filter>AEngine\window\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\window\Window.h">
+      <Filter>AEngine\window</Filter>
     </ClInclude>
     <ClInclude Include="src\aepch.h" />
   </ItemGroup>
@@ -76,8 +91,17 @@
     <ClCompile Include="src\AEngine\Math\Math.cpp">
       <Filter>AEngine\Math</Filter>
     </ClCompile>
+    <ClCompile Include="src\AEngine\core\CoreEngine.cpp">
+      <Filter>AEngine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\core\Time.cpp">
+      <Filter>AEngine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\window\GLFWWindowManager.cpp">
+      <Filter>AEngine\window</Filter>
+    </ClCompile>
     <ClCompile Include="src\AEngine\window\Platform\Windows\WindowsWindow.cpp">
-      <Filter>AEngine\Platform\Windows</Filter>
+      <Filter>AEngine\window\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\aepch.cpp" />
   </ItemGroup>

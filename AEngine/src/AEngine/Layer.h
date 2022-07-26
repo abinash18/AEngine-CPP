@@ -9,7 +9,7 @@ namespace AEngine {
 			Layer(const std::string& name = "Layer");
 
 
-			virtual ~Layer();
+			virtual ~Layer() = 0;
 
 			// since virtual methods are defined as overidable and PURE virtual functions are abstract, here you have to define the methods.
 			virtual void onAttach() {};

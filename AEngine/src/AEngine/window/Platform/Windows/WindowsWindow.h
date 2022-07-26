@@ -1,8 +1,8 @@
 #pragma once
 
-#include "AEngine/Window.h"
+#include "AEngine/window/Window.h"
 
-#include <GLFW/glfw3.h>
+// #include "GLFW/glfw3.h"
 
 namespace AEngine {
 	class WindowsWindow : public Window {
@@ -22,16 +22,18 @@ namespace AEngine {
 			inline void setEventCallback(const event_callback_fn& callback) override {
 				m_data.set_event_callback = callback;
 			};
-			void setVSync(bool enabled) override;
-			bool isVSync() const override;
-			void swapbuffers() override;
-			void post_init() override;
-			void pre_init() override;
+			void        setVSync(bool enabled) override;
+			bool        isVSync() const override;
+			void        swapbuffers() override;
+			void        post_init() override;
+			void        pre_init() override;
+			void        input() override;
+			GLFWwindow* getHandle() override;
 		private:
 			virtual void init(const WindowProperties& properties);
 			virtual void close();
-		private:
-			GLFWwindow* m_Window;
+			void         setCallbacks();
+			GLFWwindow*  m_Window;
 
 			struct WindowData {
 				std::string       title;

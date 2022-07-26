@@ -13,8 +13,8 @@ workspace "AEngine"
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
     
     IncludeDir = {}
-    IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include"
-    IncludeDir["GLAD"] = "AEngine/vendor/GLAD/include"
+    IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include/"
+    IncludeDir["GLAD"] = "AEngine/vendor/GLAD/include/"
     
     include "AEngine/vendor/GLFW"
     include "AEngine/vendor/GLAD"

@@ -9,14 +9,18 @@
 #include <glad/glad.h>
 
 namespace AEngine {
-	static bool GLFWInitialized = false;
+	/*static bool GLFWInitialized = false;
 
 	static void GLFWErrorCallback(int error_code, const char* description) {
 		AE_CORE_ERROR("GLFW Error ({0}): {1}", error_code, description);
-	}
+	}*/
 
 	Window* Window::create(const WindowProperties& props) {
 		return new WindowsWindow(props);
+	}
+
+	GLFWwindow* WindowsWindow::getHandle() {
+		return m_Window;
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProperties& properties) {
@@ -29,27 +33,41 @@ namespace AEngine {
 
 	void WindowsWindow::post_init() { }
 	void WindowsWindow::pre_init() { }
-	void WindowsWindow::swapbuffers() { }
+
+	void WindowsWindow::swapbuffers() {
+		glfwSwapBuffers(m_Window);
+	}
+
+	void WindowsWindow::input() {
+		glfwPollEvents();
+		// sceneManager.input()
+	}
+
+	void WindowsWindow::update() {
+		// sceneManager.update()
+	}
 
 	void WindowsWindow::init(const WindowProperties& properties) {
 		m_data.title  = properties.title;
 		m_data.width  = properties.width;
 		m_data.height = properties.height;
 
+
 		AE_CORE_INFO("Creating window {0} ({1}, {2})", properties.title, properties.width, properties.height);
 
 		// Right now this is being done per window in future this needs to be done either at engine init or window manager init.
-		if (!GLFWInitialized) {
+		/*if (!GLFWInitialized) {
 			int success = glfwInit();
 			AE_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 			GLFWInitialized = true;
-		}
+		}*/
 
 		m_Window = glfwCreateWindow((int)properties.width, (int)properties.height, m_data.title.c_str(), nullptr,
 									nullptr);
 		glfwMakeContextCurrent(m_Window);
 
+		// Load gl functions in this context.
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		AE_CORE_ASSERT(status, "Failed GLAD Initialization");
 
@@ -57,8 +75,12 @@ namespace AEngine {
 		setVSync(true);
 
 		// Set GLFW Callbacks
-		// TODO : make a seperate function to set these
+		setCallbacks();
 
+	};
+
+
+	void WindowsWindow::setCallbacks() {
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			WindowData& d = *(WindowData*)glfwGetWindowUserPointer(window);
 			d.width       = width;
@@ -124,17 +146,13 @@ namespace AEngine {
 			MouseMovedEvent e((float)xpos, (float)ypos);
 			d.set_event_callback(e);
 		});
-	};
+	}
 
 
 	void WindowsWindow::close() {
 		glfwDestroyWindow(m_Window);
 	}
 
-	void WindowsWindow::update() {
-		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
-	}
 
 	void WindowsWindow::setVSync(bool enabled) {
 		if (enabled) {
@@ -144,7 +162,6 @@ namespace AEngine {
 		}
 		m_data.vSync = enabled;
 	}
-
 
 	bool WindowsWindow::isVSync() const {
 		return m_data.vSync;

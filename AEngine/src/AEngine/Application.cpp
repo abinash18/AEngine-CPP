@@ -12,8 +12,8 @@ namespace AEngine {
 	#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application::Application() {
-		m_Window = std::unique_ptr<Window>(Window::create());
-		m_Window->setEventCallback(BIND_EVENT_FN(OnEvent));
+		//m_Window = std::unique_ptr<Window>(Window::create());
+		//m_Window->setEventCallback(BIND_EVENT_FN(OnEvent));
 	};
 
 	void Application::OnEvent(Event& e) {
@@ -47,7 +47,7 @@ namespace AEngine {
 		};
 	}
 
-	bool Application::OnWindowClose(WindowCloseEvent) {
+	bool Application::OnWindowClose(WindowCloseEvent& e) {
 		m_running = false;
 		return true;
 	}

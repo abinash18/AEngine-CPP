@@ -7,7 +7,7 @@
  *********************************************************************/
 #pragma once
 #include "Core.h"
-#include "Window.h"
+#include "window/Window.h"
 
 #include "EventHandling/ApplicationEvent.h"
 #include "AEngine/EventHandling/Event.h"
@@ -26,7 +26,7 @@ namespace AEngine {
 			void pushLayer(Layer* layer);
 			void pushOverlay(Layer* overlay);
 		private:
-			bool                    OnWindowClose(WindowCloseEvent);
+			bool                    OnWindowClose(WindowCloseEvent& e);
 			std::unique_ptr<Window> m_Window;
 			bool                    m_running = true;
 			LayerStack              layerStack;

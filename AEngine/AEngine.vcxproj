@@ -164,8 +164,11 @@
     <ClInclude Include="src\AEngine\LayerStack.h" />
     <ClInclude Include="src\AEngine\Log.h" />
     <ClInclude Include="src\AEngine\Math\Math.h" />
+    <ClInclude Include="src\AEngine\core\CoreEngine.h" />
+    <ClInclude Include="src\AEngine\core\Time.h" />
+    <ClInclude Include="src\AEngine\window\GLFWWindowManager.h" />
     <ClInclude Include="src\AEngine\window\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="src\AEngine\Window.h" />
+    <ClInclude Include="src\AEngine\window\Window.h" />
     <ClInclude Include="src\aepch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +177,9 @@
     <ClCompile Include="src\AEngine\LayerStack.cpp" />
     <ClCompile Include="src\AEngine\Log.cpp" />
     <ClCompile Include="src\AEngine\Math\Math.cpp" />
+    <ClCompile Include="src\AEngine\core\CoreEngine.cpp" />
+    <ClCompile Include="src\AEngine\core\Time.cpp" />
+    <ClCompile Include="src\AEngine\window\GLFWWindowManager.cpp" />
     <ClCompile Include="src\AEngine\window\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\aepch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

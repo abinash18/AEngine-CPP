@@ -6,6 +6,8 @@
  */
 #include "AEngine/Application.h"
 
+#include "AEngine/core/CoreEngine.h"
+
 /**
  *
  *	Logging Wrapper for spdlog
