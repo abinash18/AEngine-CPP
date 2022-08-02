@@ -13,11 +13,13 @@ workspace "AEngine"
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
     
     IncludeDir = {}
-    IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include/"
-    IncludeDir["GLAD"] = "AEngine/vendor/GLAD/include/"
+    IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include"
+    IncludeDir["GLAD"] = "AEngine/vendor/GLAD/include"
+    IncludeDir["IMGUI"] = "AEngine/vendor/IMGUI"
     
     include "AEngine/vendor/GLFW"
     include "AEngine/vendor/GLAD"
+    include "AEngine/vendor/IMGUI"
 
 project "AEngine"
     location "AEngine"
@@ -41,13 +43,15 @@ project "AEngine"
         "%{prj.name}/src",
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
-        "%{IncludeDir.GLAD}"
+        "%{IncludeDir.GLAD}",
+        "%{IncludeDir.IMGUI}"
     }
 
     links
     {
         "GLFW",
         "GLAD",
+        "IMGUI",
         "opengl32.lib"
     }
 
@@ -100,12 +104,12 @@ project "TestBox"
     includedirs
     {
         "AEngine/vendor/spdlog/include",
-        "AEngine/src"
+        "AEngine/src",
     }
 
     links
     {
-        "AEngine"
+        "AEngine",
     }
 
     filter "system:windows"

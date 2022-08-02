@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -103,7 +103,7 @@
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -130,7 +130,7 @@
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -156,19 +156,24 @@
     <ClInclude Include="src\AEngine\Application.h" />
     <ClInclude Include="src\AEngine\Core.h" />
     <ClInclude Include="src\AEngine\EntryPoint.h" />
-    <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h" />
-    <ClInclude Include="src\AEngine\EventHandling\Event.h" />
-    <ClInclude Include="src\AEngine\EventHandling\KeyEvent.h" />
-    <ClInclude Include="src\AEngine\EventHandling\MouseEvent.h" />
+    <ClInclude Include="src\AEngine\input\event\WindowEvent.h" />
+    <ClInclude Include="src\AEngine\input\event\Event.h" />
+    <ClInclude Include="src\AEngine\input\event\KeyEvent.h" />
+    <ClInclude Include="src\AEngine\input\event\MouseEvent.h" />
     <ClInclude Include="src\AEngine\Layer.h" />
     <ClInclude Include="src\AEngine\LayerStack.h" />
     <ClInclude Include="src\AEngine\Log.h" />
     <ClInclude Include="src\AEngine\Math\Math.h" />
     <ClInclude Include="src\AEngine\core\CoreEngine.h" />
     <ClInclude Include="src\AEngine\core\Time.h" />
-    <ClInclude Include="src\AEngine\window\GLFWWindowManager.h" />
-    <ClInclude Include="src\AEngine\window\Platform\Windows\WindowsWindow.h" />
-    <ClInclude Include="src\AEngine\window\Window.h" />
+    <ClInclude Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.h" />
+    <ClInclude Include="src\AEngine\render\window\GLFWWindow.h" />
+    <ClInclude Include="src\AEngine\render\window\GLFWWindowManager.h" />
+    <ClInclude Include="src\AEngine\render\window\GLFWWindowProperties.h" />
+    <ClInclude Include="src\AEngine\render\window\GLFW_API_TOKENS.h" />
+    <ClInclude Include="src\AEngine\render\window\Window.h" />
+    <ClInclude Include="src\AEngine\util\Destroyable.h" />
+    <ClInclude Include="src\AEngine\util\debug\ImGUILayer.h" />
     <ClInclude Include="src\aepch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,8 +184,10 @@
     <ClCompile Include="src\AEngine\Math\Math.cpp" />
     <ClCompile Include="src\AEngine\core\CoreEngine.cpp" />
     <ClCompile Include="src\AEngine\core\Time.cpp" />
-    <ClCompile Include="src\AEngine\window\GLFWWindowManager.cpp" />
-    <ClCompile Include="src\AEngine\window\Platform\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp" />
+    <ClCompile Include="src\AEngine\render\window\GLFWWindowManager.cpp" />
+    <ClCompile Include="src\AEngine\util\debug\ImGUILayer.cpp" />
     <ClCompile Include="src\aepch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
@@ -191,6 +198,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\GLAD\GLAD.vcxproj">
       <Project>{5D4A857C-4981-860D-F26D-6C10DE83020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\IMGUI\IMGUI.vcxproj">
+      <Project>{606F530D-CC83-7BBE-9505-1F1E01D977EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

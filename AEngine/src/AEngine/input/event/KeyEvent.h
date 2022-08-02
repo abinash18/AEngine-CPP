@@ -5,12 +5,15 @@ namespace AEngine {
 
 	class AE_API KeyEvent : public Event {
 		public:
-			inline int GetKeyCode() const { return m_KeyCode; }
+			inline int GetKeyCode() const {
+				return m_KeyCode;
+			}
 
 			EVENT_CLASS_CATEGORY(EVENT_CATEGORY_KEYBOARD| EVENT_CATEGORY_INPUT)
 		protected:
 			KeyEvent(int keycode)
-				: m_KeyCode(keycode) {}
+				: m_KeyCode(keycode) {
+			}
 
 			int m_KeyCode;
 	};
@@ -18,9 +21,12 @@ namespace AEngine {
 	class AE_API KeyPressedEvent : public KeyEvent {
 		public:
 			KeyPressedEvent(int keycode, int repeatCount)
-				: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
+				: KeyEvent(keycode), m_RepeatCount(repeatCount) {
+			}
 
-			inline int getRepeatCount() const { return m_RepeatCount; }
+			inline int getRepeatCount() const {
+				return m_RepeatCount;
+			}
 
 
 			std::string toString() const override {
@@ -37,7 +43,8 @@ namespace AEngine {
 	class AE_API KeyReleasedEvent : public KeyEvent {
 		public:
 			KeyReleasedEvent(int keycode)
-				: KeyEvent(keycode) {}
+				: KeyEvent(keycode) {
+			}
 
 			std::string toString() const override {
 				std::stringstream ss;
@@ -46,5 +53,20 @@ namespace AEngine {
 			}
 
 			EVENT_CLASS_TYPE(KEY_RELEASED)
+	};
+
+	class AE_API KeyTypedEvent : public KeyEvent {
+		public:
+			KeyTypedEvent(int keycode)
+				: KeyEvent(keycode) {
+			}
+
+			std::string toString() const override {
+				std::stringstream ss;
+				ss << "KeyTypedEvent: " << m_KeyCode;
+				return ss.str();
+			}
+
+			EVENT_CLASS_TYPE(KEY_TYPED)
 	};
 }

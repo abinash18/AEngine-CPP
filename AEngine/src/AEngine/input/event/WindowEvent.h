@@ -13,19 +13,24 @@ namespace AEngine {
 			 * @param _width The new width of the new window.
 			 * @param _height The new height of the window.
 			*/
-			WindowResizeEvent(unsigned int _width, unsigned int _height) : width(_width), height(_height) {};
+			WindowResizeEvent(unsigned int _width, unsigned int _height) : width(_width), height(_height) {
+			};
 
 			/**
 			 * @brief 
 			 * @return width
 			*/
-			inline unsigned int getWidth() { return width; }
+			unsigned int getWidth() {
+				return width;
+			}
 
 			/**
 			 * @brief 
 			 * @return height
 			*/
-			inline unsigned int getHeight() { return height; }
+			unsigned int getHeight() {
+				return height;
+			}
 
 			/**
 			 * @brief toString overloader
@@ -48,7 +53,8 @@ namespace AEngine {
 	*/
 	class AE_API WindowCloseEvent : public Event {
 		public:
-			WindowCloseEvent() {};
+			WindowCloseEvent() {
+			};
 
 			EVENT_CLASS_TYPE(WINDOW_CLOSE)
 			EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
@@ -59,7 +65,8 @@ namespace AEngine {
 	*/
 	class AE_API ApplicationRenderEvent : public Event {
 		public:
-			ApplicationRenderEvent() {};
+			ApplicationRenderEvent() {
+			};
 
 			EVENT_CLASS_TYPE(APPLICATION_RENDER)
 			EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
@@ -70,7 +77,8 @@ namespace AEngine {
 	*/
 	class AE_API ApplicationUpdateEvent : public Event {
 		public:
-			ApplicationUpdateEvent() {};
+			ApplicationUpdateEvent() {
+			};
 
 			EVENT_CLASS_TYPE(APPLICATION_UPDATE)
 			EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)
@@ -81,7 +89,8 @@ namespace AEngine {
 	*/
 	class AE_API ApplicationTickEvent : public Event {
 		public:
-			ApplicationTickEvent() {};
+			ApplicationTickEvent() {
+			};
 
 			EVENT_CLASS_TYPE(APPLICATION_TICK)
 			EVENT_CLASS_CATEGORY(EVENT_CATEGORY_APPLICATION)

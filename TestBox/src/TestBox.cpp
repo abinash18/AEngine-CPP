@@ -15,24 +15,12 @@ class testLayer : public AEngine::Layer {
 		}
 };
 
-//class TestBox : public AEngine::Application {
-//	public:
-//		TestBox() {
-//			pushLayer(new testLayer());
-//		};
-//};
-
-//AEngine::Application* AEngine::createApplication() {
-//	AE_INFO("Starting");
-//	return new TestBox();
-//}
-
-
 int main(int argc, char** argv) {
 	AEngine::Log::Init();
 	AE_CRITICAL("Initialized Logger");
 	auto engine = new AEngine::CoreEngine();
 	engine->addLayer(new testLayer());
+	engine->addOverlay(new AEngine::ImGUILayer());
 	engine->start();
 	delete engine;
 	//auto app = AEngine::createApplication();

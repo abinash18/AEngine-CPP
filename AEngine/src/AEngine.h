@@ -4,8 +4,6 @@
  *
  *	For use with importing AE_API
  */
-#include "AEngine/Application.h"
-
 #include "AEngine/core/CoreEngine.h"
 
 /**
@@ -21,3 +19,5 @@
  *	Entry Point
  */
 #include "AEngine/EntryPoint.h"
+
+#include "AEngine/util/debug/ImGUILayer.h"

@@ -13,14 +13,20 @@
     <Filter Include="AEngine\core">
       <UniqueIdentifier>{744BB03C-60AE-3FE1-0934-7897F5750B64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AEngine\window">
-      <UniqueIdentifier>{036B2958-EF38-1D5E-D8CC-8D84C439F9C2}</UniqueIdentifier>
+    <Filter Include="AEngine\render">
+      <UniqueIdentifier>{8B3C374C-770A-2B52-609E-9B784C0B07B7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AEngine\window\Platform">
-      <UniqueIdentifier>{B7BABFA8-23F2-0740-2CFC-6B6398B22E39}</UniqueIdentifier>
+    <Filter Include="AEngine\render\OpenGL3">
+      <UniqueIdentifier>{7267362B-5E61-5F7D-47CE-F58D3367C5E9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AEngine\window\Platform\Windows">
-      <UniqueIdentifier>{F12BDC2C-5D0F-EB6C-6612-19A9D274B1BD}</UniqueIdentifier>
+    <Filter Include="AEngine\render\window">
+      <UniqueIdentifier>{32732B7D-9EDF-E677-67D3-7ED5D3FE08E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\util">
+      <UniqueIdentifier>{693EBA3C-55A1-49E1-FE26-8297EA681564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\util\debug">
+      <UniqueIdentifier>{BFC38002-ABA7-4158-1408-3CAB000B2CDA}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,16 +40,16 @@
     <ClInclude Include="src\AEngine\EntryPoint.h">
       <Filter>AEngine</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\EventHandling\ApplicationEvent.h">
+    <ClInclude Include="src\AEngine\input\event\WindowEvent.h">
       <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\EventHandling\Event.h">
+    <ClInclude Include="src\AEngine\input\event\Event.h">
       <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\EventHandling\KeyEvent.h">
+    <ClInclude Include="src\AEngine\input\event\KeyEvent.h">
       <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\EventHandling\MouseEvent.h">
+    <ClInclude Include="src\AEngine\input\event\MouseEvent.h">
       <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\Layer.h">
@@ -64,14 +70,29 @@
     <ClInclude Include="src\AEngine\core\Time.h">
       <Filter>AEngine\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\window\GLFWWindowManager.h">
-      <Filter>AEngine\window</Filter>
+    <ClInclude Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.h">
+      <Filter>AEngine\render\OpenGL3</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\window\Platform\Windows\WindowsWindow.h">
-      <Filter>AEngine\window\Platform\Windows</Filter>
+    <ClInclude Include="src\AEngine\render\window\GLFWWindow.h">
+      <Filter>AEngine\render\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\window\Window.h">
-      <Filter>AEngine\window</Filter>
+    <ClInclude Include="src\AEngine\render\window\GLFWWindowManager.h">
+      <Filter>AEngine\render\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\window\GLFWWindowProperties.h">
+      <Filter>AEngine\render\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\window\GLFW_API_TOKENS.h">
+      <Filter>AEngine\render\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\window\Window.h">
+      <Filter>AEngine\render\window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\util\Destroyable.h">
+      <Filter>AEngine\util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\util\debug\ImGUILayer.h">
+      <Filter>AEngine\util\debug</Filter>
     </ClInclude>
     <ClInclude Include="src\aepch.h" />
   </ItemGroup>
@@ -97,11 +118,17 @@
     <ClCompile Include="src\AEngine\core\Time.cpp">
       <Filter>AEngine\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\AEngine\window\GLFWWindowManager.cpp">
-      <Filter>AEngine\window</Filter>
+    <ClCompile Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.cpp">
+      <Filter>AEngine\render\OpenGL3</Filter>
     </ClCompile>
-    <ClCompile Include="src\AEngine\window\Platform\Windows\WindowsWindow.cpp">
-      <Filter>AEngine\window\Platform\Windows</Filter>
+    <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp">
+      <Filter>AEngine\render\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\window\GLFWWindowManager.cpp">
+      <Filter>AEngine\render\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\util\debug\ImGUILayer.cpp">
+      <Filter>AEngine\util\debug</Filter>
     </ClCompile>
     <ClCompile Include="src\aepch.cpp" />
   </ItemGroup>

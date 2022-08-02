@@ -5,10 +5,15 @@
 
 #include <GLFW/glfw3.h>
 
-#include "AEngine/window/Window.h"
+#include "AEngine/render/window/Window.h"
 #include "Time.h"
 
+#include "AEngine/input/event/WindowEvent.h"
+#include "AEngine/render/window/GLFWWindow.h"
+
 namespace AEngine {
+
+	CoreEngine* CoreEngine::s_instance = nullptr;
 
 	static bool GLFWInitialized = false;
 	//#define BIND_EVENT_FN(x) std::bind(&CoreEngine::x, this, std::placeholders::_1)
@@ -19,19 +24,24 @@ namespace AEngine {
 
 	CoreEngine::CoreEngine() {
 		initGLFW();
+		s_instance = this;
 		//m_window = std::unique_ptr<Window>(Window::create());
-		m_window = Window::create();
+		m_window = new GLFWWindow();
+		m_window->create();
 		//m_Window->setEventCallback(BIND_EVENT_FN(OnEvent));
 		// TODO: Find a better way to do this idk if this is most efficent.
-		m_window->setEventCallback([=](Event& e) {
+		m_window->setEventCallback([=] (Event& e) {
 			OnEvent(e);
 		});
-
+		m_window->setVSync(false);
 		m_frameTime = 1.0 / (double)600;
+		setFramerateUncapped(true);
 		//layerStack = LayerStack();
 	};
 
-	CoreEngine::~CoreEngine() { };
+	CoreEngine::~CoreEngine() {
+		//delete m_window;
+	};
 
 	void CoreEngine::start() {
 		if (m_running) {
@@ -45,7 +55,7 @@ namespace AEngine {
 	}
 
 	bool CoreEngine::OnWindowClose(WindowCloseEvent& e) {
-		isCloseRequested = true;
+		//m_isCloseRequested = true;
 		return true;
 	}
 
@@ -56,8 +66,7 @@ namespace AEngine {
 		// TODO: Come up with better dispacther without templates (IDK Based fully on callback lamdas).
 		EventDispatcher dispatcher(e);
 		//dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
-		dispatcher.dispatch<WindowCloseEvent>([=](WindowCloseEvent& _e) {
-
+		dispatcher.dispatch<WindowCloseEvent>([=] (WindowCloseEvent& _e) {
 			return OnWindowClose(_e);
 		});
 
@@ -88,7 +97,7 @@ namespace AEngine {
 		double passedTime;
 
 		while (m_running) {
-			render = false;
+			render = isFramerateUncapped();
 
 			startTime  = AEngine::getTime();   //Current time at the start of the frame.
 			passedTime = startTime - lastTime; //Amount of passed time since last frame.
@@ -113,14 +122,13 @@ namespace AEngine {
 				//m_game->ProcessInput(m_window->GetInput(), (float)m_frameTime);
 				//m_game->Update((float)m_frameTime);
 
-				if (isCloseRequested) {
+				if (m_window->isCloseRequested()) {
 					stop();
 					continue;
 				} else {
 
 					m_window->update();
 					m_window->input();
-
 					//Since any updates can put onscreen objects in a new place, the flag
 					//must be set to rerender the scene.
 
@@ -140,12 +148,10 @@ namespace AEngine {
 				}
 			}
 
-			if (render) {
+			if (render && m_running) {
 				//m_game->Render(m_renderingEngine);
 				glClearColor(1, 0, 1, 1);
 				glClear(GL_COLOR_BUFFER_BIT);
-				//The newly rendered image will be in the window's backbuffer,
-				//so the buffers must be swapped to display the new image.
 				for (Layer* layer : m_layers) {
 					layer->update();
 				}
@@ -163,12 +169,17 @@ namespace AEngine {
 
 	void CoreEngine::addLayer(Layer* lyr) {
 		m_layers.pushLayer(lyr);
+		lyr->onAttach();
 	}
 
-	void CoreEngine::addOverlay(Layer* ovr) {}
+	void CoreEngine::addOverlay(Layer* ovr) {
+		m_layers.pushOverlay(ovr);
+		ovr->onAttach();
+	}
 
 	void CoreEngine::cleanUp() {
-		glfwDestroyWindow(m_window->getHandle());
+		//delete m_window;
+		glfwTerminate();
 	}
 
 	void CoreEngine::stop() {
@@ -176,6 +187,7 @@ namespace AEngine {
 			return;
 		}
 		AE_CORE_INFO("STOPPING ENGINE");
+		m_window->destroy();
 		m_running = false;
 	}
 

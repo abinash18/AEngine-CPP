@@ -7,11 +7,11 @@
  *********************************************************************/
 #pragma once
 #include "Core.h"
-#include "window/Window.h"
+#include "render/window/Window.h"
 
-#include "EventHandling/ApplicationEvent.h"
-#include "AEngine/EventHandling/Event.h"
 #include "AEngine/LayerStack.h"
+
+#include "input/event/WindowEvent.h"
 
 namespace AEngine {
 	class AE_API Application {
