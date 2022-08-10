@@ -83,9 +83,8 @@
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -94,7 +93,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll ..\bin\Debug-windows-x86_64\TestBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll ..\bin\Debug-windows-x86_64\TestBox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll "..\bin\Debug-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll "..\bin\Debug-windows-x86_64\TestBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -102,16 +101,15 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_DEBUG;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -121,7 +119,7 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll ..\bin\Release-windows-x86_64\TestBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll ..\bin\Release-windows-x86_64\TestBox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll "..\bin\Release-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll "..\bin\Release-windows-x86_64\TestBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -129,16 +127,15 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_DEBUG;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -148,45 +145,51 @@
       <ImportLibrary>..\bin\Dist-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll ..\bin\Dist-windows-x86_64\TestBox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll ..\bin\Dist-windows-x86_64\TestBox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll "..\bin\Dist-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll "..\bin\Dist-windows-x86_64\TestBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\AEngine.h" />
-    <ClInclude Include="src\AEngine\Application.h" />
-    <ClInclude Include="src\AEngine\Core.h" />
     <ClInclude Include="src\AEngine\EntryPoint.h" />
-    <ClInclude Include="src\AEngine\input\event\WindowEvent.h" />
-    <ClInclude Include="src\AEngine\input\event\Event.h" />
-    <ClInclude Include="src\AEngine\input\event\KeyEvent.h" />
-    <ClInclude Include="src\AEngine\input\event\MouseEvent.h" />
     <ClInclude Include="src\AEngine\Layer.h" />
     <ClInclude Include="src\AEngine\LayerStack.h" />
     <ClInclude Include="src\AEngine\Log.h" />
     <ClInclude Include="src\AEngine\Math\Math.h" />
+    <ClInclude Include="src\AEngine\core\Core.h" />
     <ClInclude Include="src\AEngine\core\CoreEngine.h" />
     <ClInclude Include="src\AEngine\core\Time.h" />
+    <ClInclude Include="src\AEngine\input\GLFWMouseAndKeyboardInput.h" />
+    <ClInclude Include="src\AEngine\input\Input.h" />
+    <ClInclude Include="src\AEngine\input\event\Event.h" />
+    <ClInclude Include="src\AEngine\input\event\KeyEvent.h" />
+    <ClInclude Include="src\AEngine\input\event\MouseEvent.h" />
+    <ClInclude Include="src\AEngine\input\event\WindowEvent.h" />
     <ClInclude Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.h" />
     <ClInclude Include="src\AEngine\render\window\GLFWWindow.h" />
-    <ClInclude Include="src\AEngine\render\window\GLFWWindowManager.h" />
+    <ClInclude Include="src\AEngine\render\window\manager\GLFWWindowManager.h" />
     <ClInclude Include="src\AEngine\render\window\GLFWWindowProperties.h" />
     <ClInclude Include="src\AEngine\render\window\GLFW_API_TOKENS.h" />
+    <ClInclude Include="src\AEngine\render\window\manager\WindowManager.h" />
+    <ClInclude Include="src\AEngine\render\window\models\EngineLoadingWindow.h" />
     <ClInclude Include="src\AEngine\render\window\Window.h" />
     <ClInclude Include="src\AEngine\util\Destroyable.h" />
     <ClInclude Include="src\AEngine\util\debug\ImGUILayer.h" />
     <ClInclude Include="src\aepch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AEngine\Application.cpp" />
     <ClCompile Include="src\AEngine\Layer.cpp" />
     <ClCompile Include="src\AEngine\LayerStack.cpp" />
     <ClCompile Include="src\AEngine\Log.cpp" />
     <ClCompile Include="src\AEngine\Math\Math.cpp" />
     <ClCompile Include="src\AEngine\core\CoreEngine.cpp" />
     <ClCompile Include="src\AEngine\core\Time.cpp" />
+    <ClCompile Include="src\AEngine\input\GLFWMouseAndKeyboardInput.cpp" />
+    <ClCompile Include="src\AEngine\input\Input.cpp" />
     <ClCompile Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp" />
-    <ClCompile Include="src\AEngine\render\window\GLFWWindowManager.cpp" />
+    <ClCompile Include="src\AEngine\render\window\manager\GLFWWindowManager.cpp" />
+    <ClCompile Include="src\AEngine\render\window\manager\WindowManager.cpp" />
+    <ClCompile Include="src\AEngine\render\window\models\EngineLoadingWindow.cpp" />
     <ClCompile Include="src\AEngine\util\debug\ImGUILayer.cpp" />
     <ClCompile Include="src\aepch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

@@ -18,13 +18,14 @@ namespace AEngine {
 
 	GLFWWindow::~GLFWWindow() {
 		AE_CORE_INFO("DESTROYING WINDOW {0}", properties.title);
-		requestClose();
+		destroy();
 	}
 
 	Window* GLFWWindow::create() {
-		AE_CORE_INFO("Creating window {0} ({1}, {2})", properties.title, properties.sc_width, properties.sc_height);
 		resetToDefaults();
+		preInit();
 
+		AE_CORE_INFO("Creating window {0} ({1}, {2})", properties.title, properties.sc_width, properties.sc_height);
 		if (properties.prefered_monitor == NULL) {
 			properties.prefered_monitor = (int*) glfwGetPrimaryMonitor();
 		}
@@ -41,7 +42,7 @@ namespace AEngine {
 		addGLFWWindowHint(GLFW_VISIBLE,
 						  !properties.start_hidden);
 
-		preInit();
+		
 
 		// This is done because creating a window defaults to full screen and if the
 		// user wants it full screen it will be, other wise we can change it like so and
@@ -70,6 +71,8 @@ namespace AEngine {
 		// Do tasks that require window handle.
 		setWindowSizeLimits();
 
+		properties.input_manager = new GLFWMouseAndKeyboardInput();
+
 		postInit();
 
 		return this;
@@ -90,6 +93,20 @@ namespace AEngine {
 
 	void GLFWWindow::resetToDefaults() {
 		glfwDefaultWindowHints();
+	}
+
+	/**
+	 * This checks if the window has been created or not, if not it throws an
+	 * exception
+	 * @return Returns true if pointer valid, else false.
+	 */
+	bool GLFWWindow::checkWindowPointer() {
+		if (glfw_handle == nullptr) {
+			AE_CORE_ERROR("Handle is invalid.");
+			//throw new NullPointerException("Handle is invalid for the current call.");
+			return false;
+		}
+		return true;
 	}
 
 	void GLFWWindow::setWindowSizeLimits(int min_width, int min_height,
@@ -118,18 +135,48 @@ namespace AEngine {
 		glfwSwapBuffers(glfw_handle);
 	}
 
-	void GLFWWindow::input() {
+	void GLFWWindow::addLayer(Layer* lyr) {
+		layerStack.pushLayer(lyr);
+		lyr->onAttach();
+	}
+
+	void GLFWWindow::addOverlay(Layer* ovr) {
+		layerStack.pushOverlay(ovr);
+		ovr->onAttach();
+	}
+
+	LayerStack& GLFWWindow::getLayerStack() {
+		return layerStack;
+	}
+
+	void GLFWWindow::render() {
+		for (Layer* layer : layerStack) {
+			layer->render();
+		}
+		// SceneManager.render();
+		swapbuffers();
+	}
+
+	void GLFWWindow::setCloseFlag(const bool close_flag) {
+		CLOSE_FLAG = close_flag;
+	}
+
+	void GLFWWindow::input(float delta) {
 		glfwPollEvents();
+
 		// sceneManager.input()
 	}
 
-	void GLFWWindow::update() {
+	void GLFWWindow::update(float delta) {
+		for (Layer* layer : layerStack) {
+			layer->update(delta);
+		}
 		// sceneManager.update()
 	}
 
 	void GLFWWindow::requestClose() {
-		//glfwDestroyWindow(glfw_handle);
-		//delete &m_data;
+		if (!checkWindowPointer())
+			return;
 		glfwSetWindowShouldClose(glfw_handle, true);
 	}
 
@@ -138,12 +185,13 @@ namespace AEngine {
 	}
 
 	void GLFWWindow::destroy() {
+		if (!checkWindowPointer())
+			return;
 		glfwDestroyWindow(glfw_handle);
 	}
 
-	void GLFWWindow::close() {
+	void GLFWWindow::close(GLFWwindow* window) {
 	}
-
 
 	void GLFWWindow::setCallbacks() {
 		glfwSetWindowSizeCallback(glfw_handle, [] (GLFWwindow* window, int width, int height) {
@@ -163,19 +211,21 @@ namespace AEngine {
 
 		glfwSetKeyCallback(glfw_handle, [] (GLFWwindow* window, int key, int scancode, int action, int mods) {
 			GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-
 			switch (action) {
 				case GLFW_PRESS: {
+					d.input_manager->setKeyDown(key);
 					KeyPressedEvent e(key, 0);
 					d.send_event_callback(e);
 					break;
 				}
 				case GLFW_RELEASE: {
+					d.input_manager->setKeyUp(key);
 					KeyReleasedEvent e(key);
 					d.send_event_callback(e);
 					break;
 				}
 				case GLFW_REPEAT: {
+					d.input_manager->setKeyDown(key);
 					KeyPressedEvent e(key, 1);
 					d.send_event_callback(e);
 					break;
@@ -194,11 +244,13 @@ namespace AEngine {
 
 			switch (action) {
 				case GLFW_PRESS: {
+					d.input_manager->setMouseButtonDown(button);
 					MouseButtonPressedEvent e(button);
 					d.send_event_callback(e);
 					break;
 				}
 				case GLFW_RELEASE: {
+					d.input_manager->setMouseButtonUp(button);
 					MouseButtonReleasedEvent e(button);
 					d.send_event_callback(e);
 					break;
@@ -208,14 +260,17 @@ namespace AEngine {
 
 		glfwSetScrollCallback(glfw_handle, [] (GLFWwindow* window, double xoffset, double yoffset) {
 			GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-
+			d.input_manager->setScrollOffsetX(d.input_manager->getScrollOffsetX() + xoffset);
+			d.input_manager->setScrollOffsetY(d.input_manager->getScrollOffsetY() + yoffset);
 			MouseScrolledEvent e((float) xoffset, (float) yoffset);
 			d.send_event_callback(e);
 		});
 
 		glfwSetCursorPosCallback(glfw_handle, [] (GLFWwindow* window, double xpos, double ypos) {
 			GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-			MouseMovedEvent       e((float) xpos, (float) ypos);
+			d.input_manager->setMouseX(xpos);
+			d.input_manager->setMouseY(ypos);
+			MouseMovedEvent e((float) xpos, (float) ypos);
 			d.send_event_callback(e);
 		});
 	}

@@ -4,14 +4,17 @@
     <Filter Include="AEngine">
       <UniqueIdentifier>{7CCD3D38-E8AC-BCD3-F1C4-47AA5D232335}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AEngine\EventHandling">
-      <UniqueIdentifier>{F2EACA45-5E57-8640-274B-1E9E9376A8A8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AEngine\Math">
       <UniqueIdentifier>{D5FFA33C-C162-33E1-6AE8-6B97562AFF63}</UniqueIdentifier>
     </Filter>
     <Filter Include="AEngine\core">
       <UniqueIdentifier>{744BB03C-60AE-3FE1-0934-7897F5750B64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\input">
+      <UniqueIdentifier>{9BBA25D3-077B-A109-D0B5-EA863C35E6E5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\input\event">
+      <UniqueIdentifier>{4C9494BB-B8F5-71C9-4163-B87BADC3A888}</UniqueIdentifier>
     </Filter>
     <Filter Include="AEngine\render">
       <UniqueIdentifier>{8B3C374C-770A-2B52-609E-9B784C0B07B7}</UniqueIdentifier>
@@ -31,26 +34,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AEngine.h" />
-    <ClInclude Include="src\AEngine\Application.h">
-      <Filter>AEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AEngine\Core.h">
-      <Filter>AEngine</Filter>
-    </ClInclude>
     <ClInclude Include="src\AEngine\EntryPoint.h">
       <Filter>AEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AEngine\input\event\WindowEvent.h">
-      <Filter>AEngine\EventHandling</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AEngine\input\event\Event.h">
-      <Filter>AEngine\EventHandling</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AEngine\input\event\KeyEvent.h">
-      <Filter>AEngine\EventHandling</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AEngine\input\event\MouseEvent.h">
-      <Filter>AEngine\EventHandling</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\Layer.h">
       <Filter>AEngine</Filter>
@@ -64,11 +49,32 @@
     <ClInclude Include="src\AEngine\Math\Math.h">
       <Filter>AEngine\Math</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\core\Core.h">
+      <Filter>AEngine\core</Filter>
+    </ClInclude>
     <ClInclude Include="src\AEngine\core\CoreEngine.h">
       <Filter>AEngine\core</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\core\Time.h">
       <Filter>AEngine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\input\GLFWMouseAndKeyboardInput.h">
+      <Filter>AEngine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\input\Input.h">
+      <Filter>AEngine\input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\input\event\Event.h">
+      <Filter>AEngine\input\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\input\event\KeyEvent.h">
+      <Filter>AEngine\input\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\input\event\MouseEvent.h">
+      <Filter>AEngine\input\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\input\event\WindowEvent.h">
+      <Filter>AEngine\input\event</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.h">
       <Filter>AEngine\render\OpenGL3</Filter>
@@ -76,7 +82,7 @@
     <ClInclude Include="src\AEngine\render\window\GLFWWindow.h">
       <Filter>AEngine\render\window</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\render\window\GLFWWindowManager.h">
+    <ClInclude Include="src\AEngine\render\window\manager\GLFWWindowManager.h">
       <Filter>AEngine\render\window</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\render\window\GLFWWindowProperties.h">
@@ -95,11 +101,10 @@
       <Filter>AEngine\util\debug</Filter>
     </ClInclude>
     <ClInclude Include="src\aepch.h" />
+    <ClInclude Include="src\AEngine\render\window\manager\WindowManager.h" />
+    <ClInclude Include="src\AEngine\render\window\models\EngineLoadingWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\AEngine\Application.cpp">
-      <Filter>AEngine</Filter>
-    </ClCompile>
     <ClCompile Include="src\AEngine\Layer.cpp">
       <Filter>AEngine</Filter>
     </ClCompile>
@@ -118,18 +123,26 @@
     <ClCompile Include="src\AEngine\core\Time.cpp">
       <Filter>AEngine\core</Filter>
     </ClCompile>
+    <ClCompile Include="src\AEngine\input\GLFWMouseAndKeyboardInput.cpp">
+      <Filter>AEngine\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\input\Input.cpp">
+      <Filter>AEngine\input</Filter>
+    </ClCompile>
     <ClCompile Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.cpp">
       <Filter>AEngine\render\OpenGL3</Filter>
     </ClCompile>
     <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp">
       <Filter>AEngine\render\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\AEngine\render\window\GLFWWindowManager.cpp">
+    <ClCompile Include="src\AEngine\render\window\manager\GLFWWindowManager.cpp">
       <Filter>AEngine\render\window</Filter>
     </ClCompile>
     <ClCompile Include="src\AEngine\util\debug\ImGUILayer.cpp">
       <Filter>AEngine\util\debug</Filter>
     </ClCompile>
     <ClCompile Include="src\aepch.cpp" />
+    <ClCompile Include="src\AEngine\render\window\manager\WindowManager.cpp" />
+    <ClCompile Include="src\AEngine\render\window\models\EngineLoadingWindow.cpp" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 #include "AEngine/LayerStack.h"
 #include "AEngine/render/window/Window.h"
 #include "AEngine/input/event/WindowEvent.h"
-#include "AEngine/render/window/GLFWWindowManager.h"
+#include "AEngine/render/window/manager/WindowManager.h"
 
 namespace AEngine {
 	class AE_API CoreEngine {
@@ -25,7 +25,7 @@ namespace AEngine {
 			void addOverlay(Layer* ovr);
 
 			void setFramerateUncapped(bool cap) {
-				m_isFramerateUncapped = true;
+				m_isFramerateUncapped = cap;
 			}
 
 			bool isFramerateUncapped() {
@@ -40,8 +40,8 @@ namespace AEngine {
 			bool   m_isCloseRequested    = false;
 			bool   m_isFramerateUncapped = false;
 
-			GLFWWindowManager m_manager;
-			LayerStack        m_layers;
+			WindowManager* m_window_manager;
+			// LayerStack     m_layers;
 
 	};
 }

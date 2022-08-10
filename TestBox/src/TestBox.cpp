@@ -1,25 +1,9 @@
 #include <AEngine.h>
 
-class testLayer : public AEngine::Layer {
-	public:
-		testLayer() : Layer("test") { }
-
-
-		void update() override {
-			//AE_INFO("testLayer::update");
-		}
-
-		void onEvent(AEngine::Event& event) override {
-			//AE_TRACE("{0}", event);
-			event.handled = true;
-		}
-};
-
 int main(int argc, char** argv) {
 	AEngine::Log::Init();
 	AE_CRITICAL("Initialized Logger");
 	auto engine = new AEngine::CoreEngine();
-	engine->addLayer(new testLayer());
 	engine->addOverlay(new AEngine::ImGUILayer());
 	engine->start();
 	delete engine;

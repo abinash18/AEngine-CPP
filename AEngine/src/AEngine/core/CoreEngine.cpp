@@ -5,11 +5,13 @@
 
 #include <GLFW/glfw3.h>
 
-#include "AEngine/render/window/Window.h"
 #include "Time.h"
 
 #include "AEngine/input/event/WindowEvent.h"
 #include "AEngine/render/window/GLFWWindow.h"
+#include "AEngine/render/window/Window.h"
+#include "AEngine/render/window/manager/GLFWWindowManager.h"
+#include "AEngine/render/window/models/EngineLoadingWindow.h"
 
 namespace AEngine {
 
@@ -23,19 +25,22 @@ namespace AEngine {
 	}
 
 	CoreEngine::CoreEngine() {
+		m_window_manager = new GLFWWindowManager(this);
 		initGLFW();
+
 		s_instance = this;
 		//m_window = std::unique_ptr<Window>(Window::create());
-		m_window = new GLFWWindow();
-		m_window->create();
+		m_window = new EngineLoadingWindow();
+		//m_window->create();
+		m_window_manager->openWindow("Engine", m_window);
 		//m_Window->setEventCallback(BIND_EVENT_FN(OnEvent));
 		// TODO: Find a better way to do this idk if this is most efficent.
 		m_window->setEventCallback([=] (Event& e) {
 			OnEvent(e);
 		});
-		m_window->setVSync(false);
-		m_frameTime = 1.0 / (double)600;
-		setFramerateUncapped(true);
+		//m_window->setVSync(false);
+		m_frameTime = 1.0 / (double) 60;
+		setFramerateUncapped(false);
 		//layerStack = LayerStack();
 	};
 
@@ -72,7 +77,7 @@ namespace AEngine {
 
 
 		// Loop over the layer from last to first, since the last layer would be the top of the stack. And poll events on each layer backwards.
-		for (auto it = m_layers.end(); it != m_layers.begin();) {
+		for (auto it = m_window->getLayerStack().end(); it != m_window->getLayerStack().begin();) {
 			(*--it)->onEvent(e);
 			if (e.handled) {
 				// if the current layer captured the event then we dont need to send it to the lower layers.
@@ -88,18 +93,18 @@ namespace AEngine {
 		}
 		m_running = true;
 
-		double lastTime        = AEngine::getTime(); //Current time at the start of the last frame
-		double frameCounter    = 0;                  //Total passed time since last frame counter display
-		double unprocessedTime = 0;                  //Amount of passed time that the engine hasn't accounted for
-		int    frames          = 0;                  //Number of frames rendered since last
-		bool   render;                               //Whether or not the game needs to be rerendered.
+		double lastTime        = AEngine::getTime(); // Current time at the start of the last frame
+		double frameCounter    = 0;                  // Total passed time since last frame counter display
+		double unprocessedTime = 0;                  // Amount of passed time that the engine hasn't accounted for
+		int    frames          = 0;                  // Number of frames rendered since last
+		bool   render;                               // Whether or not the game needs to be rerendered.
 		double startTime;
 		double passedTime;
 
 		while (m_running) {
-			render = isFramerateUncapped();
+			render = m_isFramerateUncapped;
 
-			startTime  = AEngine::getTime();   //Current time at the start of the frame.
+			startTime  = getTime();            //Current time at the start of the frame.
 			passedTime = startTime - lastTime; //Amount of passed time since last frame.
 			lastTime   = startTime;
 
@@ -113,25 +118,18 @@ namespace AEngine {
 			//stored in unprocessedTime, and then the engine processes as much time as it can. Any
 			//unaccounted time can then be processed later, since it will remain stored in unprocessedTime.
 			while (m_running && (unprocessedTime > m_frameTime)) {
-				//m_window->update();
-
 				//Input must be processed here because the window may have found new
 				//input events from the OS when it updated. Since inputs can trigger
 				//new game actions, the game also needs to be updated immediately 
 				//afterwards.
-				//m_game->ProcessInput(m_window->GetInput(), (float)m_frameTime);
-				//m_game->Update((float)m_frameTime);
 
-				if (m_window->isCloseRequested()) {
+				//if (m_window->isCloseRequested()) {
+				if (m_window_manager->isEngineStopFlagRaised()) {
 					stop();
-					continue;
+					break;
 				} else {
-
-					m_window->update();
-					m_window->input();
-					//Since any updates can put onscreen objects in a new place, the flag
-					//must be set to rerender the scene.
-
+					m_window_manager->update((float) m_frameTime);
+					m_window_manager->input((float) m_frameTime);
 					render = true;
 
 					unprocessedTime -= m_frameTime;
@@ -152,32 +150,36 @@ namespace AEngine {
 				//m_game->Render(m_renderingEngine);
 				glClearColor(1, 0, 1, 1);
 				glClear(GL_COLOR_BUFFER_BIT);
-				for (Layer* layer : m_layers) {
-					layer->update();
-				}
-				m_window->swapbuffers();
 
+				/*for (Layer* layer : m_layers) {
+					layer->update();
+				}*/
+				//m_window->swapbuffers();
+				m_window_manager->render();
 				frames++;
 			} else {
 				//If no rendering is needed, sleep for some time so the OS
 				//can use the processor for other tasks.
+				//if (m_running) {
 				std::this_thread::sleep_for(std::chrono::milliseconds(1));
+				//}
 			}
 		}
 		cleanUp();
 	}
 
 	void CoreEngine::addLayer(Layer* lyr) {
-		m_layers.pushLayer(lyr);
+		m_window->getLayerStack().pushLayer(lyr);
 		lyr->onAttach();
 	}
 
 	void CoreEngine::addOverlay(Layer* ovr) {
-		m_layers.pushOverlay(ovr);
+		m_window->getLayerStack().pushOverlay(ovr);
 		ovr->onAttach();
 	}
 
 	void CoreEngine::cleanUp() {
+		delete m_window_manager;
 		//delete m_window;
 		glfwTerminate();
 	}
@@ -187,14 +189,14 @@ namespace AEngine {
 			return;
 		}
 		AE_CORE_INFO("STOPPING ENGINE");
-		m_window->destroy();
 		m_running = false;
 	}
 
 	void CoreEngine::initGLFW() {
 		int success = glfwInit();
 		AE_CORE_ASSERT(success, "ERROR INITALIZING GLFW!");
-		glfwSetErrorCallback((GLFWerrorfun)GLFWErrorCallback);
+		m_window_manager->setErrorCallback(GLFWErrorCallback);
+		//glfwSetErrorCallback((GLFWerrorfun) GLFWErrorCallback);
 		GLFWInitialized = true;
 		AE_CORE_INFO("INITIALIZED GLFW");
 	};

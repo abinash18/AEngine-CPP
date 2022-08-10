@@ -4,6 +4,7 @@
 #include "AEngine/input/event/Event.h"
 #include "AEngine/input/event/KeyEvent.h"
 #include "AEngine/input/event/MouseEvent.h"
+#include "AEngine/core/Core.h"
 
 namespace AEngine {
 	class AE_API ImGUILayer : public Layer {
@@ -13,7 +14,8 @@ namespace AEngine {
 
 			void onAttach() override;
 			void onDetach() override;
-			void update() override;
+			void render() override;
+			void update(float delta) override;
 			void onEvent(Event& event) override;
 
 		private:

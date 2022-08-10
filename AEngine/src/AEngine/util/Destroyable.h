@@ -1,5 +1,5 @@
 #pragma once
-#include "AEngine/Core.h"
+#include "AEngine/core/Core.h"
 
 namespace AEngine {
 	class Destroyable {

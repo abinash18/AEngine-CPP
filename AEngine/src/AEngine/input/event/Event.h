@@ -7,12 +7,14 @@
  *********************************************************************/
 #pragma once
 #include "aepch.h"
-#include "AEngine/Core.h"
+#include "AEngine/core/Core.h"
 
-/**
- * Currently Blocking IO
- */
 namespace AEngine {
+
+	/**
+	 * Currently Blocking IO
+	 */
+
 	/**
 	 *
 	 * All the different types of blocking events.
@@ -89,7 +91,8 @@ namespace AEngine {
 		template <typename T> using EventFn = std::function<bool(T&)>;
 
 		public:
-			EventDispatcher(Event& event) : m_Event(event) {}
+			EventDispatcher(Event& event) : m_Event(event) {
+			}
 
 			template <typename T> bool dispatch(EventFn<T> func) {
 				if (m_Event.getEventType() == T::getStaticType()) {

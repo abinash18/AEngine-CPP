@@ -1,18 +1,18 @@
 #include "aepch.h"
 #include "ImGUILayer.h"
 
-#include "AEngine/render/OpenGL3/imgui_impl_opengl3.h"
-#include "imgui.h"
-
-#include "AEngine/input/event/WindowEvent.h"
-#include "AEngine/input/event/KeyEvent.h"
-#include "AEngine/input/event/MouseEvent.h"
-#include "AEngine/render/window/GLFW_API_TOKENS.h"
-
-#include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+#include <GLFW/glfw3.h>
+
+#include "imgui.h"
+
 #include "AEngine/core/CoreEngine.h"
+#include "AEngine/input/event/KeyEvent.h"
+#include "AEngine/input/event/MouseEvent.h"
+#include "AEngine/input/event/WindowEvent.h"
+#include "AEngine/render/OpenGL3/imgui_impl_opengl3.h"
+#include "AEngine/render/window/GLFW_API_TOKENS.h"
 
 namespace AEngine {
 	ImGUILayer::ImGUILayer() : Layer("ImGUILayer AEngine Debug") {
@@ -27,6 +27,9 @@ namespace AEngine {
 		StyleColorsLight();
 
 		ImGuiIO& io = GetIO();
+		io.DisplaySize = ImVec2(CoreEngine::s_instance->m_window->getWidth(),
+								CoreEngine::s_instance->m_window->getHeight());
+
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
@@ -59,15 +62,11 @@ namespace AEngine {
 	void ImGUILayer::onDetach() {
 	}
 
-	void ImGUILayer::update() {
-		ImGuiIO& io    = ImGui::GetIO();
-		io.DisplaySize = ImVec2(CoreEngine::s_instance->m_window->getWidth(),
-								CoreEngine::s_instance->m_window->getHeight());
+	void ImGUILayer::render() {
+		ImGuiIO& io = ImGui::GetIO();
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui::NewFrame();
-		float time       = (float) glfwGetTime();
-		io.DeltaTime     = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
-		m_Time           = time;
+
 		static bool show = true;
 
 		ImGui::ShowDemoWindow(&show);
@@ -75,10 +74,22 @@ namespace AEngine {
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
+	//ImGuiIO& io = ImGui::GetIO();
+
+	void ImGUILayer::update(float delta) {
+		Layer::update(delta);
+		ImGuiIO& io    = ImGui::GetIO();
+		io.DisplaySize = ImVec2(CoreEngine::s_instance->m_window->getWidth(),
+								CoreEngine::s_instance->m_window->getHeight());
+		/*float time       = (float) glfwGetTime();
+		io.DeltaTime     = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
+		m_Time           = time;*/
+		io.DeltaTime = delta;
+	}
+
 
 	void ImGUILayer::onEvent(Event& event) {
 		EventDispatcher dispatcher(event);
-
 
 		dispatcher.dispatch<MouseButtonPressedEvent>([=] (MouseButtonPressedEvent& _e) {
 			return mouseButtonPressed(_e);

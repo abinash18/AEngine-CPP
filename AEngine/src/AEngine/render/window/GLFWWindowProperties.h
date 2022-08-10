@@ -3,10 +3,12 @@
 #include "aepch.h"
 #include "GLFW_API_TOKENS.h"
 
+#include "AEngine/input/GLFWMouseAndKeyboardInput.h"
+
 namespace AEngine {
 
 	/*
-	 * This is a stencil that the Engine will use to 
+	 * This is a stencil that the Engine will use to create a window
 	 */
 	struct GLFWWindowProperties {
 		/**
@@ -88,7 +90,15 @@ namespace AEngine {
 			 */
 			f_top, f_left, f_right, f_bottom;
 
+
+		// TODO: Create a refrence counted input manager that is common aboung multiple windows. And Renderengine
+
+		GLFWMouseAndKeyboardInput* input_manager;
+
 		GLFWWindowProperties() {
+		}
+
+		~GLFWWindowProperties() {
 		}
 
 	};
