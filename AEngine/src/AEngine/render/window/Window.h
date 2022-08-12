@@ -30,7 +30,7 @@ namespace AEngine {
 			/**
 			 * Getters and setters
 			 */
-			virtual int*         getWindowHandle() = 0;
+			virtual void*        getWindowHandle() = 0;
 			virtual unsigned int getWidth() const = 0;
 			virtual unsigned int getHeight() const = 0;
 			virtual void         setEventCallback(const event_callback_fn& callback) = 0;

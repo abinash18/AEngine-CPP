@@ -23,19 +23,19 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
@@ -54,46 +54,44 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\bin\Debug-windows-x86_64\AEngine\</OutDir>
     <IntDir>..\bin-int\Debug-windows-x86_64\AEngine\</IntDir>
     <TargetName>AEngine</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Release-windows-x86_64\AEngine\</OutDir>
     <IntDir>..\bin-int\Release-windows-x86_64\AEngine\</IntDir>
     <TargetName>AEngine</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\bin\Dist-windows-x86_64\AEngine\</OutDir>
     <IntDir>..\bin-int\Dist-windows-x86_64\AEngine\</IntDir>
     <TargetName>AEngine</TargetName>
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AE_PLATFORM_WINDOWS;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\GLM;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Debug-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
     </Link>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll "..\bin\Debug-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.dll "..\bin\Debug-windows-x86_64\TestBox\" &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\AEngine\AEngine.lib\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.lib "..\bin\Debug-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\AEngine\AEngine.lib "..\bin\Debug-windows-x86_64\TestBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -101,25 +99,26 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_DEBUG;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AE_PLATFORM_WINDOWS;AE_DEBUG;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\GLM;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Release-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
     </Link>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll "..\bin\Release-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.dll "..\bin\Release-windows-x86_64\TestBox\" &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\AEngine\AEngine.lib\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.lib "..\bin\Release-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\AEngine\AEngine.lib "..\bin\Release-windows-x86_64\TestBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -127,30 +126,30 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>aepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>AE_PLATFORM_WINDOWS;AE_DEBUG;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;AE_PLATFORM_WINDOWS;AE_DEBUG;AE_BUILD_DLL;GLFW_INCLUDE_NONE;AE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\GLM;vendor\IMGUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ImportLibrary>..\bin\Dist-windows-x86_64\AEngine\AEngine.lib</ImportLibrary>
     </Link>
+    <Lib>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll "..\bin\Dist-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.dll "..\bin\Dist-windows-x86_64\TestBox\" &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Dist-windows-x86_64\AEngine\AEngine.lib\ (xcopy /Q /E /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.lib "..\bin\Dist-windows-x86_64\TestBox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Dist-windows-x86_64\AEngine\AEngine.lib "..\bin\Dist-windows-x86_64\TestBox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\AEngine.h" />
-    <ClInclude Include="src\AEngine\EntryPoint.h" />
     <ClInclude Include="src\AEngine\Layer.h" />
     <ClInclude Include="src\AEngine\LayerStack.h" />
     <ClInclude Include="src\AEngine\Log.h" />
@@ -160,18 +159,18 @@
     <ClInclude Include="src\AEngine\core\Time.h" />
     <ClInclude Include="src\AEngine\input\GLFWMouseAndKeyboardInput.h" />
     <ClInclude Include="src\AEngine\input\Input.h" />
+    <ClInclude Include="src\AEngine\input\InputCodes.h" />
     <ClInclude Include="src\AEngine\input\event\Event.h" />
     <ClInclude Include="src\AEngine\input\event\KeyEvent.h" />
     <ClInclude Include="src\AEngine\input\event\MouseEvent.h" />
     <ClInclude Include="src\AEngine\input\event\WindowEvent.h" />
-    <ClInclude Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.h" />
     <ClInclude Include="src\AEngine\render\window\GLFWWindow.h" />
-    <ClInclude Include="src\AEngine\render\window\manager\GLFWWindowManager.h" />
     <ClInclude Include="src\AEngine\render\window\GLFWWindowProperties.h" />
     <ClInclude Include="src\AEngine\render\window\GLFW_API_TOKENS.h" />
+    <ClInclude Include="src\AEngine\render\window\Window.h" />
+    <ClInclude Include="src\AEngine\render\window\manager\GLFWWindowManager.h" />
     <ClInclude Include="src\AEngine\render\window\manager\WindowManager.h" />
     <ClInclude Include="src\AEngine\render\window\models\EngineLoadingWindow.h" />
-    <ClInclude Include="src\AEngine\render\window\Window.h" />
     <ClInclude Include="src\AEngine\util\Destroyable.h" />
     <ClInclude Include="src\AEngine\util\debug\ImGUILayer.h" />
     <ClInclude Include="src\aepch.h" />
@@ -185,11 +184,11 @@
     <ClCompile Include="src\AEngine\core\Time.cpp" />
     <ClCompile Include="src\AEngine\input\GLFWMouseAndKeyboardInput.cpp" />
     <ClCompile Include="src\AEngine\input\Input.cpp" />
-    <ClCompile Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.cpp" />
     <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp" />
     <ClCompile Include="src\AEngine\render\window\manager\GLFWWindowManager.cpp" />
     <ClCompile Include="src\AEngine\render\window\manager\WindowManager.cpp" />
     <ClCompile Include="src\AEngine\render\window\models\EngineLoadingWindow.cpp" />
+    <ClCompile Include="src\AEngine\util\debug\IMGUIBuild.cpp" />
     <ClCompile Include="src\AEngine\util\debug\ImGUILayer.cpp" />
     <ClCompile Include="src\aepch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -202,8 +201,8 @@
     <ProjectReference Include="vendor\GLAD\GLAD.vcxproj">
       <Project>{5D4A857C-4981-860D-F26D-6C10DE83020F}</Project>
     </ProjectReference>
-    <ProjectReference Include="vendor\IMGUI\IMGUI.vcxproj">
-      <Project>{606F530D-CC83-7BBE-9505-1F1E01D977EF}</Project>
+    <ProjectReference Include="vendor\IMGUI\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

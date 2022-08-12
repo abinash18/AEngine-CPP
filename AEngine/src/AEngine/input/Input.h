@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AEngine/core/Core.h"
-#include "AEngine/render/window/Window.h"
 
 namespace AEngine {
 	class AE_API Input {
@@ -14,7 +13,7 @@ namespace AEngine {
 			/**
 			 * Delete the input buffers here.
 			 */
-			~Input();
+			virtual ~Input();
 
 			virtual void initInput() = 0;
 

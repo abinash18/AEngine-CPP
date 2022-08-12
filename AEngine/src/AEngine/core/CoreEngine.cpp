@@ -40,7 +40,7 @@ namespace AEngine {
 		});
 		//m_window->setVSync(false);
 		m_frameTime = 1.0 / (double) 60;
-		setFramerateUncapped(false);
+		setFramerateUncapped(true);
 		//layerStack = LayerStack();
 	};
 
@@ -102,7 +102,7 @@ namespace AEngine {
 		double passedTime;
 
 		while (m_running) {
-			render = m_isFramerateUncapped;
+			render = false;
 
 			startTime  = getTime();            //Current time at the start of the frame.
 			passedTime = startTime - lastTime; //Amount of passed time since last frame.
@@ -111,6 +111,16 @@ namespace AEngine {
 			unprocessedTime += passedTime;
 			frameCounter += passedTime;
 
+
+			if (frameCounter >= 1.0) {
+				AE_CORE_INFO("FRAMES: {0} ; FRAME_TIME: {1}", frames,
+							 (double) 1000 / frames
+							 //m_frameTime
+							 // The double cast of 1 second over number of frames. How much time each frame takes per 1 second  
+							);
+				frames       = 0;
+				frameCounter = 0;
+			}
 
 			//The engine works on a fixed update system, where each update is 1/frameRate seconds of time.
 			//Because of this, there can be a situation where there is, for instance, a fixed update of 16ms, 
@@ -127,23 +137,12 @@ namespace AEngine {
 				if (m_window_manager->isEngineStopFlagRaised()) {
 					stop();
 					break;
-				} else {
-					m_window_manager->update((float) m_frameTime);
-					m_window_manager->input((float) m_frameTime);
-					render = true;
-
-					unprocessedTime -= m_frameTime;
-
-					if (frameCounter >= 1.0) {
-						AE_CORE_INFO("FRAMES: {0} ; FRAME_TIME: {1}", frames,
-									 (double) 1000 / frames
-									 // The double cast of 1 second over number of frames. How much time each frame takes per 1 second  
-									);
-						frames       = 0;
-						frameCounter = 0;
-					}
-
 				}
+				m_window_manager->update((float) m_frameTime);
+				m_window_manager->input((float) m_frameTime);
+				render = true;
+
+				unprocessedTime -= m_frameTime;
 			}
 
 			if (render && m_running) {
@@ -157,6 +156,7 @@ namespace AEngine {
 				//m_window->swapbuffers();
 				m_window_manager->render();
 				frames++;
+				//m_frameTime = 1.0 / (double) frames;
 			} else {
 				//If no rendering is needed, sleep for some time so the OS
 				//can use the processor for other tasks.
@@ -170,12 +170,10 @@ namespace AEngine {
 
 	void CoreEngine::addLayer(Layer* lyr) {
 		m_window->getLayerStack().pushLayer(lyr);
-		lyr->onAttach();
 	}
 
 	void CoreEngine::addOverlay(Layer* ovr) {
 		m_window->getLayerStack().pushOverlay(ovr);
-		ovr->onAttach();
 	}
 
 	void CoreEngine::cleanUp() {

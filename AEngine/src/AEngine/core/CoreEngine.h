@@ -21,6 +21,10 @@ namespace AEngine {
 			bool OnWindowClose(WindowCloseEvent& e);
 
 
+			inline static CoreEngine& Get() {
+				return *s_instance;
+			}
+
 			void addLayer(Layer* lyr);
 			void addOverlay(Layer* ovr);
 

@@ -12,21 +12,15 @@ namespace AEngine {
 			ImGUILayer();
 			~ImGUILayer();
 
-			void onAttach() override;
-			void onDetach() override;
+			void attach() override;
+			void detach() override;
 			void render() override;
 			void update(float delta) override;
-			void onEvent(Event& event) override;
+
+			void begin();
+			void end();
 
 		private:
-			bool  mouseButtonPressed(MouseButtonPressedEvent& e);
-			bool  mouseButtonReleased(MouseButtonReleasedEvent& e);
-			bool  mouseMoved(MouseMovedEvent& e);
-			bool  mouseScrolled(MouseScrolledEvent& e);
-			bool  windowResize(WindowResizeEvent& e);
-			bool  keyPressed(KeyPressedEvent& e);
-			bool  keyReleased(KeyReleasedEvent& e);
-			bool  keyTyped(KeyTypedEvent& e);
 			float m_Time = 0;
 	};
 }

@@ -65,7 +65,7 @@ namespace AEngine {
 			unsigned int          getHeight() const override;
 			void                  setVSync(bool enabled) override;
 			bool                  isVSync() const override;
-			int*                  getWindowHandle() override;
+			void*                 getWindowHandle() override;
 			GLFWWindowProperties* getWindowProperties();
 			int*                  getCurrentMonitor();
 			int*                  getCurrentVidMode();

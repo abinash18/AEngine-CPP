@@ -42,7 +42,6 @@ namespace AEngine {
 		addGLFWWindowHint(GLFW_VISIBLE,
 						  !properties.start_hidden);
 
-		
 
 		// This is done because creating a window defaults to full screen and if the
 		// user wants it full screen it will be, other wise we can change it like so and
@@ -137,12 +136,12 @@ namespace AEngine {
 
 	void GLFWWindow::addLayer(Layer* lyr) {
 		layerStack.pushLayer(lyr);
-		lyr->onAttach();
+		lyr->attach();
 	}
 
 	void GLFWWindow::addOverlay(Layer* ovr) {
 		layerStack.pushOverlay(ovr);
-		ovr->onAttach();
+		ovr->attach();
 	}
 
 	LayerStack& GLFWWindow::getLayerStack() {
@@ -305,8 +304,8 @@ namespace AEngine {
 		return properties.vSync;
 	}
 
-	int* GLFWWindow::getWindowHandle() {
-		return (int*) glfw_handle;
+	void* GLFWWindow::getWindowHandle() {
+		return glfw_handle;
 	}
 
 	GLFWWindowProperties* GLFWWindow::getWindowProperties() {

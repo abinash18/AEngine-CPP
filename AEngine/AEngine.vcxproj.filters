@@ -19,11 +19,14 @@
     <Filter Include="AEngine\render">
       <UniqueIdentifier>{8B3C374C-770A-2B52-609E-9B784C0B07B7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AEngine\render\OpenGL3">
-      <UniqueIdentifier>{7267362B-5E61-5F7D-47CE-F58D3367C5E9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AEngine\render\window">
       <UniqueIdentifier>{32732B7D-9EDF-E677-67D3-7ED5D3FE08E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\render\window\manager">
+      <UniqueIdentifier>{7C592030-E871-075A-B11E-97F31DF69BF3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\render\window\models">
+      <UniqueIdentifier>{C54C8C7E-B107-7C2A-5ABF-F4744659C6BA}</UniqueIdentifier>
     </Filter>
     <Filter Include="AEngine\util">
       <UniqueIdentifier>{693EBA3C-55A1-49E1-FE26-8297EA681564}</UniqueIdentifier>
@@ -34,9 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AEngine.h" />
-    <ClInclude Include="src\AEngine\EntryPoint.h">
-      <Filter>AEngine</Filter>
-    </ClInclude>
     <ClInclude Include="src\AEngine\Layer.h">
       <Filter>AEngine</Filter>
     </ClInclude>
@@ -64,6 +64,9 @@
     <ClInclude Include="src\AEngine\input\Input.h">
       <Filter>AEngine\input</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\input\InputCodes.h">
+      <Filter>AEngine\input</Filter>
+    </ClInclude>
     <ClInclude Include="src\AEngine\input\event\Event.h">
       <Filter>AEngine\input\event</Filter>
     </ClInclude>
@@ -76,13 +79,7 @@
     <ClInclude Include="src\AEngine\input\event\WindowEvent.h">
       <Filter>AEngine\input\event</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.h">
-      <Filter>AEngine\render\OpenGL3</Filter>
-    </ClInclude>
     <ClInclude Include="src\AEngine\render\window\GLFWWindow.h">
-      <Filter>AEngine\render\window</Filter>
-    </ClInclude>
-    <ClInclude Include="src\AEngine\render\window\manager\GLFWWindowManager.h">
       <Filter>AEngine\render\window</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\render\window\GLFWWindowProperties.h">
@@ -94,6 +91,15 @@
     <ClInclude Include="src\AEngine\render\window\Window.h">
       <Filter>AEngine\render\window</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\render\window\manager\GLFWWindowManager.h">
+      <Filter>AEngine\render\window\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\window\manager\WindowManager.h">
+      <Filter>AEngine\render\window\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\window\models\EngineLoadingWindow.h">
+      <Filter>AEngine\render\window\models</Filter>
+    </ClInclude>
     <ClInclude Include="src\AEngine\util\Destroyable.h">
       <Filter>AEngine\util</Filter>
     </ClInclude>
@@ -101,8 +107,6 @@
       <Filter>AEngine\util\debug</Filter>
     </ClInclude>
     <ClInclude Include="src\aepch.h" />
-    <ClInclude Include="src\AEngine\render\window\manager\WindowManager.h" />
-    <ClInclude Include="src\AEngine\render\window\models\EngineLoadingWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Layer.cpp">
@@ -129,20 +133,24 @@
     <ClCompile Include="src\AEngine\input\Input.cpp">
       <Filter>AEngine\input</Filter>
     </ClCompile>
-    <ClCompile Include="src\AEngine\render\OpenGL3\imgui_impl_opengl3.cpp">
-      <Filter>AEngine\render\OpenGL3</Filter>
-    </ClCompile>
     <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp">
       <Filter>AEngine\render\window</Filter>
     </ClCompile>
     <ClCompile Include="src\AEngine\render\window\manager\GLFWWindowManager.cpp">
-      <Filter>AEngine\render\window</Filter>
+      <Filter>AEngine\render\window\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\window\manager\WindowManager.cpp">
+      <Filter>AEngine\render\window\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\window\models\EngineLoadingWindow.cpp">
+      <Filter>AEngine\render\window\models</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\util\debug\IMGUIBuild.cpp">
+      <Filter>AEngine\util\debug</Filter>
     </ClCompile>
     <ClCompile Include="src\AEngine\util\debug\ImGUILayer.cpp">
       <Filter>AEngine\util\debug</Filter>
     </ClCompile>
     <ClCompile Include="src\aepch.cpp" />
-    <ClCompile Include="src\AEngine\render\window\manager\WindowManager.cpp" />
-    <ClCompile Include="src\AEngine\render\window\models\EngineLoadingWindow.cpp" />
   </ItemGroup>
 </Project>

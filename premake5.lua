@@ -16,6 +16,7 @@ workspace "AEngine"
     IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include"
     IncludeDir["GLAD"] = "AEngine/vendor/GLAD/include"
     IncludeDir["IMGUI"] = "AEngine/vendor/IMGUI"
+    IncludeDir["GLM"] = "AEngine/vendor/GLM"
     group "Dependencies"
         include "AEngine/vendor/GLFW"
         include "AEngine/vendor/GLAD"
@@ -24,9 +25,10 @@ workspace "AEngine"
 
 project "AEngine"
     location "AEngine"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
-    staticruntime "off"
+    cppdialect "C++20"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -40,12 +42,19 @@ project "AEngine"
         "%{prj.name}/src/**.cpp"
     }
 
+
+    defines 
+    {
+        "_CRT_SECURE_NO_WARNINGS"
+    }
+
     includedirs
     {
         "%{prj.name}/src",
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLAD}",
+        "%{IncludeDir.GLM}",
         "%{IncludeDir.IMGUI}"
     }
 
@@ -58,7 +67,7 @@ project "AEngine"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
+       
         systemversion "latest"
 
         defines
@@ -77,23 +86,24 @@ project "AEngine"
         filter "configurations:Debug"
             defines "AE_DEBUG"
             runtime "Debug"
-            symbols "On"
+            symbols "on"
 
         filter "configurations:Release"
             defines "AE_RELEASE"
             runtime "Release"
-            optimize "On"
+            optimize "on"
 
         filter "configurations:Dist"
             defines "AE_DIST"
             runtime "Release"
-            optimize "On"
+            optimize "on"
 
 project "TestBox"
     location "TestBox"
     kind "ConsoleApp"
     language "C++"
-    staticruntime "off"
+    cppdialect "C++20"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -108,9 +118,8 @@ project "TestBox"
     {
         "AEngine/vendor/spdlog/include",
         "AEngine/src",
-        "%{IncludeDir.GLFW}",
-        "%{IncludeDir.GLAD}",
-        "%{IncludeDir.IMGUI}"
+        "AEngine/vendor",
+        "%{IncludeDir.GLM}"
     }
 
     links
@@ -123,7 +132,6 @@ project "TestBox"
     }
 
     filter "system:windows"
-        cppdialect "C++20"
         systemversion "latest"
 
         defines
@@ -134,14 +142,14 @@ project "TestBox"
         filter "configurations:Debug"
             defines "AE_DEBUG"
             runtime "Debug"
-            symbols "On"
+            symbols "on"
 
         filter "configurations:Release"
             defines "AE_Release"
             runtime "Release"
-            optimize "On"
+            optimize "on"
 
         filter "configurations:Dist"
             defines "AE_DIST"
             runtime "Release"
-            optimize "On"
+            optimize "on"

@@ -24,7 +24,7 @@ namespace AEngine {
 			}
 
 		private:
-			std::vector<Layer*>           layers;
-			std::vector<Layer*>::iterator layerIterator;
+			std::vector<Layer*> layers;
+			int                 layerInsertIndex = 0;
 	};
 }

@@ -7,3 +7,6 @@
 [submodule "AEngine/vendor/IMGUI"]
 	path = AEngine/vendor/IMGUI
 	url = https://github.com/abinash18/imgui.git
+[submodule "AEngine/vendor/GLM"]
+	path = AEngine/vendor/GLM
+	url = https://github.com/g-truc/glm
