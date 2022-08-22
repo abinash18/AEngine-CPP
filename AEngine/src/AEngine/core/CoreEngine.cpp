@@ -147,12 +147,9 @@ namespace AEngine {
 
 			if (render && m_running) {
 				//m_game->Render(m_renderingEngine);
-				glClearColor(1, 0, 1, 1);
-				glClear(GL_COLOR_BUFFER_BIT);
-
-				/*for (Layer* layer : m_layers) {
-					layer->update();
-				}*/
+                /*for (Layer* layer : m_layers) {
+                    layer->update();
+                }*/
 				//m_window->swapbuffers();
 				m_window_manager->render();
 				frames++;

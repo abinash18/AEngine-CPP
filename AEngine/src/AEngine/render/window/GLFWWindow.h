@@ -8,116 +8,122 @@
 
 #include "AEngine/LayerStack.h"
 #include "AEngine/input/GLFWMouseAndKeyboardInput.h"
+#include "AEngine/render/RenderEngine.h"
 
+#include "AEngine/render/api/opengl/ContextOGL.h"
 
 namespace AEngine {
-	class AE_API GLFWWindow : public Window {
-		public:
-			GLFWWindow();
-			GLFWWindow(const GLFWWindowProperties& properties);
-			~GLFWWindow();
-			void    destroy() override;
-			void    update(float delta) override;
-			void    setEventCallback(const event_callback_fn& callback) override;
-			void    input(float delta) override;
-			Window* create() override;
+    class AE_API GLFWWindow : public Window {
+        public:
+            GLFWWindow();
+            GLFWWindow(const GLFWWindowProperties& properties);
+            ~GLFWWindow();
+            void    destroy() override;
+            void    update(float delta) override;
+            void    setEventCallback(const event_callback_fn& callback) override;
+            void    input(float delta) override;
+            Window* create() override;
 
-			/**
-			 * GLFW wrapper functions.
-			 */
-			void swapbuffers() override;
-			void addGLFWWindowHint(int hint, int value);
-			void addGLFWWindowAttrib(int attrib, int value);
-			int  getGLFWWindowAttrib(int attrib);
-			void resetToDefaults();
-			void setWindowSizeLimits(int min_width,
-									 int min_height,
-									 int max_width,
-									 int max_height);
-			void setWindowSizeLimits();
-			void getWindowContentScale(float* x_scale, float* y_scale);
+            /**
+             * GLFW wrapper functions.
+             */
+            void swapbuffers() override;
+            void addGLFWWindowHint(int hint, int value);
+            void addGLFWWindowAttrib(int attrib, int value);
+            int  getGLFWWindowAttrib(int attrib);
+            void resetToDefaults();
+            void setWindowSizeLimits(int min_width,
+                                     int min_height,
+                                     int max_width,
+                                     int max_height);
+            void setWindowSizeLimits();
+            void getWindowContentScale(float* x_scale, float* y_scale);
 
-			// Iconify.
+            // Iconify.
 
-			/**
-			 * @brief This is what the user calls to close the window,
-			 * this function will request the window manager to close this window at the next update,
-			 * it sets a close flag. 
-			*/
-			void requestClose();
+            /**
+             * @brief This is what the user calls to close the window,
+             * this function will request the window manager to close this window at the next update,
+             * it sets a close flag. 
+            */
+            void requestClose();
 
-			bool isCloseRequested();
+            bool isCloseRequested();
 
-			/**
-			 * @brief The aspect ratio is specified as a numerator and denominator,
-			 * corresponding to the width and height, respectively.
-			 * If you want a window to maintain its current aspect ratio,
-			 * use its current size as the ratio.
-			 * @param width_numerator 
-			 * @param height_denominator 
-			*/
-			void setWindowAspectRatio(int width_numerator, int height_denominator);
+            /**
+             * @brief The aspect ratio is specified as a numerator and denominator,
+             * corresponding to the width and height, respectively.
+             * If you want a window to maintain its current aspect ratio,
+             * use its current size as the ratio.
+             * @param width_numerator 
+             * @param height_denominator 
+            */
+            void setWindowAspectRatio(int width_numerator, int height_denominator);
 
-			/**
-			 * Getters and Setters.
-			*/
-			unsigned int          getWidth() const override;
-			unsigned int          getHeight() const override;
-			void                  setVSync(bool enabled) override;
-			bool                  isVSync() const override;
-			void*                 getWindowHandle() override;
-			GLFWWindowProperties* getWindowProperties();
-			int*                  getCurrentMonitor();
-			int*                  getCurrentVidMode();
-			int                   getCurrentRefreshRate();
-			void                  setCloseFlag(const bool close_flag);
-			void                  addLayer(Layer* lyr);
-			void                  addOverlay(Layer* ovr);
+            /**
+             * Getters and Setters.
+            */
+            unsigned int          getWidth() const override;
+            unsigned int          getHeight() const override;
+            void                  setVSync(bool enabled) override;
+            bool                  isVSync() const override;
+            void*                 getWindowHandle() override;
+            GLFWWindowProperties* getWindowProperties();
+            int*                  getCurrentMonitor();
+            int*                  getCurrentVidMode();
+            int                   getCurrentRefreshRate();
+            void                  setCloseFlag(const bool close_flag);
+            void                  addLayer(Layer* lyr);
+            void                  addOverlay(Layer* ovr);
 
-			bool checkWindowPointer();
-			void render() override;
+            bool checkWindowPointer();
+            void render() override;
 
-			LayerStack& getLayerStack();
-		protected:
-			GLFWwindow*  glfw_handle;
-			GLFWmonitor* current_monitor;
+            LayerStack& getLayerStack();
+        protected:
+            GLFWwindow*  glfw_handle;
+            GLFWmonitor* current_monitor;
 
-			bool CLOSE_FLAG;
+            RenderContext* context;
 
-			/**
-			 * @brief vid mode is a const structure so it cannot be modified,
-			 * therefore its a const pointer.
-			 */
-			const GLFWvidmode* video_mode;
-			int                current_refresh_rate;
+            bool CLOSE_FLAG;
 
-			// SceneManager
-			// InputManager
-			// AssetStore
-			// AssetManager
+            /**
+             * @brief vid mode is a const structure so it cannot be modified,
+             * therefore its a const pointer.
+             */
+            const GLFWvidmode* video_mode;
+            int                current_refresh_rate;
 
-			GLFWWindowProperties properties;
+            // SceneManager
+            // InputManager
+            // AssetStore
+            // AssetManager
 
-			// This is where user will add any pre creation window hints
-			void preInit() {
-			};
-			// This is where the user can execute any post creation methods that require context.
-			void postInit() {
-			};
+            GLFWWindowProperties properties;
 
-			void onClose() {
-			};
-			/**
-			 * @brief Add a scene to the window's scene manager.
-			 */
-			// virtual void addScene(Scene scene);
+            // This is where user will add any pre creation window hints
+            void preInit() {
+            };
+            // This is where the user can execute any post creation methods that require context.
+            void postInit() {
+            };
 
-			void close(GLFWwindow* window);
-			void setCallbacks();
+            void onClose() {
+            };
+            /**
+             * @brief Add a scene to the window's scene manager.
+             */
+            // virtual void addScene(Scene scene);
 
-			/**
-			 * @brief current layer stack for this window.
-			*/
-			LayerStack layerStack;
-	};
+            void close(GLFWwindow* window);
+            void setCallbacks();
+
+            /**
+             * @brief current layer stack for this window.
+            */
+            LayerStack layerStack;
+
+            RenderEngine* renderer;
+    };
 }
