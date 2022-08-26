@@ -1,4 +1,6 @@
 #pragma once
+#include "RenderWorkflow.h"
+
 namespace AEngine {
 
     enum class RenderAPI {
@@ -9,15 +11,9 @@ namespace AEngine {
 
     class RenderEngine {
         public:
-            inline static RenderAPI getAPI() {
-                return s_render_api;
-            };
+            RenderEngine() { };
 
-            RenderEngine() {
-            };
-
-            ~RenderEngine() {
-            };
+            ~RenderEngine() { };
             virtual void init() = 0;
             virtual void render() = 0;
             virtual void update() = 0;
@@ -26,6 +22,10 @@ namespace AEngine {
              * @brief This function prints system and API info retrieved from the initialized renderer.
             */
             virtual void printAPIInfo() = 0;
+
+            inline static RenderAPI getAPI() { return s_render_api; };
+
+        protected:
         private:
             static RenderAPI s_render_api;
     };

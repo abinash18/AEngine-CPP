@@ -8,7 +8,7 @@
 
 #include "AEngine/LayerStack.h"
 #include "AEngine/input/GLFWMouseAndKeyboardInput.h"
-#include "AEngine/render/RenderEngine.h"
+#include "AEngine/render/api/ae/RenderEngine.h"
 
 #include "AEngine/render/api/opengl/ContextOGL.h"
 
@@ -103,14 +103,11 @@ namespace AEngine {
             GLFWWindowProperties properties;
 
             // This is where user will add any pre creation window hints
-            void preInit() {
-            };
+            void preInit() { };
             // This is where the user can execute any post creation methods that require context.
-            void postInit() {
-            };
+            void postInit() { };
 
-            void onClose() {
-            };
+            void onClose() { };
             /**
              * @brief Add a scene to the window's scene manager.
              */

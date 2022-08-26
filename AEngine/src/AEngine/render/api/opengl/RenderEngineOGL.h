@@ -1,8 +1,9 @@
 #pragma once
-#include "AEngine/render/RenderEngine.h"
+#include "AEngine/render/api/ae/RenderEngine.h"
 #include "AEngine/render/shader/Shader.h"
 #include "AEngine/render/api/ae/VertexBuffer.h"
 #include "AEngine/render/api/ae/IndexBuffer.h"
+#include "AEngine/render/api/ae/VertexArrayObject.h"
 
 namespace AEngine {
     class RenderEngineOGL : public RenderEngine {
@@ -14,9 +15,13 @@ namespace AEngine {
             void update() override;
             void init() override;
         private:
-            unsigned int            vertexArrayBuffer;
-            VertexBuffer*           vertexBuffer;
-            IndexBuffer*            indexBuffer;
-            std::unique_ptr<Shader> shader;
+            unsigned int                       vertexArrayBuffer;
+            std::shared_ptr<VertexArrayObject> vao;
+            std::shared_ptr<VertexBuffer>      vertexBuffer;
+            std::shared_ptr<IndexBuffer>       indexBuffer;
+            std::unique_ptr<Shader>            shader;
+            std::unique_ptr<Shader>            squareShader;
+            std::shared_ptr<VertexArrayObject> squareVAO;
+
     };
 }

@@ -61,7 +61,7 @@ namespace AEngine {
 #define AE_TRACE(...) ::AEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define AE_INFO(...) ::AEngine::Log::GetClientLogger()->info(__VA_ARGS__)
 #define AE_WARN(...) ::AEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define AE_DEBUG(...) ::AEngine::Log::GetClientLogger()->debug(__VA_ARGS__)
+//#define AE_DEBUG(...) ::AEngine::Log::GetClientLogger()->debug(__VA_ARGS__)
 #define AE_ERROR(...) ::AEngine::Log::GetClientLogger()->error(__VA_ARGS__)
 #define AE_CRITICAL(...)                                                       \
   ::AEngine::Log::GetClientLogger()->critical(__VA_ARGS__)

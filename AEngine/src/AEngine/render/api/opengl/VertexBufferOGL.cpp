@@ -1,7 +1,7 @@
 #include <aepch.h>
 #include "VertexBufferOGL.h"
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace AEngine {
     VertexBufferOGL::VertexBufferOGL(void* verts, uint32_t size) {
@@ -12,29 +12,15 @@ namespace AEngine {
 
     VertexBufferOGL::~VertexBufferOGL() {
         BufferOGL::destroy();
-        glDeleteBuffers(1, &id);
     }
 
-    void VertexBufferOGL::bind() const {
-        BufferOGL::bind();
-    }
+    void VertexBufferOGL::bind() const { BufferOGL::bind(); }
 
-    void VertexBufferOGL::destroy() {
-        BufferOGL::destroy();
-    }
+    void VertexBufferOGL::destroy() { BufferOGL::destroy(); }
 
-    void VertexBufferOGL::unBind() const {
-        BufferOGL::unBind();
-    }
+    void VertexBufferOGL::unBind() const { BufferOGL::unBind(); }
 
-    void VertexBufferOGL::addData() {
-    }
+    void VertexBufferOGL::setBufferLayout(const BufferLayout& _layout) { BufferOGL::setBufferLayout(_layout); }
 
-    void VertexBufferOGL::setBufferLayout(const BufferLayout& _layout) {
-        BufferOGL::setBufferLayout(_layout);
-    }
-
-    BufferLayout& VertexBufferOGL::getLayout() {
-        return BufferOGL::getLayout();
-    }
+    BufferLayout& VertexBufferOGL::getLayout() { return BufferOGL::getLayout(); }
 }

@@ -13,5 +13,7 @@ namespace AEngine {
     }
 
     //TODO: idk
-    void BufferOGL::destroy() { }
+    void BufferOGL::destroy() {
+        glDeleteBuffers(1, &id);
+    }
 }

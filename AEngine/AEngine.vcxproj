@@ -108,6 +108,8 @@
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -164,27 +166,32 @@
     <ClInclude Include="src\AEngine\input\event\KeyEvent.h" />
     <ClInclude Include="src\AEngine\input\event\MouseEvent.h" />
     <ClInclude Include="src\AEngine\input\event\WindowEvent.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderCommand.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderWorkflow.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\VertexArrayObject.h" />
+    <ClInclude Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderEngine.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\AEDataType.h" />
     <ClInclude Include="src\AEngine\render\api\ae\Buffer.h" />
     <ClInclude Include="src\AEngine\render\api\ae\BufferElement.h" />
     <ClInclude Include="src\AEngine\render\api\ae\BufferLayout.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\AEDataType.h" />
     <ClInclude Include="src\AEngine\render\api\ae\IndexBuffer.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderContext.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\VertexBuffer.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\BufferOGL.h" />
+    <ClInclude Include="src\AEngine\render\api\opengl\ContextOGL.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\IndexBufferOGL.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\RenderEngineOGL.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\VertexBufferOGL.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\VertexBuffer.h" />
-    <ClInclude Include="src\AEngine\render\RenderEngine.h" />
     <ClInclude Include="src\AEngine\render\shader\Shader.h" />
     <ClInclude Include="src\AEngine\render\window\GLFWWindow.h" />
     <ClInclude Include="src\AEngine\render\window\GLFWWindowProperties.h" />
     <ClInclude Include="src\AEngine\render\window\GLFW_API_TOKENS.h" />
-    <ClInclude Include="src\AEngine\render\api\opengl\ContextOGL.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\RenderContext.h" />
     <ClInclude Include="src\AEngine\render\window\Window.h" />
     <ClInclude Include="src\AEngine\render\window\manager\GLFWWindowManager.h" />
     <ClInclude Include="src\AEngine\render\window\manager\WindowManager.h" />
     <ClInclude Include="src\AEngine\render\window\models\EngineLoadingWindow.h" />
+    <ClInclude Include="src\AEngine\util\BufferTools.h" />
     <ClInclude Include="src\AEngine\util\Destroyable.h" />
     <ClInclude Include="src\AEngine\util\debug\ImGUILayer.h" />
     <ClInclude Include="src\aepch.h" />
@@ -198,22 +205,25 @@
     <ClCompile Include="src\AEngine\core\Time.cpp" />
     <ClCompile Include="src\AEngine\input\GLFWMouseAndKeyboardInput.cpp" />
     <ClCompile Include="src\AEngine\input\Input.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\RenderWorkflow.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\VertexArrayObject.cpp" />
+    <ClCompile Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\RenderEngine.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\Buffer.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\BufferLayout.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\IndexBuffer.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\RenderContext.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\VertexBuffer.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\BufferOGL.cpp" />
+    <ClCompile Include="src\AEngine\render\api\opengl\ContextOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\IndexBufferOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\RenderEngineOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\VertexBufferOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\VertexBuffer.cpp" />
-    <ClCompile Include="src\AEngine\render\RenderEngine.cpp" />
     <ClCompile Include="src\AEngine\render\shader\Shader.cpp" />
     <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp" />
     <ClCompile Include="src\AEngine\render\window\manager\GLFWWindowManager.cpp" />
     <ClCompile Include="src\AEngine\render\window\manager\WindowManager.cpp" />
     <ClCompile Include="src\AEngine\render\window\models\EngineLoadingWindow.cpp" />
-    <ClCompile Include="src\AEngine\render\api\opengl\ContextOGL.cpp" />
     <ClCompile Include="src\AEngine\util\debug\IMGUIBuild.cpp" />
     <ClCompile Include="src\AEngine\util\debug\ImGUILayer.cpp" />
     <ClCompile Include="src\aepch.cpp">

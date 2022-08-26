@@ -10,12 +10,11 @@ namespace AEngine {
         // weather the data in the element is already normalized.
         bool normalized;
 
-        BufferElement() {
-        };
+        BufferElement() { };
+
 
         BufferElement(AEDataType _type, const std::string& _name, bool _normalized = false)
             : type(_type), name(_name),
-              normalized(_normalized), size(AETypeSize(type)), offset(0) {
-        }
+              normalized(_normalized), size(AETypeSize(type)), offset(0) { }
     };
 }

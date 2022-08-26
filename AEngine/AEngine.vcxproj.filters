@@ -19,6 +19,18 @@
     <Filter Include="AEngine\render">
       <UniqueIdentifier>{8B3C374C-770A-2B52-609E-9B784C0B07B7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AEngine\render\api">
+      <UniqueIdentifier>{54FB63D7-40DF-242D-A93F-1F8095420FAF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\render\api\ae">
+      <UniqueIdentifier>{A9FF544A-156C-1045-DE5F-A8A24A8B32AD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\render\api\opengl">
+      <UniqueIdentifier>{68365788-D4F8-8A12-1DA9-199F89AA63F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AEngine\render\shader">
+      <UniqueIdentifier>{F195BD73-5D02-796E-26F6-10CC92219BD6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="AEngine\render\window">
       <UniqueIdentifier>{32732B7D-9EDF-E677-67D3-7ED5D3FE08E0}</UniqueIdentifier>
     </Filter>
@@ -79,6 +91,48 @@
     <ClInclude Include="src\AEngine\input\event\WindowEvent.h">
       <Filter>AEngine\input\event</Filter>
     </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\RenderEngine.h">
+      <Filter>AEngine\render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\AEDataType.h">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\Buffer.h">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\BufferElement.h">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\BufferLayout.h">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\IndexBuffer.h">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\RenderContext.h">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\ae\VertexBuffer.h">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\opengl\BufferOGL.h">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\opengl\ContextOGL.h">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\opengl\IndexBufferOGL.h">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\opengl\RenderEngineOGL.h">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\api\opengl\VertexBufferOGL.h">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AEngine\render\shader\Shader.h">
+      <Filter>AEngine\render\shader</Filter>
+    </ClInclude>
     <ClInclude Include="src\AEngine\render\window\GLFWWindow.h">
       <Filter>AEngine\render\window</Filter>
     </ClInclude>
@@ -107,20 +161,11 @@
       <Filter>AEngine\util\debug</Filter>
     </ClInclude>
     <ClInclude Include="src\aepch.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\RenderContext.h" />
-    <ClInclude Include="src\AEngine\render\api\opengl\ContextOGL.h" />
-    <ClInclude Include="src\AEngine\render\RenderEngine.h" />
-    <ClInclude Include="src\AEngine\render\api\opengl\RenderEngineOGL.h" />
-    <ClInclude Include="src\AEngine\render\shader\Shader.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\Buffer.h" />
-    <ClInclude Include="src\AEngine\render\api\opengl\BufferOGL.h" />
-    <ClInclude Include="src\AEngine\render\api\opengl\VertexBufferOGL.h" />
-    <ClInclude Include="src\AEngine\render\api\opengl\IndexBufferOGL.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\VertexBuffer.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\IndexBuffer.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\BufferLayout.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\AEDataType.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\BufferElement.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\VertexArrayObject.h" />
+    <ClInclude Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.h" />
+    <ClInclude Include="src\AEngine\util\BufferTools.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderWorkflow.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Layer.cpp">
@@ -147,6 +192,42 @@
     <ClCompile Include="src\AEngine\input\Input.cpp">
       <Filter>AEngine\input</Filter>
     </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\ae\RenderEngine.cpp">
+      <Filter>AEngine\render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\ae\Buffer.cpp">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\ae\BufferLayout.cpp">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\ae\IndexBuffer.cpp">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\ae\RenderContext.cpp">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\ae\VertexBuffer.cpp">
+      <Filter>AEngine\render\api\ae</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\opengl\BufferOGL.cpp">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\opengl\ContextOGL.cpp">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\opengl\IndexBufferOGL.cpp">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\opengl\RenderEngineOGL.cpp">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\api\opengl\VertexBufferOGL.cpp">
+      <Filter>AEngine\render\api\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AEngine\render\shader\Shader.cpp">
+      <Filter>AEngine\render\shader</Filter>
+    </ClCompile>
     <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp">
       <Filter>AEngine\render\window</Filter>
     </ClCompile>
@@ -166,17 +247,8 @@
       <Filter>AEngine\util\debug</Filter>
     </ClCompile>
     <ClCompile Include="src\aepch.cpp" />
-    <ClCompile Include="src\AEngine\render\api\opengl\ContextOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\api\opengl\RenderEngineOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\shader\Shader.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\Buffer.cpp" />
-    <ClCompile Include="src\AEngine\render\api\opengl\BufferOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\RenderEngine.cpp" />
-    <ClCompile Include="src\AEngine\render\api\opengl\VertexBufferOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\api\opengl\IndexBufferOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\VertexBuffer.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\IndexBuffer.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\BufferLayout.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\RenderContext.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\VertexArrayObject.cpp" />
+    <ClCompile Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\RenderWorkflow.cpp" />
   </ItemGroup>
 </Project>

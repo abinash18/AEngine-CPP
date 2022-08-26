@@ -102,7 +102,7 @@ namespace AEngine {
 		double passedTime;
 
 		while (m_running) {
-			render = false;
+            render = true;
 
 			startTime  = getTime();            //Current time at the start of the frame.
 			passedTime = startTime - lastTime; //Amount of passed time since last frame.

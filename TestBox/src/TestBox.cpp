@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 	AEngine::Log::Init();
 	AE_CRITICAL("Initialized Logger");
 	auto engine = new AEngine::CoreEngine();
-	engine->addOverlay(new AEngine::ImGUILayer());
+    //engine->addOverlay(new AEngine::ImGUILayer());
 	engine->start();
 	delete engine;
 

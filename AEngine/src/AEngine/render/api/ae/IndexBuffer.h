@@ -4,11 +4,9 @@
 namespace AEngine {
     class IndexBuffer : public Buffer {
         public:
-            virtual      ~IndexBuffer() override = default;
-            virtual void addData() = 0;
-            //virtual void        bind() const override;
-            //virtual void        unBind() const override;
-            static IndexBuffer* create(void* verticies, uint32_t size);
-    };
+            virtual             ~IndexBuffer() override = default;
+            virtual uint32_t    getCount() const = 0;
+            static IndexBuffer* create(void* verticies, uint32_t size, uint32_t _count);
 
+    };
 }

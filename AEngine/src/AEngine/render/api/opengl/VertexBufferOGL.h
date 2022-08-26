@@ -11,10 +11,8 @@ namespace AEngine {
             void          bind() const override;
             void          destroy() override;
             void          unBind() const override;
-            void          addData() override;
             void          setBufferLayout(const BufferLayout& _layout) override;
             BufferLayout& getLayout() override;
         private:
-            uint32_t id;
     };
 }

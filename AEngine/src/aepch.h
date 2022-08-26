@@ -8,6 +8,8 @@
 #include <sstream>
 #include <ostream>
 
+#include <stdint.h>
+
 #include <string>
 #include <set>
 #include <map>
