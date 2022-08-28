@@ -124,7 +124,7 @@
     <ClInclude Include="src\AEngine\render\api\opengl\IndexBufferOGL.h">
       <Filter>AEngine\render\api\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="src\AEngine\render\api\opengl\RenderEngineOGL.h">
+    <ClInclude Include="src\AEngine\render\api\opengl\RendererAPIOGL.h">
       <Filter>AEngine\render\api\opengl</Filter>
     </ClInclude>
     <ClInclude Include="src\AEngine\render\api\opengl\VertexBufferOGL.h">
@@ -164,8 +164,9 @@
     <ClInclude Include="src\AEngine\render\api\ae\VertexArrayObject.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.h" />
     <ClInclude Include="src\AEngine\util\BufferTools.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\RenderWorkflow.h" />
     <ClInclude Include="src\AEngine\render\api\ae\RenderCommand.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RendererAPI.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Layer.cpp">
@@ -219,7 +220,7 @@
     <ClCompile Include="src\AEngine\render\api\opengl\IndexBufferOGL.cpp">
       <Filter>AEngine\render\api\opengl</Filter>
     </ClCompile>
-    <ClCompile Include="src\AEngine\render\api\opengl\RenderEngineOGL.cpp">
+    <ClCompile Include="src\AEngine\render\api\opengl\RendererAPIOGL.cpp">
       <Filter>AEngine\render\api\opengl</Filter>
     </ClCompile>
     <ClCompile Include="src\AEngine\render\api\opengl\VertexBufferOGL.cpp">
@@ -249,6 +250,7 @@
     <ClCompile Include="src\aepch.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\VertexArrayObject.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\RenderWorkflow.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\RenderCommand.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\RendererAPI.cpp" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 #include <aepch.h>
 #include "RenderContext.h"
 
-namespace AEngine {
-}
+namespace AEngine {}

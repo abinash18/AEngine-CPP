@@ -1,32 +1,37 @@
 #pragma once
-#include "RenderWorkflow.h"
+#include "RenderAPI.h"
+#include "RendererAPI.h"
+
+#include "AEngine/render/shader/Shader.h"
 
 namespace AEngine {
-
-    enum class RenderAPI {
-        NONE = 0,
-        OPEN_GL = 1
-        //VULKAN = 2
-    };
-
     class RenderEngine {
         public:
-            RenderEngine() { };
+            RenderEngine();
 
-            ~RenderEngine() { };
-            virtual void init() = 0;
+            virtual ~RenderEngine();
+            /*virtual void init() = 0;
             virtual void render() = 0;
-            virtual void update() = 0;
+            virtual void update() = 0;*/
+            virtual void init();
+            virtual void render();
+            virtual void update();
+            virtual void submit(const std::shared_ptr<VertexArrayObject>& vertexArray);
 
-            /**
-             * @brief This function prints system and API info retrieved from the initialized renderer.
-            */
-            virtual void printAPIInfo() = 0;
+            inline static RenderAPI getAPI() {
+                return s_render_api;
+            };
 
-            inline static RenderAPI getAPI() { return s_render_api; };
-
-        protected:
         private:
             static RenderAPI s_render_api;
+            RendererAPI*     renderer = nullptr;
+
+            unsigned int                       vertexArrayBuffer;
+            std::shared_ptr<VertexArrayObject> vao;
+            std::shared_ptr<VertexBuffer>      vertexBuffer;
+            std::shared_ptr<IndexBuffer>       indexBuffer;
+            std::unique_ptr<Shader>            shader;
+            std::unique_ptr<Shader>            squareShader;
+            std::shared_ptr<VertexArrayObject> squareVAO;
     };
 }

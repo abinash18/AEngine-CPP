@@ -121,6 +121,6 @@ namespace AEngine {
             */
             LayerStack layerStack;
 
-            RenderEngine* renderer;
+            RenderEngine* renderengine;
     };
 }

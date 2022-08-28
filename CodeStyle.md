@@ -1,27 +1,35 @@
-<h1 align="center"> Code Style for AEngine-CPP </h1> 
+<h1 align="center"> Code Style for AEngine-CPP </h1>
 
----
 #### Includes:
+
 Header files should use this as a template to includes.
+
 ```cpp
 #include <...> // The system's included headers should be placed at the top.
 
 #include "..." // Whatever the user needs to include should be done after.
 ```
+
 ---
+
 ### Headers:
+
 When writing for the engine all header files should enclose all definitions in the AEngine namespace.
+
 ```cpp
 namespace AEngine {
     // ...
 }
 ```
+
 ---
 
 ### Classes
+
 Seperate class definitions and method implementations in headers and source files.
 
 #### Class in Header:
+
 ```cpp
 // Includes
 namespace AEngine {
@@ -41,7 +49,9 @@ namespace AEngine {
     }
 }
 ```
+
 ---
+
 ```cpp
 #pragma once
 #include "AEngine/render/api/Buffer.h"

@@ -166,8 +166,9 @@
     <ClInclude Include="src\AEngine\input\event\KeyEvent.h" />
     <ClInclude Include="src\AEngine\input\event\MouseEvent.h" />
     <ClInclude Include="src\AEngine\input\event\WindowEvent.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RenderAPI.h" />
     <ClInclude Include="src\AEngine\render\api\ae\RenderCommand.h" />
-    <ClInclude Include="src\AEngine\render\api\ae\RenderWorkflow.h" />
+    <ClInclude Include="src\AEngine\render\api\ae\RendererAPI.h" />
     <ClInclude Include="src\AEngine\render\api\ae\VertexArrayObject.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.h" />
     <ClInclude Include="src\AEngine\render\api\ae\RenderEngine.h" />
@@ -181,7 +182,7 @@
     <ClInclude Include="src\AEngine\render\api\opengl\BufferOGL.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\ContextOGL.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\IndexBufferOGL.h" />
-    <ClInclude Include="src\AEngine\render\api\opengl\RenderEngineOGL.h" />
+    <ClInclude Include="src\AEngine\render\api\opengl\RendererAPIOGL.h" />
     <ClInclude Include="src\AEngine\render\api\opengl\VertexBufferOGL.h" />
     <ClInclude Include="src\AEngine\render\shader\Shader.h" />
     <ClInclude Include="src\AEngine\render\window\GLFWWindow.h" />
@@ -205,7 +206,8 @@
     <ClCompile Include="src\AEngine\core\Time.cpp" />
     <ClCompile Include="src\AEngine\input\GLFWMouseAndKeyboardInput.cpp" />
     <ClCompile Include="src\AEngine\input\Input.cpp" />
-    <ClCompile Include="src\AEngine\render\api\ae\RenderWorkflow.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\RenderCommand.cpp" />
+    <ClCompile Include="src\AEngine\render\api\ae\RendererAPI.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\VertexArrayObject.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\RenderEngine.cpp" />
@@ -217,7 +219,7 @@
     <ClCompile Include="src\AEngine\render\api\opengl\BufferOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\ContextOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\IndexBufferOGL.cpp" />
-    <ClCompile Include="src\AEngine\render\api\opengl\RenderEngineOGL.cpp" />
+    <ClCompile Include="src\AEngine\render\api\opengl\RendererAPIOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\opengl\VertexBufferOGL.cpp" />
     <ClCompile Include="src\AEngine\render\shader\Shader.cpp" />
     <ClCompile Include="src\AEngine\render\window\GLFWWindow.cpp" />

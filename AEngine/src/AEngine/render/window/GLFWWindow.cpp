@@ -5,14 +5,12 @@
 #include "AEngine/input/event/KeyEvent.h"
 #include "AEngine/input/event/MouseEvent.h"
 #include "AEngine/render/api/opengl/ContextOGL.h"
-#include "AEngine/render/api/opengl/RenderEngineOGL.h"
+#include "AEngine/render/api/opengl/RendererAPIOGL.h"
 
 namespace AEngine {
-    GLFWWindow::GLFWWindow() {
-    }
+    GLFWWindow::GLFWWindow() { }
 
-    GLFWWindow::GLFWWindow(const GLFWWindowProperties& properties) {
-    }
+    GLFWWindow::GLFWWindow(const GLFWWindowProperties& properties) { }
 
     GLFWWindow::~GLFWWindow() {
         AE_CORE_INFO("DESTROYING WINDOW {0}", properties.title);
@@ -50,7 +48,8 @@ namespace AEngine {
         // Create Window.
         glfw_handle = glfwCreateWindow((int) properties.sc_width,
                                        (int) properties.sc_height,
-                                       properties.title.c_str(), // title
+                                       properties.title.c_str(),
+                                       // title
                                        (GLFWmonitor*) mon,
                                        nullptr);
 
@@ -67,11 +66,9 @@ namespace AEngine {
 
         properties.input_manager = new GLFWMouseAndKeyboardInput();
 
-        renderer = new RenderEngineOGL();
+        renderengine = new RenderEngine();
 
-        renderer->init();
-
-        renderer->printAPIInfo();
+        renderengine->init();
 
         postInit();
 
@@ -117,14 +114,18 @@ namespace AEngine {
         properties.max_height = max_height;
 
         glfwSetWindowSizeLimits(glfw_handle,
-                                min_width, min_height,
-                                max_width, max_height);
+                                min_width,
+                                min_height,
+                                max_width,
+                                max_height);
     }
 
     void GLFWWindow::setWindowSizeLimits() {
         glfwSetWindowSizeLimits(glfw_handle,
-                                properties.min_width, properties.min_height,
-                                properties.max_width, properties.max_height);
+                                properties.min_width,
+                                properties.min_height,
+                                properties.max_width,
+                                properties.max_height);
     }
 
     void GLFWWindow::getWindowContentScale(float* x_scale, float* y_scale) {
@@ -150,7 +151,7 @@ namespace AEngine {
     }
 
     void GLFWWindow::render() {
-        renderer->render();
+        renderengine->render();
         for (Layer* layer : layerStack) {
             layer->render();
         }
@@ -193,89 +194,98 @@ namespace AEngine {
         glfwDestroyWindow(glfw_handle);
     }
 
-    void GLFWWindow::close(GLFWwindow* window) {
-    }
+    void GLFWWindow::close(GLFWwindow* window) { }
 
     void GLFWWindow::setCallbacks() {
-        glfwSetWindowSizeCallback(glfw_handle, [] (GLFWwindow* window, int width, int height) {
-            GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-            d.sc_width              = width;
-            d.sc_height             = height;
-            WindowResizeEvent e(width, height);
-            d.send_event_callback(e);
-        });
+        glfwSetWindowSizeCallback(glfw_handle,
+                                  [] (GLFWwindow* window, int width, int height) {
+                                      GLFWWindowProperties& d = *(GLFWWindowProperties*)
+                                              glfwGetWindowUserPointer(window);
+                                      d.sc_width  = width;
+                                      d.sc_height = height;
+                                      WindowResizeEvent e(width, height);
+                                      d.send_event_callback(e);
+                                  });
 
-        glfwSetWindowCloseCallback(glfw_handle, [] (GLFWwindow* window) {
-            GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-            WindowCloseEvent      e;
-            d.send_event_callback(e);
-            glfwWindowShouldClose(window);
-        });
+        glfwSetWindowCloseCallback(glfw_handle,
+                                   [] (GLFWwindow* window) {
+                                       GLFWWindowProperties& d = *(GLFWWindowProperties*)
+                                               glfwGetWindowUserPointer(window);
+                                       WindowCloseEvent e;
+                                       d.send_event_callback(e);
+                                       glfwWindowShouldClose(window);
+                                   });
 
-        glfwSetKeyCallback(glfw_handle, [] (GLFWwindow* window, int key, int scancode, int action, int mods) {
-            GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-            switch (action) {
-                case GLFW_PRESS: {
-                    d.input_manager->setKeyDown(key);
-                    KeyPressedEvent e(key, 0);
-                    d.send_event_callback(e);
-                    break;
-                }
-                case GLFW_RELEASE: {
-                    d.input_manager->setKeyUp(key);
-                    KeyReleasedEvent e(key);
-                    d.send_event_callback(e);
-                    break;
-                }
-                case GLFW_REPEAT: {
-                    d.input_manager->setKeyDown(key);
-                    KeyPressedEvent e(key, 1);
-                    d.send_event_callback(e);
-                    break;
-                }
-            }
-        });
-        glfwSetCharCallback(glfw_handle, [] (GLFWwindow* window, unsigned int c) {
-            GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-            KeyTypedEvent         e(c);
-            d.send_event_callback(e);
+        glfwSetKeyCallback(glfw_handle,
+                           [] (GLFWwindow* window, int key, int scancode, int action, int mods) {
+                               GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
+                               switch (action) {
+                                   case GLFW_PRESS: {
+                                       d.input_manager->setKeyDown(key);
+                                       KeyPressedEvent e(key, 0);
+                                       d.send_event_callback(e);
+                                       break;
+                                   }
+                                   case GLFW_RELEASE: {
+                                       d.input_manager->setKeyUp(key);
+                                       KeyReleasedEvent e(key);
+                                       d.send_event_callback(e);
+                                       break;
+                                   }
+                                   case GLFW_REPEAT: {
+                                       d.input_manager->setKeyDown(key);
+                                       KeyPressedEvent e(key, 1);
+                                       d.send_event_callback(e);
+                                       break;
+                                   }
+                               }
+                           });
+        glfwSetCharCallback(glfw_handle,
+                            [] (GLFWwindow* window, unsigned int c) {
+                                GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
+                                KeyTypedEvent         e(c);
+                                d.send_event_callback(e);
+                            });
 
-        });
+        glfwSetMouseButtonCallback(glfw_handle,
+                                   [] (GLFWwindow* window, int button, int action, int mods) {
+                                       GLFWWindowProperties& d = *(GLFWWindowProperties*)
+                                               glfwGetWindowUserPointer(window);
 
-        glfwSetMouseButtonCallback(glfw_handle, [] (GLFWwindow* window, int button, int action, int mods) {
-            GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
+                                       switch (action) {
+                                           case GLFW_PRESS: {
+                                               d.input_manager->setMouseButtonDown(button);
+                                               MouseButtonPressedEvent e(button);
+                                               d.send_event_callback(e);
+                                               break;
+                                           }
+                                           case GLFW_RELEASE: {
+                                               d.input_manager->setMouseButtonUp(button);
+                                               MouseButtonReleasedEvent e(button);
+                                               d.send_event_callback(e);
+                                               break;
+                                           }
+                                       }
+                                   });
 
-            switch (action) {
-                case GLFW_PRESS: {
-                    d.input_manager->setMouseButtonDown(button);
-                    MouseButtonPressedEvent e(button);
-                    d.send_event_callback(e);
-                    break;
-                }
-                case GLFW_RELEASE: {
-                    d.input_manager->setMouseButtonUp(button);
-                    MouseButtonReleasedEvent e(button);
-                    d.send_event_callback(e);
-                    break;
-                }
-            }
-        });
+        glfwSetScrollCallback(glfw_handle,
+                              [] (GLFWwindow* window, double xoffset, double yoffset) {
+                                  GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
+                                  d.input_manager->setScrollOffsetX(d.input_manager->getScrollOffsetX() + xoffset);
+                                  d.input_manager->setScrollOffsetY(d.input_manager->getScrollOffsetY() + yoffset);
+                                  MouseScrolledEvent e((float) xoffset, (float) yoffset);
+                                  d.send_event_callback(e);
+                              });
 
-        glfwSetScrollCallback(glfw_handle, [] (GLFWwindow* window, double xoffset, double yoffset) {
-            GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-            d.input_manager->setScrollOffsetX(d.input_manager->getScrollOffsetX() + xoffset);
-            d.input_manager->setScrollOffsetY(d.input_manager->getScrollOffsetY() + yoffset);
-            MouseScrolledEvent e((float) xoffset, (float) yoffset);
-            d.send_event_callback(e);
-        });
-
-        glfwSetCursorPosCallback(glfw_handle, [] (GLFWwindow* window, double xpos, double ypos) {
-            GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-            d.input_manager->setMouseX(xpos);
-            d.input_manager->setMouseY(ypos);
-            MouseMovedEvent e((float) xpos, (float) ypos);
-            d.send_event_callback(e);
-        });
+        glfwSetCursorPosCallback(glfw_handle,
+                                 [] (GLFWwindow* window, double xpos, double ypos) {
+                                     GLFWWindowProperties& d = *(GLFWWindowProperties*)
+                                             glfwGetWindowUserPointer(window);
+                                     d.input_manager->setMouseX(xpos);
+                                     d.input_manager->setMouseY(ypos);
+                                     MouseMovedEvent e((float) xpos, (float) ypos);
+                                     d.send_event_callback(e);
+                                 });
     }
 
     /**

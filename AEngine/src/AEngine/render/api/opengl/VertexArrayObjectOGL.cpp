@@ -48,7 +48,8 @@ namespace AEngine {
         glBindVertexArray(id);
         indexBuffer->bind();
 
-        ibs.push_back(indexBuffer);
+        //ibs.push_back(indexBuffer);
+        ibs = indexBuffer;
     }
 
 }

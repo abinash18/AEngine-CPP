@@ -6,7 +6,7 @@
 namespace AEngine {
     class VertexArrayObject {
         public:
-            virtual ~VertexArrayObject() {};
+            virtual      ~VertexArrayObject() {};
             virtual void bind() const = 0;
             virtual void unBind() const = 0;
 
@@ -15,7 +15,8 @@ namespace AEngine {
 
 
             virtual const std::vector<std::shared_ptr<VertexBuffer>>& getVbs() const = 0;
-            virtual const std::vector<std::shared_ptr<IndexBuffer>>&  getIbs() const = 0;
+            //virtual const std::vector<std::shared_ptr<IndexBuffer>>&  getIbs() const = 0;
+            virtual const std::shared_ptr<IndexBuffer>& getIbs() const = 0;
 
             static VertexArrayObject* create();
     };
