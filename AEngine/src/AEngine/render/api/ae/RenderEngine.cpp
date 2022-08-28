@@ -1,4 +1,4 @@
-#include <aepch.h>
+#include "aepch.h"
 #include "RenderEngine.h"
 
 namespace AEngine {
@@ -17,21 +17,8 @@ namespace AEngine {
         renderer->initAPI();
         renderer->printAPIInfo();
 
-        // Initialize OpenGL units
-        /*glGenVertexArrays(1, &vertexArrayBuffer);
-        glBindVertexArray(vertexArrayBuffer);*/
-
         vao.reset(VertexArrayObject::create());
         vao->bind();
-        //glGenBuffers(1, &vertexBuffer);
-        //glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-
-        /* float vertices[3 * 3] = {
-             -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
-             0.0f, 0.5f, 0.0f,
-         };*/
-
         float vertices[3 * 7] = {
             -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
             0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
@@ -45,7 +32,6 @@ namespace AEngine {
         };
 
         vertexBuffer.reset(VertexBuffer::create(vertices, sizeof(vertices)));
-        //glBufferData(GL_ARRAY_BUFFER, sizeof(vert), vert, GL_STATIC_DRAW);
 
         // This destroys the local variables after the scope ends.
         BufferLayout layout = {
@@ -57,52 +43,8 @@ namespace AEngine {
 
         vao->addVertexBuffer(vertexBuffer);
 
-        /* uint32_t i = 0;
-         for (const auto& el : vertexBuffer->getLayout().getElements()) {
-             glEnableVertexAttribArray(i);
-             glVertexAttribPointer(i,
-                                   AETypeElementCount(el.type),
-                                   AETypeToGLType(el.type),
-                                   el.normalized ? GL_FALSE : GL_TRUE,
-                                   vertexBuffer->getLayout().getStride(),
-                                   (const void*) el.offset);
-             i++;
-         }*/
-
-        //glEnableVertexAttribArray(0);
-        //glVertexAttribPointer(0,
-        //                      AETypeElementCount(vertexBuffer->getLayout().getElements().at(0).type),
-        //                      AETypeToGLType(vertexBuffer->getLayout().getElements().at(0).type),
-        //                      vertexBuffer->getLayout().getElements().at(0).normalized ? GL_FALSE : GL_TRUE,
-        //                      vertexBuffer->getLayout().getStride(),
-        //                      (const void*) vertexBuffer->getLayout().getElements().at(0).offset);
-
-        //vertexBuffer2 = VertexBuffer::create(colors, sizeof(colors));
-        //{
-        //    // This destroys the local variables after the scope ends.
-        //    BufferLayout layout = {
-        //        { AEDataType::FLOAT4, "a_Colors" },
-        //    };
-
-        //    vertexBuffer2->setBufferLayout(layout);
-        //}
-
-        //glEnableVertexAttribArray(1);
-        //glVertexAttribPointer(1,
-        //                      AETypeElementCount(vertexBuffer2->getLayout().getElements().at(0).type),
-        //                      AETypeToGLType(vertexBuffer2->getLayout().getElements().at(0).type),
-        //                      vertexBuffer2->getLayout().getElements().at(0).normalized ? GL_FALSE : GL_TRUE,
-        //                      vertexBuffer2->getLayout().getStride(),
-        //                      (const void*) vertexBuffer2->getLayout().getElements().at(0).offset);
-
-        //glGenBuffers(1, &indexBuffer);
-        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-
-
         unsigned int ind[3] = { 0, 1, 2 };
         indexBuffer.reset(IndexBuffer::create(ind, sizeof(ind), sizeof(ind) / sizeof(uint32_t)));
-        //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ind), ind, GL_STATIC_DRAW);
-
 
         vao->addIndexBuffer(indexBuffer);
 
@@ -183,31 +125,18 @@ namespace AEngine {
     }
 
     void RenderEngine::render() {
-        /*glClearColor(0.1f, 0.1f, 0.1f, 1);
-        glClear(GL_COLOR_BUFFER_BIT);*/
         renderer->Clear();
-        squareVAO->bind();
         squareShader->bind();
-
-        renderer->drawIndexed(squareVAO);
-
-        /*glDrawElements(GL_TRIANGLES,
-                       6,
-                       GL_UNSIGNED_INT,
-                       nullptr
-                      );*/
-        vao->bind();
+        submit(squareVAO);
         shader->bind();
-        renderer->drawIndexed(vao);
-        //glBindVertexArray(vertexArrayBuffer);
-        /* glDrawElements(GL_TRIANGLES,
-                        indexBuffer->getCount(),
-                        GL_UNSIGNED_INT,
-                        nullptr
-                       );*/
+        submit(vao);
     }
 
     void RenderEngine::update() {}
-    void RenderEngine::submit(const std::shared_ptr<VertexArrayObject>& vertexArray) { }
+
+    void RenderEngine::submit(const std::shared_ptr<VertexArrayObject>& _vertex_array) {
+        _vertex_array->bind();
+        renderer->drawIndexed(_vertex_array);
+    }
 
 }
