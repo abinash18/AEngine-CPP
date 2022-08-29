@@ -18,7 +18,7 @@ namespace AEngine {
             virtual void update();
             virtual void submit(const std::shared_ptr<VertexArrayObject>& vertexArray);
 
-            inline static RenderAPI getAPI() {
+            static RenderAPI getAPI() {
                 return s_render_api;
             };
 

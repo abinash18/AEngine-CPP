@@ -151,7 +151,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\AEngine\components\Camera.h" />
     <ClInclude Include="src\AEngine.h" />
+    <ClInclude Include="src\AEngine\components\SceneComponent.h" />
     <ClInclude Include="src\AEngine\Layer.h" />
     <ClInclude Include="src\AEngine\LayerStack.h" />
     <ClInclude Include="src\AEngine\Log.h" />
@@ -198,6 +200,8 @@
     <ClInclude Include="src\aepch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AEngine\components\Camera.cpp" />
+    <ClCompile Include="src\AEngine\components\SceneComponent.cpp" />
     <ClCompile Include="src\AEngine\Layer.cpp" />
     <ClCompile Include="src\AEngine\LayerStack.cpp" />
     <ClCompile Include="src\AEngine\Log.cpp" />

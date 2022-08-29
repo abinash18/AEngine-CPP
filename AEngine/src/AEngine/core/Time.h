@@ -1,4 +1,4 @@
 #pragma once
 namespace AEngine {
-	double getTime();
+    double getTime();
 }

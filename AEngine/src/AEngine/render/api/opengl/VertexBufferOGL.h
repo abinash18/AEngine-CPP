@@ -8,11 +8,11 @@ namespace AEngine {
         public:
             VertexBufferOGL(void* verts, uint32_t size);
             ~VertexBufferOGL() override;
-            void          bind() const override;
-            void          destroy() override;
-            void          unBind() const override;
-            void          setBufferLayout(const BufferLayout& _layout) override;
-            BufferLayout& getLayout() override;
+            virtual void          bind() const override;
+            virtual void          destroy() override;
+            virtual void          unBind() const override;
+            virtual void          setBufferLayout(const BufferLayout& _layout) override;
+            virtual BufferLayout& getLayout() override;
         private:
     };
 }

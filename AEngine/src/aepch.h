@@ -1,21 +1,21 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
-#include <utility>
 #include <algorithm>
 #include <functional>
-#include <sstream>
+#include <iostream>
+#include <memory>
 #include <ostream>
+#include <sstream>
+#include <utility>
 
 #include <stdint.h>
 
-#include <string>
-#include <set>
 #include <map>
-#include <vector>
+#include <set>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 //#include "../../AEngine/vendor/GLFW/include/GLFW/glfw3.h"
 #include "AEngine/Log.h"

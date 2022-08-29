@@ -12,7 +12,9 @@ namespace AEngine {
                 AE_CORE_ASSERT(false, "RenderAPI::NONE not supported");
                 return nullptr;
             }
-            case RenderAPI::OPEN_GL: { return new VertexBufferOGL(verticies, size); }
+            case RenderAPI::OPEN_GL: {
+                return new VertexBufferOGL(verticies, size);
+            }
         }
 
         AE_CORE_ASSERT(false, "Invalid RenderAPI");

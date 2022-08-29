@@ -19,5 +19,7 @@ namespace AEngine {
     }
 
 
-    void ContextOGL::swapBuffers() { glfwSwapBuffers(handle); }
+    void ContextOGL::swapBuffers() {
+        glfwSwapBuffers(handle);
+    }
 }

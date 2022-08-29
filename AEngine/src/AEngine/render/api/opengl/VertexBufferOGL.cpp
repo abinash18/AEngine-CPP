@@ -14,13 +14,23 @@ namespace AEngine {
         BufferOGL::destroy();
     }
 
-    void VertexBufferOGL::bind() const { BufferOGL::bind(); }
+    void VertexBufferOGL::bind() const {
+        BufferOGL::bind();
+    }
 
-    void VertexBufferOGL::destroy() { BufferOGL::destroy(); }
+    void VertexBufferOGL::destroy() {
+        BufferOGL::destroy();
+    }
 
-    void VertexBufferOGL::unBind() const { BufferOGL::unBind(); }
+    void VertexBufferOGL::unBind() const {
+        BufferOGL::unBind();
+    }
 
-    void VertexBufferOGL::setBufferLayout(const BufferLayout& _layout) { BufferOGL::setBufferLayout(_layout); }
+    void VertexBufferOGL::setBufferLayout(const BufferLayout& _layout) {
+        BufferOGL::setBufferLayout(_layout);
+    }
 
-    BufferLayout& VertexBufferOGL::getLayout() { return BufferOGL::getLayout(); }
+    BufferLayout& VertexBufferOGL::getLayout() {
+        return BufferOGL::getLayout();
+    }
 }

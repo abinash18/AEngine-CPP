@@ -1,9 +1,9 @@
 #include "aepch.h"
 #include "GLFWWindow.h"
 #include "AEngine/Log.h"
-#include "AEngine/input/event/WindowEvent.h"
 #include "AEngine/input/event/KeyEvent.h"
 #include "AEngine/input/event/MouseEvent.h"
+#include "AEngine/input/event/WindowEvent.h"
 #include "AEngine/render/api/opengl/ContextOGL.h"
 #include "AEngine/render/api/opengl/RendererAPIOGL.h"
 
@@ -22,7 +22,7 @@ namespace AEngine {
         preInit();
 
         AE_CORE_INFO("Creating window {0} ({1}, {2})", properties.title, properties.sc_width, properties.sc_height);
-        if (properties.prefered_monitor == NULL) {
+        if (properties.prefered_monitor == nullptr) {
             properties.prefered_monitor = (int*) glfwGetPrimaryMonitor();
         }
 
@@ -42,12 +42,12 @@ namespace AEngine {
         // user wants it full screen it will be, other wise we can change it like so and
         // then move the window to the proper monitor later.
         if (!properties.fullscreen) {
-            mon = NULL;
+            mon = nullptr;
         }
 
         // Create Window.
-        glfw_handle = glfwCreateWindow((int) properties.sc_width,
-                                       (int) properties.sc_height,
+        glfw_handle = glfwCreateWindow(properties.sc_width,
+                                       properties.sc_height,
                                        properties.title.c_str(),
                                        // title
                                        (GLFWmonitor*) mon,
@@ -179,8 +179,9 @@ namespace AEngine {
     }
 
     void GLFWWindow::requestClose() {
-        if (!checkWindowPointer())
+        if (!checkWindowPointer()) {
             return;
+        }
         glfwSetWindowShouldClose(glfw_handle, true);
     }
 
@@ -189,8 +190,9 @@ namespace AEngine {
     }
 
     void GLFWWindow::destroy() {
-        if (!checkWindowPointer())
+        if (!checkWindowPointer()) {
             return;
+        }
         glfwDestroyWindow(glfw_handle);
     }
 
@@ -199,8 +201,8 @@ namespace AEngine {
     void GLFWWindow::setCallbacks() {
         glfwSetWindowSizeCallback(glfw_handle,
                                   [] (GLFWwindow* window, int width, int height) {
-                                      GLFWWindowProperties& d = *(GLFWWindowProperties*)
-                                              glfwGetWindowUserPointer(window);
+                                      GLFWWindowProperties& d = *static_cast<GLFWWindowProperties*>(
+                                          glfwGetWindowUserPointer(window));
                                       d.sc_width  = width;
                                       d.sc_height = height;
                                       WindowResizeEvent e(width, height);
@@ -209,8 +211,8 @@ namespace AEngine {
 
         glfwSetWindowCloseCallback(glfw_handle,
                                    [] (GLFWwindow* window) {
-                                       GLFWWindowProperties& d = *(GLFWWindowProperties*)
-                                               glfwGetWindowUserPointer(window);
+                                       GLFWWindowProperties& d = *static_cast<GLFWWindowProperties*>(
+                                           glfwGetWindowUserPointer(window));
                                        WindowCloseEvent e;
                                        d.send_event_callback(e);
                                        glfwWindowShouldClose(window);
@@ -218,7 +220,8 @@ namespace AEngine {
 
         glfwSetKeyCallback(glfw_handle,
                            [] (GLFWwindow* window, int key, int scancode, int action, int mods) {
-                               GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
+                               GLFWWindowProperties& d = *static_cast<GLFWWindowProperties*>(
+                                   glfwGetWindowUserPointer(window));
                                switch (action) {
                                    case GLFW_PRESS: {
                                        d.input_manager->setKeyDown(key);
@@ -242,15 +245,16 @@ namespace AEngine {
                            });
         glfwSetCharCallback(glfw_handle,
                             [] (GLFWwindow* window, unsigned int c) {
-                                GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
-                                KeyTypedEvent         e(c);
+                                GLFWWindowProperties& d = *static_cast<GLFWWindowProperties*>(
+                                    glfwGetWindowUserPointer(window));
+                                KeyTypedEvent e(c);
                                 d.send_event_callback(e);
                             });
 
         glfwSetMouseButtonCallback(glfw_handle,
                                    [] (GLFWwindow* window, int button, int action, int mods) {
-                                       GLFWWindowProperties& d = *(GLFWWindowProperties*)
-                                               glfwGetWindowUserPointer(window);
+                                       GLFWWindowProperties& d = *static_cast<GLFWWindowProperties*>(
+                                           glfwGetWindowUserPointer(window));
 
                                        switch (action) {
                                            case GLFW_PRESS: {
@@ -270,20 +274,21 @@ namespace AEngine {
 
         glfwSetScrollCallback(glfw_handle,
                               [] (GLFWwindow* window, double xoffset, double yoffset) {
-                                  GLFWWindowProperties& d = *(GLFWWindowProperties*) glfwGetWindowUserPointer(window);
+                                  GLFWWindowProperties& d = *static_cast<GLFWWindowProperties*>(
+                                      glfwGetWindowUserPointer(window));
                                   d.input_manager->setScrollOffsetX(d.input_manager->getScrollOffsetX() + xoffset);
                                   d.input_manager->setScrollOffsetY(d.input_manager->getScrollOffsetY() + yoffset);
-                                  MouseScrolledEvent e((float) xoffset, (float) yoffset);
+                                  MouseScrolledEvent e((xoffset), (yoffset));
                                   d.send_event_callback(e);
                               });
 
         glfwSetCursorPosCallback(glfw_handle,
                                  [] (GLFWwindow* window, double xpos, double ypos) {
-                                     GLFWWindowProperties& d = *(GLFWWindowProperties*)
-                                             glfwGetWindowUserPointer(window);
+                                     GLFWWindowProperties& d = *static_cast<GLFWWindowProperties*>(
+                                         glfwGetWindowUserPointer(window));
                                      d.input_manager->setMouseX(xpos);
                                      d.input_manager->setMouseY(ypos);
-                                     MouseMovedEvent e((float) xpos, (float) ypos);
+                                     MouseMovedEvent e((xpos), (ypos));
                                      d.send_event_callback(e);
                                  });
     }

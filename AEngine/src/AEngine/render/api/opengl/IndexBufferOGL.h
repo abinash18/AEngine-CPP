@@ -8,12 +8,16 @@ namespace AEngine {
         public:
             IndexBufferOGL(void* verticies, uint32_t size, uint32_t _count);
             ~IndexBufferOGL() override;
-            void          bind() const override;
-            void          unBind() const override;
-            void          destroy() override;
-            void          setBufferLayout(const BufferLayout& _layout) override;
-            BufferLayout& getLayout() override;
-            uint32_t      getCount() const override { return count; }
+            virtual void          bind() const override;
+            virtual void          unBind() const override;
+            virtual void          destroy() override;
+            virtual void          setBufferLayout(const BufferLayout& _layout) override;
+            virtual BufferLayout& getLayout() override;
+
+            virtual uint32_t getCount() const override {
+                return count;
+            }
+
         private:
             uint32_t count;
     };

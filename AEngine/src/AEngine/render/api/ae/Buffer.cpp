@@ -5,6 +5,4 @@
 
 #include "AEngine/render/api/opengl/BufferOGL.h"
 
-namespace AEngine {
-   
-}
+namespace AEngine { }

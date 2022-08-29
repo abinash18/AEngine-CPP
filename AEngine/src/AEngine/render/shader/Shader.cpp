@@ -13,8 +13,8 @@ namespace AEngine {
 
         // Send the vertex shader source code to GL
         // Note that std::string's .c_str is NULL character terminated.
-        const GLchar* source = (const GLchar*) vertexSource.c_str();
-        glShaderSource(vertexShader, 1, &source, 0);
+        auto source = vertexSource.c_str();
+        glShaderSource(vertexShader, 1, &source, nullptr);
 
         // Compile the vertex shader
         glCompileShader(vertexShader);
@@ -42,8 +42,8 @@ namespace AEngine {
 
         // Send the fragment shader source code to GL
         // Note that std::string's .c_str is NULL character terminated.
-        source = (const GLchar*) fragmentSource.c_str();
-        glShaderSource(fragmentShader, 1, &source, 0);
+        source = fragmentSource.c_str();
+        glShaderSource(fragmentShader, 1, &source, nullptr);
 
         // Compile the fragment shader
         glCompileShader(fragmentShader);
@@ -81,7 +81,7 @@ namespace AEngine {
 
         // Note the different functions here: glGetProgram* instead of glGetShader*.
         GLint isLinked = 0;
-        glGetProgramiv(shaderProgram, GL_LINK_STATUS, (int*) &isLinked);
+        glGetProgramiv(shaderProgram, GL_LINK_STATUS, &isLinked);
         if (isLinked == GL_FALSE) {
             GLint maxLength = 0;
             glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &maxLength);

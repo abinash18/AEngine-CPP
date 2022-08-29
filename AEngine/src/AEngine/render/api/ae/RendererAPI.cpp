@@ -12,7 +12,9 @@ namespace AEngine {
                 AE_CORE_ASSERT(false, "RenderAPI::NONE not supported");
                 return nullptr;
             }
-            case RenderAPI::OPEN_GL: { return new RendererAPIOGL(); }
+            case RenderAPI::OPEN_GL: {
+                return new RendererAPIOGL();
+            }
         }
 
         AE_CORE_ASSERT(false, "Invalid RenderAPI");

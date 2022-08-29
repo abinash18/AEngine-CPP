@@ -12,7 +12,9 @@ namespace AEngine {
                 return nullptr;
             }
 
-            case RenderAPI::OPEN_GL: { return new IndexBufferOGL(verticies, size, _count); }
+            case RenderAPI::OPEN_GL: {
+                return new IndexBufferOGL(verticies, size, _count);
+            }
         }
 
         AE_CORE_ASSERT(false, "Invalid RenderAPI");

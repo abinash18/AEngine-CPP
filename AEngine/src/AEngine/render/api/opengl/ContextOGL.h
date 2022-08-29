@@ -7,8 +7,8 @@ namespace AEngine {
     class ContextOGL : public RenderContext {
         public:
             ContextOGL(GLFWwindow* handle);
-            void init() override;
-            void    swapBuffers() override;
+            virtual void init() override;
+            virtual void swapBuffers() override;
         private:
             GLFWwindow* handle;
     };

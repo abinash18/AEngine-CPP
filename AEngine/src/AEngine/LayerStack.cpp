@@ -2,8 +2,7 @@
 #include "LayerStack.h"
 
 namespace AEngine {
-    LayerStack::LayerStack() {
-    };
+    LayerStack::LayerStack() { };
 
     LayerStack::~LayerStack() {
         for (Layer* layer : layers) {

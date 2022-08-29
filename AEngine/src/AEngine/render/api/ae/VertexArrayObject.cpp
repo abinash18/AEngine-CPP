@@ -1,7 +1,7 @@
 #include "aepch.h"
 
-#include "IndexBuffer.h"
 #include "VertexArrayObject.h"
+#include "IndexBuffer.h"
 #include "VertexBuffer.h"
 
 #include "AEngine/render/api/ae/RenderEngine.h"
@@ -18,7 +18,9 @@ namespace AEngine {
                 AE_CORE_ASSERT(false, "RenderAPI::NONE not supported");
                 return nullptr;
             }
-            case RenderAPI::OPEN_GL: { return new VertexArrayObjectOGL(); }
+            case RenderAPI::OPEN_GL: {
+                return new VertexArrayObjectOGL();
+            }
         }
 
         AE_CORE_ASSERT(false, "Invalid RenderAPI");

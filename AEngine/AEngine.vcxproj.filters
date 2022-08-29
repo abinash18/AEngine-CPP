@@ -167,6 +167,8 @@
     <ClInclude Include="src\AEngine\render\api\ae\RenderCommand.h" />
     <ClInclude Include="src\AEngine\render\api\ae\RendererAPI.h" />
     <ClInclude Include="src\AEngine\render\api\ae\RenderAPI.h" />
+    <ClInclude Include="src\AEngine\components\Camera.h" />
+    <ClInclude Include="src\AEngine\components\SceneComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AEngine\Layer.cpp">
@@ -252,5 +254,7 @@
     <ClCompile Include="src\AEngine\render\api\opengl\VertexArrayObjectOGL.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\RenderCommand.cpp" />
     <ClCompile Include="src\AEngine\render\api\ae\RendererAPI.cpp" />
+    <ClCompile Include="src\AEngine\components\Camera.cpp" />
+    <ClCompile Include="src\AEngine\components\SceneComponent.cpp" />
   </ItemGroup>
 </Project>

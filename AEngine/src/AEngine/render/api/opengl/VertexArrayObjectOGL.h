@@ -5,7 +5,7 @@ namespace AEngine {
     class VertexArrayObjectOGL : public VertexArrayObject {
         public:
             VertexArrayObjectOGL();
-            virtual      ~VertexArrayObjectOGL() override;
+            ~VertexArrayObjectOGL() override;
             virtual void bind() const override;
             virtual void unBind() const override;
             virtual void addVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) override;

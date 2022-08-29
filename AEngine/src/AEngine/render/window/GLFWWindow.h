@@ -1,10 +1,10 @@
 #pragma once
 
-#include "AEngine/util/Destroyable.h"
-#include "AEngine/render/window/Window.h"
-#include "AEngine/render/window/GLFWWindowProperties.h"
 #include <GLFW/glfw3.h>
 #include "GLFW_API_TOKENS.h"
+#include "AEngine/render/window/GLFWWindowProperties.h"
+#include "AEngine/render/window/Window.h"
+#include "AEngine/util/Destroyable.h"
 
 #include "AEngine/LayerStack.h"
 #include "AEngine/input/GLFWMouseAndKeyboardInput.h"
@@ -17,25 +17,25 @@ namespace AEngine {
         public:
             GLFWWindow();
             GLFWWindow(const GLFWWindowProperties& properties);
-            ~GLFWWindow();
-            void    destroy() override;
-            void    update(float delta) override;
-            void    setEventCallback(const event_callback_fn& callback) override;
-            void    input(float delta) override;
-            Window* create() override;
+            ~GLFWWindow() override;
+            virtual void    destroy() override;
+            virtual void    update(float delta) override;
+            virtual void    setEventCallback(const event_callback_fn& callback) override;
+            virtual void    input(float delta) override;
+            virtual Window* create() override;
 
             /**
              * GLFW wrapper functions.
              */
-            void swapbuffers() override;
-            void addGLFWWindowHint(int hint, int value);
-            void addGLFWWindowAttrib(int attrib, int value);
-            int  getGLFWWindowAttrib(int attrib);
-            void resetToDefaults();
-            void setWindowSizeLimits(int min_width,
-                                     int min_height,
-                                     int max_width,
-                                     int max_height);
+            virtual void swapbuffers() override;
+            void         addGLFWWindowHint(int hint, int value);
+            void         addGLFWWindowAttrib(int attrib, int value);
+            int          getGLFWWindowAttrib(int attrib);
+            void         resetToDefaults();
+            void         setWindowSizeLimits(int min_width,
+                                             int min_height,
+                                             int max_width,
+                                             int max_height);
             void setWindowSizeLimits();
             void getWindowContentScale(float* x_scale, float* y_scale);
 
@@ -46,9 +46,9 @@ namespace AEngine {
              * this function will request the window manager to close this window at the next update,
              * it sets a close flag. 
             */
-            void requestClose();
+            virtual void requestClose() override;
 
-            bool isCloseRequested();
+            virtual bool isCloseRequested() override;
 
             /**
              * @brief The aspect ratio is specified as a numerator and denominator,
@@ -63,23 +63,23 @@ namespace AEngine {
             /**
              * Getters and Setters.
             */
-            unsigned int          getWidth() const override;
-            unsigned int          getHeight() const override;
-            void                  setVSync(bool enabled) override;
-            bool                  isVSync() const override;
-            void*                 getWindowHandle() override;
+            virtual unsigned int  getWidth() const override;
+            virtual unsigned int  getHeight() const override;
+            virtual void          setVSync(bool enabled) override;
+            virtual bool          isVSync() const override;
+            virtual void*         getWindowHandle() override;
             GLFWWindowProperties* getWindowProperties();
             int*                  getCurrentMonitor();
             int*                  getCurrentVidMode();
             int                   getCurrentRefreshRate();
-            void                  setCloseFlag(const bool close_flag);
+            void                  setCloseFlag(bool close_flag);
             void                  addLayer(Layer* lyr);
             void                  addOverlay(Layer* ovr);
 
-            bool checkWindowPointer();
-            void render() override;
+            bool         checkWindowPointer();
+            virtual void render() override;
 
-            LayerStack& getLayerStack();
+            virtual LayerStack& getLayerStack() override;
         protected:
             GLFWwindow*  glfw_handle;
             GLFWmonitor* current_monitor;
@@ -103,9 +103,9 @@ namespace AEngine {
             GLFWWindowProperties properties;
 
             // This is where user will add any pre creation window hints
-            void preInit() { };
+            virtual void preInit() override { };
             // This is where the user can execute any post creation methods that require context.
-            void postInit() { };
+            virtual void postInit() override { };
 
             void onClose() { };
             /**

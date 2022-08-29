@@ -3,10 +3,8 @@
 
 namespace AEngine {
 
-	Input::Input() {
-	}
+    Input::Input() { }
 
-	Input::~Input() {
-	}
+    Input::~Input() { }
 
 }

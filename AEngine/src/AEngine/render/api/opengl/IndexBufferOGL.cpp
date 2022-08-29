@@ -21,8 +21,15 @@ namespace AEngine {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
-    void IndexBufferOGL::destroy() { BufferOGL::destroy(); }
+    void IndexBufferOGL::destroy() {
+        BufferOGL::destroy();
+    }
 
-    void          IndexBufferOGL::setBufferLayout(const BufferLayout& _layout) { BufferOGL::setBufferLayout(_layout); }
-    BufferLayout& IndexBufferOGL::getLayout() { return BufferOGL::getLayout(); }
+    void IndexBufferOGL::setBufferLayout(const BufferLayout& _layout) {
+        BufferOGL::setBufferLayout(_layout);
+    }
+
+    BufferLayout& IndexBufferOGL::getLayout() {
+        return BufferOGL::getLayout();
+    }
 }

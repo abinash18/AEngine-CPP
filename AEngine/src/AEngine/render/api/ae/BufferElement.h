@@ -14,7 +14,7 @@ namespace AEngine {
 
 
         BufferElement(AEDataType _type, const std::string& _name, bool _normalized = false)
-            : type(_type), name(_name),
-              normalized(_normalized), size(AETypeSize(type)), offset(0) { }
+            : name(_name), type(_type),
+              size(AETypeSize(type)), offset(0), normalized(_normalized) { }
     };
 }
