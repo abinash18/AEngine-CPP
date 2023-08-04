@@ -4,6 +4,7 @@
 #include "GLFW_API_TOKENS.h"
 
 #include "AEngine/input/GLFWMouseAndKeyboardInput.h"
+#include "AEngine/input/event/Event.h"
 
 namespace AEngine {
 
