@@ -21,10 +21,12 @@ namespace AEngine {
     void EngineLoadingWindow::preInit() {
         //addGLFWWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
         //addGLFWWindowHint(GLFW_DECORATED, GLFW_FALSE);
+        //addGLFWWindowHint(GLFW_DECORATED, GLFW_FALSE);
+        //addGLFWWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+        //properties.start_hidden = true;
     }
-
     void EngineLoadingWindow::postInit() {
         setVSync(false);
+        
     }
-
 }
