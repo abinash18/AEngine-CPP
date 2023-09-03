@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.6)
 
 # set(CMAKE_TOOLCHAIN_FILE toolchain/TC_Windows.cmake)
-project(AEngine VERSION 0.1.0 LANGUAGES C CXX)
+if(NOT AE_COMPILE_NO_TEST)
+    project(AEngine VERSION 0.1.0 LANGUAGES C CXX)
+endif()
 
 # Dependecies: ########################################################
 find_package(Git QUIET)
@@ -23,12 +25,12 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/glfw/CMakeLists.txt")
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/GLFW/CMakeLists.txt")
     message(FATAL_ERROR "GLFW CMakeLists file not found.")
 endif()
 
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/imgui/CMakeLists.txt")
-    message(FATAL_ERROR "imgui CMakeLists file not found.")
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/IMGUI/CMakeLists.txt")
+    message(FATAL_ERROR "IMGUI CMakeLists file not found.")
 endif()
 
 # ############################################################################
@@ -77,11 +79,13 @@ if(MSVC)
     # set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
-file(GLOB_RECURSE TEST_SOURCES "TestBox/src/*.cpp")
+if(NOT AE_COMPILE_NO_TEST)
+    file(GLOB_RECURSE TEST_SOURCES "TestBox/src/*.cpp")
 
-add_executable(TEST ${TEST_SOURCES})
-target_include_directories(TEST PUBLIC TestBox/src)
-target_link_libraries(TEST PUBLIC AEngine)
+    add_executable(TEST ${TEST_SOURCES})
+    target_include_directories(TEST PUBLIC TestBox/src)
+    target_link_libraries(TEST PUBLIC AEngine)
+endif()
 
 # target_compile_definitions(glfw PUBLIC GLFW_BUILD_WIN32)
 # if(NOT WIN32)
