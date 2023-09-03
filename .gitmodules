@@ -10,3 +10,6 @@
 [submodule "AEngine/vendor/GLM"]
 	path = AEngine/vendor/GLM
 	url = git@github.com:abinash18/glm.git
+[submodule "AEngine/vendor/IMPLOT"]
+	path = AEngine/vendor/IMPLOT
+	url = git@github.com:abinash18/implot.git
