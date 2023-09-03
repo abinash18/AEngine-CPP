@@ -25,11 +25,11 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/GLFW/CMakeLists.txt")
+if(NOT EXISTS "AEngine/vendor/GLFW/CMakeLists.txt")
     message(FATAL_ERROR "GLFW CMakeLists file not found.")
 endif()
 
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/IMGUI/CMakeLists.txt")
+if(NOT EXISTS "AEngine/vendor/IMGUI/CMakeLists.txt")
     message(FATAL_ERROR "IMGUI CMakeLists file not found.")
 endif()
 
