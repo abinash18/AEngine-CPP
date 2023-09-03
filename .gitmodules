@@ -1,12 +1,12 @@
 [submodule "AEngine/vendor/spdlog"]
 	path = AEngine/vendor/spdlog
-	url = https://github.com/gabime/spdlog.git
+	url = git@github.com:abinash18/spdlog.git
 [submodule "AEngine/vendor/GLFW"]
 	path = AEngine/vendor/GLFW
-	url = https://github.com/abinash18/glfw
+	url = git@github.com:abinash18/glfw
 [submodule "AEngine/vendor/IMGUI"]
 	path = AEngine/vendor/IMGUI
-	url = https://github.com/abinash18/imgui.git
+	url = git@github.com:abinash18/imgui.git
 [submodule "AEngine/vendor/GLM"]
 	path = AEngine/vendor/GLM
-	url = https://github.com/abinash18/glm.git
+	url = git@github.com:abinash18/glm.git

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26.0)
+cmake_minimum_required(VERSION 3.6)
 
 # set(CMAKE_TOOLCHAIN_FILE toolchain/TC_Windows.cmake)
 project(AEngine VERSION 0.1.0 LANGUAGES C CXX)
@@ -31,10 +31,6 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/imgui/CMakeLists.txt")
     message(FATAL_ERROR "imgui CMakeLists file not found.")
 endif()
 
-if(NOT EXISTS "${PROJECT_SOURCE_DIR}/AEngine/vendor/spdlog/CMakeLists.txt")
-    message(FATAL_ERROR "imgui CMakeLists file not found.")
-endif()
-
 # ############################################################################
 # Define AE_SOURCES to be a list of all the source files for my game
 file(GLOB_RECURSE AE_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/AEngine/src/*.cpp")
@@ -44,21 +40,17 @@ add_library(AEngine STATIC ${AE_SOURCES})
 target_include_directories(AEngine PUBLIC AEngine/src/)
 target_precompile_headers(AEngine PUBLIC AEngine/src/aepch.h)
 
-add_subdirectory(AEngine/vendor/glfw)
-include_directories(AEngine/vendor/glfw/include)
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
+add_subdirectory(AEngine/vendor/GLFW)
+include_directories(AEngine/vendor/GLFW/include)
 
-add_subdirectory(AEngine/vendor/imgui)
-include_directories(AEngine/vendor/imgui)
-include_directories(AEngine/vendor/imgui/backends)
+add_subdirectory(AEngine/vendor/IMGUI)
+include_directories(AEngine/vendor/IMGUI)
+include_directories(AEngine/vendor/IMGUI/backends)
 
-add_subdirectory(AEngine/vendor/glad)
-include_directories(AEngine/vendor/glad/include/glad)
+add_subdirectory(AEngine/vendor/GLAD)
+include_directories(AEngine/vendor/GLAD/include/)
 
-add_subdirectory(AEngine/vendor/spdlog)
+# add_subdirectory(AEngine/vendor/spdlog)
 include_directories(AEngine/vendor/spdlog/include/)
 
 add_subdirectory(AEngine/vendor/GLM)
@@ -67,9 +59,12 @@ include_directories(AEngine/vendor/GLM)
 # since we use glad we have to stop glfw from loading system gl.
 add_compile_definitions(GLFW_INCLUDE_NONE)
 add_compile_definitions(AE_PLATFORM_WINDOWS)
-target_link_libraries(AEngine PUBLIC glad)
+target_link_libraries(AEngine PUBLIC GLAD)
 target_link_libraries(AEngine PUBLIC IMGUI)
 target_link_libraries(AEngine PUBLIC GLFW)
+target_link_libraries(AEngine PUBLIC GLM)
+
+# target_link_libraries(AEngine PUBLIC spdlog)
 
 # target_compile_definitions(${PROJECT_NAME} PUBLIC GLFW_BUILD_WIN32)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
@@ -82,7 +77,7 @@ if(MSVC)
     # set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
-file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS "TestBox/src/*.cpp")
+file(GLOB_RECURSE TEST_SOURCES "TestBox/src/*.cpp")
 
 add_executable(TEST ${TEST_SOURCES})
 target_include_directories(TEST PUBLIC TestBox/src)
