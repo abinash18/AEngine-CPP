@@ -25,11 +25,11 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     endif()
 endif()
 
-if(NOT EXISTS "AEngine/vendor/GLFW/CMakeLists.txt")
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/AEngine/vendor/GLFW/CMakeLists.txt")
     message(FATAL_ERROR "GLFW CMakeLists file not found.")
 endif()
 
-if(NOT EXISTS "AEngine/vendor/IMGUI/CMakeLists.txt")
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/AEngine/vendor/IMGUI/CMakeLists.txt")
     message(FATAL_ERROR "IMGUI CMakeLists file not found.")
 endif()
 
@@ -66,10 +66,11 @@ target_link_libraries(AEngine PUBLIC IMGUI)
 target_link_libraries(AEngine PUBLIC GLFW)
 target_link_libraries(AEngine PUBLIC GLM)
 
-# target_link_libraries(AEngine PUBLIC spdlog)
-
-# target_compile_definitions(${PROJECT_NAME} PUBLIC GLFW_BUILD_WIN32)
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+if(NOT AE_COMPILE_NO_TEST)
+    # target_link_libraries(AEngine PUBLIC spdlog)
+    # target_compile_definitions(${PROJECT_NAME} PUBLIC GLFW_BUILD_WIN32)
+    target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+endif()
 
 if(MSVC)
     target_compile_options(AEngine PUBLIC "/ZI")
