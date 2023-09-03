@@ -41,3 +41,5 @@
 #binary files
 bin/
 bin-int/
+
+build/

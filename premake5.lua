@@ -1,24 +1,40 @@
 workspace "AEngine"
     architecture "x64"
 
+    startproject "TestBox"
+
     configurations
     {
         "Debug",
         "Release",
         "Dist"
     }
-	
-	startproject "TestBox"
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+    
+    IncludeDir = {}
+    IncludeDir["GLFW"] = "AEngine/vendor/GLFW/include"
+    IncludeDir["GLAD"] = "AEngine/vendor/GLAD/include"
+    IncludeDir["IMGUI"] = "AEngine/vendor/IMGUI"
+    IncludeDir["GLM"] = "AEngine/vendor/GLM"
+    group "Dependencies"
+        include "AEngine/vendor/GLFW"
+        include "AEngine/vendor/GLAD"
+        include "AEngine/vendor/IMGUI"
+    group ""
 
 project "AEngine"
     location "AEngine"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
+    cppdialect "C++20"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "aepch.h"
+    pchsource "AEngine/src/aepch.cpp"
 
     files
     {
@@ -26,43 +42,68 @@ project "AEngine"
         "%{prj.name}/src/**.cpp"
     }
 
+
+    defines 
+    {
+        "_CRT_SECURE_NO_WARNINGS"
+    }
+
     includedirs
     {
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/src",
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.GLAD}",
+        "%{IncludeDir.GLM}",
+        "%{IncludeDir.IMGUI}"
+    }
+
+    links
+    {
+        "GLFW",
+        "GLAD",
+        "IMGUI",
+        "opengl32.lib"
     }
 
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
+       
         systemversion "latest"
 
         defines
         {
             "AE_PLATFORM_WINDOWS",
-            "AE_BUILD_DLL"
+            "AE_DEBUG",
+            "AE_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/TestBox")
+            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/TestBox/\"")
         }
 
         filter "configurations:Debug"
             defines "AE_DEBUG"
-            symbols "On"
+            runtime "Debug"
+            symbols "on"
 
         filter "configurations:Release"
-            defines "AE_Release"
-            optimize "On"
+            defines "AE_RELEASE"
+            runtime "Release"
+            optimize "on"
 
         filter "configurations:Dist"
             defines "AE_DIST"
-            optimize "On"
+            runtime "Release"
+            optimize "on"
 
 project "TestBox"
     location "TestBox"
     kind "ConsoleApp"
     language "C++"
+    cppdialect "C++20"
+    staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -76,17 +117,21 @@ project "TestBox"
     includedirs
     {
         "AEngine/vendor/spdlog/include",
-        "AEngine/src"
+        "AEngine/src",
+        "AEngine/vendor",
+        "%{IncludeDir.GLM}"
     }
 
     links
     {
-        "AEngine"
+        "AEngine",
+        "GLFW",
+        "GLAD",
+        "IMGUI",
+        "opengl32.lib"
     }
 
     filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -96,12 +141,15 @@ project "TestBox"
 
         filter "configurations:Debug"
             defines "AE_DEBUG"
-            symbols "On"
+            runtime "Debug"
+            symbols "on"
 
         filter "configurations:Release"
             defines "AE_Release"
-            optimize "On"
+            runtime "Release"
+            optimize "on"
 
         filter "configurations:Dist"
             defines "AE_DIST"
-            optimize "On"
+            runtime "Release"
+            optimize "on"

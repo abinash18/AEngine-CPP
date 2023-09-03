@@ -1,10 +1,10 @@
 #pragma once
 
-/**
- *
- *	For use with importing AE_API
- */
-#include "AEngine/Application.h"
+#include "AEngine/core/CoreEngine.h"
+
+#include "AEngine/input/Input.h"
+
+#include "AEngine/input/InputCodes.h"
 
 /**
  *
@@ -12,8 +12,6 @@
  */
 #include "AEngine/Log.h"
 
-/**
- *
- *	Entry Point
- */
-#include "AEngine/EntryPoint.h"
+#include "AEngine/Layer.h"
+
+#include "AEngine/util/debug/ImGUILayer.h"
