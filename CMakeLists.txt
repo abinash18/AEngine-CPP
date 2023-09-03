@@ -58,6 +58,9 @@ include_directories(AEngine/vendor/spdlog/include/)
 add_subdirectory(AEngine/vendor/GLM)
 include_directories(AEngine/vendor/GLM)
 
+add_subdirectory(AEngine/vendor/IMPLOT)
+include_directories(AEngine/vendor/IMPLOT)
+
 # since we use glad we have to stop glfw from loading system gl.
 add_compile_definitions(GLFW_INCLUDE_NONE)
 add_compile_definitions(AE_PLATFORM_WINDOWS)
@@ -65,7 +68,7 @@ target_link_libraries(AEngine PUBLIC GLAD)
 target_link_libraries(AEngine PUBLIC IMGUI)
 target_link_libraries(AEngine PUBLIC GLFW)
 target_link_libraries(AEngine PUBLIC GLM)
-
+target_link_libraries(AEngine PUBLIC IMPLOT)
 # target_link_libraries(AEngine PUBLIC spdlog)
 # target_compile_definitions(${PROJECT_NAME} PUBLIC GLFW_BUILD_WIN32)
 target_compile_features(AEngine PUBLIC cxx_std_20)
