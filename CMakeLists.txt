@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 set(CMAKE_CXX_STANDARD 20)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # set(CMAKE_TOOLCHAIN_FILE toolchain/TC_Windows.cmake)
 if(NOT AE_COMPILE_NO_TEST)
@@ -37,11 +38,15 @@ endif()
 # ############################################################################
 # Define AE_SOURCES to be a list of all the source files for my game
 file(GLOB_RECURSE AE_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/AEngine/src/*.cpp")
+file(GLOB_RECURSE AE_HEADERS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/AEngine/src/*.h")
 
 # include_directories(${PROJECT_SOURCE_DIR}/AEngine)
-add_library(AEngine STATIC ${AE_SOURCES})
+add_library(AEngine STATIC ${AE_SOURCES} ${AE_HEADERS})
 target_include_directories(AEngine PUBLIC AEngine/src/)
 target_precompile_headers(AEngine PUBLIC AEngine/src/aepch.h)
+
+# THE ABSOLUTE GOAAAATTTTTT https://stackoverflow.com/a/56496104
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${AE_SOURCES} ${AE_HEADERS})
 
 add_subdirectory(AEngine/vendor/GLFW)
 include_directories(AEngine/vendor/GLFW/include)
@@ -62,7 +67,6 @@ include_directories(AEngine/vendor/GLM)
 add_subdirectory(AEngine/vendor/IMPLOT)
 include_directories(AEngine/vendor/IMPLOT)
 
-
 # since we use glad we have to stop glfw from loading system gl.
 add_compile_definitions(GLFW_INCLUDE_NONE)
 add_compile_definitions(AE_PLATFORM_WINDOWS)
@@ -76,6 +80,12 @@ target_link_libraries(AEngine PUBLIC IMPLOT)
 # target_compile_definitions(${PROJECT_NAME} PUBLIC GLFW_BUILD_WIN32)
 target_compile_features(AEngine PUBLIC cxx_std_20)
 
+set_target_properties(GLAD PROPERTIES FOLDER "AEngine Dependencies")
+set_target_properties(IMGUI PROPERTIES FOLDER "AEngine Dependencies")
+set_target_properties(GLFW PROPERTIES FOLDER "AEngine Dependencies")
+set_target_properties(GLM PROPERTIES FOLDER "AEngine Dependencies")
+set_target_properties(IMPLOT PROPERTIES FOLDER "AEngine Dependencies")
+
 if(MSVC)
     target_compile_options(AEngine PUBLIC "/ZI")
     target_link_options(AEngine PUBLIC "/INCREMENTAL")
@@ -86,10 +96,12 @@ endif()
 
 if(NOT AE_COMPILE_NO_TEST)
     file(GLOB_RECURSE TEST_SOURCES "TestBox/src/*.cpp")
-
-    add_executable(TEST ${TEST_SOURCES})
+    file(GLOB_RECURSE TEST_HEADERS "TestBox/src/*.h")
+    add_executable(TEST ${TEST_SOURCES} ${TEST_HEADERS})
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TEST_SOURCES} ${TEST_HEADERS})
     target_include_directories(TEST PUBLIC TestBox/src)
     target_link_libraries(TEST PUBLIC AEngine)
+    set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT TEST)
 endif()
 
 # target_compile_definitions(glfw PUBLIC GLFW_BUILD_WIN32)
