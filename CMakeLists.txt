@@ -91,7 +91,9 @@ if(MSVC)
     target_link_options(AEngine PUBLIC "/INCREMENTAL")
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-    # set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
 if(NOT AE_COMPILE_NO_TEST)
