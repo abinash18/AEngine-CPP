@@ -15,6 +15,6 @@ namespace AEngine {
             virtual void openWindow(std::string id, Window* wnd) = 0;
             virtual bool isEngineStopFlagRaised() const = 0;
             virtual void raiseEngineStopFlag() = 0;
-            virtual void setErrorCallback(void* errorCallback) = 0;
+            virtual void setErrorCallback(void(*errorCallback)(int, const char*)) = 0;
     };
 }

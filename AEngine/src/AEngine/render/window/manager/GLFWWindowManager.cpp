@@ -84,7 +84,7 @@ namespace AEngine {
         ENGINE_STOP_FLAG = true;
     }
 
-    void GLFWWindowManager::setErrorCallback(void* errorCallback) {
+    void GLFWWindowManager::setErrorCallback(void(*errorCallback)(int, const char*)) {
         glfwSetErrorCallback(*static_cast<GLFWerrorfun>(errorCallback));
     }
 

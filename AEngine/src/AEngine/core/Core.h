@@ -18,7 +18,8 @@
         #define AE_API
     #endif
 #else
-    #error AE Only supports windows.
+    //#error AE Only supports windows.
+    #define AE_API
 #endif // AE_PLATFORM_WINDOWS
 
 #ifdef AE_DEBUG

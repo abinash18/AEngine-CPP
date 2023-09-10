@@ -19,7 +19,7 @@ namespace AEngine {
             virtual void openWindow(std::string id, Window* wnd) override;
             virtual bool isEngineStopFlagRaised() const override;
             virtual void raiseEngineStopFlag() override;
-            virtual void setErrorCallback(void* errorCallback) override;
+            virtual void setErrorCallback(void(*errorCallback)(int, const char*)) override;
         private:
             bool ENGINE_STOP_FLAG = false;
 
