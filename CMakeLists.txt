@@ -1,14 +1,16 @@
 cmake_minimum_required(VERSION 3.6)
 set(CMAKE_CXX_STANDARD 20)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+message("Starting AEngine Build")
 
-# set(CMAKE_TOOLCHAIN_FILE toolchain/TC_Windows.cmake)
 if(NOT AE_COMPILE_NO_TEST)
+    message("Compiling Test")
     project(AEngine VERSION 0.1.0 LANGUAGES C CXX)
 endif()
 
 # Dependecies: ########################################################
 find_package(Git QUIET)
+message("Updating modules")
 
 # https://cliutils.gitlab.io/modern-cmake/chapters/projects/submodule.html
 if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
@@ -48,28 +50,48 @@ target_precompile_headers(AEngine PUBLIC AEngine/src/aepch.h)
 # THE ABSOLUTE GOAAAATTTTTT https://stackoverflow.com/a/56496104
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${AE_SOURCES} ${AE_HEADERS})
 
+message("Adding GLFW")
 add_subdirectory(AEngine/vendor/GLFW)
 include_directories(AEngine/vendor/GLFW/include)
 
+message("Adding IMGUI")
 add_subdirectory(AEngine/vendor/IMGUI)
 include_directories(AEngine/vendor/IMGUI)
 include_directories(AEngine/vendor/IMGUI/backends)
 
+message("Adding GLAD")
 add_subdirectory(AEngine/vendor/GLAD)
 include_directories(AEngine/vendor/GLAD/include/)
+
+message("Adding SPDLOG")
 
 # add_subdirectory(AEngine/vendor/spdlog)
 include_directories(AEngine/vendor/spdlog/include/)
 
+message("Adding GLM")
 add_subdirectory(AEngine/vendor/GLM)
 include_directories(AEngine/vendor/GLM)
 
+message("Adding IMPLOT")
 add_subdirectory(AEngine/vendor/IMPLOT)
 include_directories(AEngine/vendor/IMPLOT)
 
 # since we use glad we have to stop glfw from loading system gl.
 add_compile_definitions(GLFW_INCLUDE_NONE)
-add_compile_definitions(AE_PLATFORM_WINDOWS)
+
+if(WIN32)
+    message("Compiling for Windows")
+    add_compile_definitions(AE_PLATFORM_WINDOWS)
+    add_compile_definitions(GLFW_BUILD_WIN32)
+    set(AE_PLATFORM_WINDOWS ON)
+else()
+    message("Compiling for Linux")
+    add_compile_definitions(AE_PLATFORM_LINUX)
+    target_link_libraries(AEngine PUBLIC X11)
+    add_compile_definitions(GLFW_BUILD_X11)
+    set(AE_PLATFORM_LINUX ON)
+endif()
+
 target_link_libraries(AEngine PUBLIC GLAD)
 target_link_libraries(AEngine PUBLIC IMGUI)
 target_link_libraries(AEngine PUBLIC GLFW)
@@ -78,8 +100,7 @@ target_link_libraries(AEngine PUBLIC IMPLOT)
 
 # target_link_libraries(AEngine PUBLIC spdlog)
 # target_compile_definitions(${PROJECT_NAME} PUBLIC GLFW_BUILD_WIN32)
-target_compile_features(AEngine PUBLIC cxx_std_20)
-
+# target_compile_features(AEngine PUBLIC cxx_std_11)
 set_target_properties(GLAD PROPERTIES FOLDER "AEngine Dependencies")
 set_target_properties(IMGUI PROPERTIES FOLDER "AEngine Dependencies")
 set_target_properties(GLFW PROPERTIES FOLDER "AEngine Dependencies")
