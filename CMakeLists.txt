@@ -111,9 +111,7 @@ if(MSVC)
     target_compile_options(AEngine PUBLIC "/ZI")
     target_link_options(AEngine PUBLIC "/INCREMENTAL")
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-
     set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
 
@@ -126,12 +124,3 @@ if(NOT AE_COMPILE_NO_TEST)
     target_link_libraries(TEST PUBLIC AEngine)
     set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT TEST)
 endif()
-
-# target_compile_definitions(glfw PUBLIC GLFW_BUILD_WIN32)
-# if(NOT WIN32)
-# target_link_libraries(ecocar-telemetry-interface PUBLIC SERIAL_COM)
-# endif()
-
-# target_link_libraries(ecocar-telemetry-interface PUBLIC X11)
-
-# ok cmake is officially bad ass.
