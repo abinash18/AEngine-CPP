@@ -7,7 +7,7 @@
 namespace AEngine {
     class AE_API Layer {
         public:
-            Layer(const std::string& name = "Layer") : m_DebugName(m_DebugName) { };
+            Layer(const std::string& name = "Layer") : m_DebugName(name) { };
 
             virtual ~Layer() { };
 
